@@ -7,15 +7,15 @@ class Core_Sticker_Category
    
     private $_order = 0;
     
-    private $_collection = null;
+    private $_collectionId = null;
     
 
-    public function __construct($id, $name, $order, Core_Sticker_Collection $collection)
+    public function __construct($id, $name, $order, $collectionId)
     {
         $this->_id = (int)$id;
         $this->_name = $name;
         $this->_order = (int)$order;
-        $this->_collection = $collection;
+        $this->_collectionId = (int)$collectionId;
     }
 
    
@@ -49,13 +49,13 @@ class Core_Sticker_Category
         $this->_order = (int)$order;
     }
     
-    public function getCollection()
+    public function getCollectionId()
     {
-        return $this->_collection;
+        return $this->_collectionId;
     }
     
-    public function setCollection(Core_Sticker_Collection $collection)
+    public function setCollectionId($collectionId)
     {
-        $this->_collection = $collection;
+        $this->_collectionId = $collectionId;
     }
 }

@@ -5,14 +5,14 @@ class Core_Sticker_Sticker extends Core_Store_Product
    
     private $_imageURL = null;
    
-    private $_category = null;
+    private $_categoryId = null;
     
 
-    public function __construct($number, $imageURL, Core_Sticker_Category $category)
+    public function __construct($number, $imageURL, $categoryId)
     {
         $this->_number = (int)$number;
         $this->_imageURL = $imageURL;
-        $this->_category = $category;
+        $this->_categoryId = (int)$categoryId;
     }
 
    
@@ -36,13 +36,13 @@ class Core_Sticker_Sticker extends Core_Store_Product
         $this->_imageURL = $imageURL;
     }
    
-    public function getCategory()
+    public function getCategoryId()
     {
-        return $this->_category;
+        return $this->_categoryId;
     }
  
-    public function setCategory(Core_Sticker_Category $category)
+    public function setCategoryId($categoryId)
     {
-        $this->_category = $category;
+        $this->_categoryId = $categoryId;
     }
 }

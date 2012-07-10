@@ -1,24 +1,37 @@
 <?php
 class Core_Sticker_Collection
 {
+    private $_id = null;
+    
     private $_name = null;
 
     private $_year = null;
    
     private $_imageURL = null;
    
-    private $_editorial = null;
+    private $_editorialId = null;
     
 
-    public function __construct($name, $year, $imageURL, Core_Sticker_Editorial $editorial)
+    public function __construct($id, $name, $year, $imageURL, $editorialId)
     {
+        $this->_id = (int)$id;
         $this->_name = $name;
         $this->_year = (int)$year;
         $this->_imageURL = $imageURL;
-        $this->_editorial = $editorial;
+        $this->_editorialId = (int)$editorialId;
     }
 
    
+    public function getId()
+    {
+        return $this->_id;
+    }
+    
+    public function setId($id)
+    {
+        $this->_id = (int)$id;
+    }
+    
     public function getName()
     {
         return $this->_name;
@@ -49,13 +62,13 @@ class Core_Sticker_Collection
         $this->_imageURL = $imageURL;
     }
    
-    public function getEditorial()
+    public function getEditorialId()
     {
-        return $this->_editorial;
+        return $this->_editorialId;
     }
  
-    public function setEditorial(Core_Sticker_Editorial $editorial)
+    public function setEditorialId($editorialId)
     {
-        $this->_editorial = $editorial;
+        $this->_editorialId = $editorialId;
     }
 }

@@ -1,6 +1,8 @@
 <?php
 class Core_Sticker_Editorial
 {
+    private $_id = null
+    
     private $_name = null;
 
     private $_priority = 0;
@@ -8,14 +10,25 @@ class Core_Sticker_Editorial
     private $_imageURL = null;
     
 
-    public function __construct($name, $priority, $imageURl)
+    public function __construct($id, $name, $priority, $imageURl)
     {
+        $this->_id = (int)$id;
         $this->_name = $name;
         $this->_priority = (int)$priority;
         $this->_imageURL = $imageURL;
     }
 
    
+    public function getId()
+    {
+        return $this->_id;
+    }
+    
+    public function setId($id)
+    {
+        $this->_id = (int)$id;
+    }
+    
     public function getName()
     {
         return $this->_name;
