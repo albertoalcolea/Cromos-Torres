@@ -5,24 +5,20 @@ class Core_Store_Product
    
     protected $_name = null;
    
-    protected $_description = null;
-   
-    protected $_detail = null;
-   
-    protected $_quantity = null;
-   
+    protected $_details = null;
+
     protected $_price = null;
    
     protected $_dateAdded = null;
-   
-    protected $_weight = null;
+
  
-    public function __construct($id, $nombre, $description, $price)
+    public function __construct($id, $name, $details, $price, $dateAdded)
     {
-        $this->_id = $id;
-        $this->_name = $nombre;
-        $this->_description = $description;
-        $this->_price = $price;
+        $this->_id = (int)$id;
+        $this->_name = $name;
+        $this->_details = $details;
+        $this->_price = (double)$price;
+        $this->_dateAdded = $dateAdded;
     }
    
     public function getId()
@@ -30,9 +26,9 @@ class Core_Store_Product
         return $this->_id;
     }
  
-    public function setId($value)
+    public function setId($id)
     {
-        $this->_id =  (int)$value;
+        $this->_id = (int)$id;
     }
    
     public function getName()
@@ -40,49 +36,29 @@ class Core_Store_Product
         return $this->_name;
     }
  
-    public function setName($value)
+    public function setName($name)
     {
-        $this->_name = $value;
+        $this->_name = $name;
     }
-   
-    public function getDescription()
+    
+    public function getDetails()
     {
-        return $this->_description;
-    }
- 
-    public function setDescription($value)
-    {
-        $this->_description = $value;
+        return $this->_details;
     }
  
-    public function getDetail()
+    public function setDetails($details)
     {
-        return $this->_detail;
+        $this->_details = $details;
     }
- 
-    public function setDetail($value)
-    {
-        $this->_detail = $value;
-    }
-   
-    public function getQuantity()
-    {
-        return $this->_quantity;
-    }
- 
-    public function setQuantity($value)
-    {
-        $this->_quantity = (int)$value;
-    }
- 
+    
     public function getPrice()
     {
         return $this->_price;
     }
  
-    public function setPrice($value)
+    public function setPrice($price)
     {
-        $this->_price = (double)$value;
+        $this->_price = (double)$price;
     }
  
     public function getDateAdded()
@@ -90,18 +66,8 @@ class Core_Store_Product
         return $this->_dateAdded;
     }
  
-    public function setDateAdded($value)
+    public function setDateAdded($date)
     {
-        $this->_dateAdded = $value;
-    }
- 
-    public function getWeight()
-    {
-        return $this->_weight;
-    }
- 
-    public function setWeight($value)
-    {
-        $this->_weight = (double)$value;
+        $this->_dateAdded = $date;
     }
 }
