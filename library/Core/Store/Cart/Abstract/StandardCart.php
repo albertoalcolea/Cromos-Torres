@@ -26,7 +26,7 @@ class Core_Store_Cart_Abstract_StandardCart extends Core_Store_Cart_Abstract
     static public function getInstance()
     {
         if (!self::$_instance instanceof self) {
-            self:$_instance = new self();
+            self::$_instance = new self();
         }
         
         return self::$_instance;
