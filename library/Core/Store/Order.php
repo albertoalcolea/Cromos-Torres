@@ -1,16 +1,17 @@
 <?php
+
 class Core_Store_Order
 {
-    private $_id = null;
-   
-    private $_date = null;
-   
-    private $_firstName = null;
-
-    private $_lastName = null;
-   
-    private $_street = null;
-
+    private $_id = null;
+    
+    private $_date = null;
+    
+    private $_firstName = null;
+    
+    private $_lastName = null;
+    
+    private $_address = null;
+    
     private $_city = null;
     
     private $_postcode = null;
@@ -20,34 +21,42 @@ class Core_Store_Order
     private $_paymentMethod = null;
     
     private $_products = null;
-
- 
-    public function __construct($id, $date, $firstName, $lastName, 
-                                $street, $city, $postcode, $email, 
-                                $paymentMethod, ArrayAccess $products)
-    {
-        $this->_id = (int)$id;
+    
+    
+    public function __construct($id = null,
+                                $date = null,
+                                $firstName = null,
+                                $lastName = null,
+                                $address = null,
+                                $city = null,
+                                $postcode = null,
+                                $email = null,
+                                $paymentMethod = null,
+                                ArrayAccess $products = null)
+    {
+        $this->_id = (int)$id;
         $this->_date = $date;
         $this->_firstName = $firstName;
         $this->_lastName = $lastName;
-        $this->_street = $street;
+        $this->_address = $address;
         $this->_city = $city;
         $this->_postcode = (int)$postcode;
         $this->_email = $email;
         $this->_paymentMethod = $paymentMethod;
         $this->_products = $products;
-    }
-   
-    public function getId()
-    {
-        return $this->_id;
-    }
- 
-    public function setId($id)
-    {
-        $this->_id = (int)$id;
-    }
-   
+    }
+    
+    
+    public function getId()
+    {
+        return $this->_id;
+    }
+    
+    public function setId($id)
+    {
+        $this->_id = (int)id;
+    }
+    
     public function getDate()
     {
         return $this->_date;
@@ -58,7 +67,7 @@ class Core_Store_Order
         $this->_date = $date;
     }
     
-    public function getFirstname()
+    public function getFirstName()
     {
         return $this->_firstName;
     }
@@ -78,14 +87,14 @@ class Core_Store_Order
         $this->_lastName = $lastName;
     }
     
-    public function getStreet()
+    public function getAddress()
     {
-        return $this->_street;
+        return $this->_address;
     }
     
-    public function setStreet($street)
+    public function setAddress($address)
     {
-        $this->_street = $street;
+        $this->_address = $address;
     }
     
     public function getCity()
