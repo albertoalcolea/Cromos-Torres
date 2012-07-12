@@ -1,5 +1,5 @@
 <?php
-class Application_Model_DbTable_Post extends Zend_Db_Table_Abstract{
+class Application_Model_DbTable_Editorial extends Zend_Db_Table_Abstract{
     
     protected $_name = 'editorial';
     protected $_primary = 'editorial_id';
@@ -13,8 +13,8 @@ class Application_Model_DbTable_Post extends Zend_Db_Table_Abstract{
         $editorial = new Core_Sticker_Editorial();
         $editorial->setId($row['editorial_id']);
         $editorial->setName($row['editorial_name']);
-        $editorial->setPriority($row['collection_priority']);
-        $editorial->setImageURL($row['editorial_imageURL']);
+        $editorial->setPriority($row['editorial_priority']);
+        $editorial->setImageURL($row['editorial_imageUrl']);
          
         return $editorial;
     }
@@ -24,8 +24,8 @@ class Application_Model_DbTable_Post extends Zend_Db_Table_Abstract{
         $row = array(
             'editorial_id' => $editorial->getId(),
             'editorial_name' => $editorial->getName(),
-            'collection_priority' => $editorial->getPriority(),
-            'editorial_imageURL' => $editorial->getImageUrl(),
+            'editorial_priority' => $editorial->getPriority(),
+            'editorial_imageUrl' => $editorial->getImageUrl(),
         );
         
         return $row;

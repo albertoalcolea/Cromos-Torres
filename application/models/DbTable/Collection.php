@@ -1,6 +1,6 @@
 <?php
 
-class Application_Model_DbTable_Post extends Zend_Db_Table_Abstract
+class Application_Model_DbTable_Collection extends Zend_Db_Table_Abstract
 {
     protected $_name = 'collection';
     protected $_primary = 'collection_id';
