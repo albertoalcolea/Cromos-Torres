@@ -1,6 +1,14 @@
 <h2>Yo me llamo Ralph</h2>
-<p>
-    <?php 
-        echo $this->message; 
-    ?>
-</p>
+
+<?php foreach ($this->editorials as $editorial) : ?>
+	<dl>
+		<dt>id</dt>
+		<dd><?php echo $editorial->id ?></dd>
+		<dt>name</dt>
+		<dd><?php echo $editorial->name ?></dd>
+		<dt>priority</dt>
+		<dd><?php echo $editorial->priority ?></dd>
+		<dt>imageUrl</dt>
+		<dd><?php echo $editorial->imageUrl ?></dd>
+	</dl>
+<?php endforeach; ?>

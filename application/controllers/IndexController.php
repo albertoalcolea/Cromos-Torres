@@ -10,8 +10,9 @@ class IndexController extends Zend_Controller_Action
 
     public function indexAction()
     {
-        $this->view->message = "hola";
         $table = new Application_Model_DbTable_Editorial();
+		
+		$this->view->editorials = $table->fetchAll();	
     }
 }
 

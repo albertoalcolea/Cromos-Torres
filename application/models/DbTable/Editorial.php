@@ -2,7 +2,7 @@
 class Application_Model_DbTable_Editorial extends Zend_Db_Table_Abstract{
     
     protected $_name = 'editorial';
-    protected $_primary = 'editorial_id';
+    protected $_primary = 'id';
     
     
     /*****************************************************************/
@@ -11,10 +11,10 @@ class Application_Model_DbTable_Editorial extends Zend_Db_Table_Abstract{
     private function rowToObject($row)
     {
         $editorial = new Core_Sticker_Editorial();
-        $editorial->setId($row['editorial_id']);
-        $editorial->setName($row['editorial_name']);
-        $editorial->setPriority($row['editorial_priority']);
-        $editorial->setImageURL($row['editorial_imageUrl']);
+        $editorial->setId($row['id']);
+        $editorial->setName($row['name']);
+        $editorial->setPriority($row['priority']);
+        $editorial->setImageURL($row['imageUrl']);
          
         return $editorial;
     }
@@ -22,10 +22,10 @@ class Application_Model_DbTable_Editorial extends Zend_Db_Table_Abstract{
     private function objectToRow(Core_Sticker_Editorial $editorial)
     {
         $row = array(
-            'editorial_id' => $editorial->getId(),
-            'editorial_name' => $editorial->getName(),
-            'editorial_priority' => $editorial->getPriority(),
-            'editorial_imageUrl' => $editorial->getImageUrl(),
+            'id' => $editorial->getId(),
+            'name' => $editorial->getName(),
+            'priority' => $editorial->getPriority(),
+            'imageUrl' => $editorial->getImageUrl(),
         );
         
         return $row;
