@@ -1,20 +1,52 @@
-* {
-	border: 0;
-	margin: 0;
-	padding: 0;
+li {
+  list-style: none;
 }
 
-h2 {
-	background: #666;
-	display: block;
+body {
+    background:  url(../images/pattern-11.jpg) ;
 }
 
-dl {
-	background: #fff555;
-	display: block;
-	margin: 10px;
+
+#login {
+	background:  url(../images/pattern-3.jpg);
+	border-radius: 10px;
+	color : #626262;
+	height: 220px;
+	margin: 100px auto 0px auto;
+ 	padding: 30px;
+ 	width: 350px;
+ 	
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;    
 }
 
-dt, dd {
-	display: inline-block;
+
+#login h2 {
+	margin-bottom: 10px;
+    margin-left: 20px;
+}
+
+.reg-login {
+    font-size: 10px;
+    margin-left: 170px;
+}
+
+#twitter-but {
+    margin-left: 15px;
+}
+
+textarea {
+	height: 350px;
+    width: 600px;
+}
+
+.input-form {
+	border-radius: 5px; 
+    border:1px solid #ababab;
+	height: 26px;
+    width: 600px;
+    
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+
 }

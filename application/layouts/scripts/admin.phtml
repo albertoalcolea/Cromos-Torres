@@ -1,0 +1,121 @@
+<?php echo $this->doctype(); ?> 
+<html lang="es">
+	<head>
+    	<meta charset="utf-8">
+    
+		<?php echo $this->headTitle() ?>   
+    	
+    	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    	
+     	<style type="text/css">
+      		body {
+      			padding-bottom: 40px;
+        		padding-top: 60px;
+      		}
+      		.sidebar-nav {
+        		padding: 9px 0;
+      		}
+    	</style>
+
+		<?php echo $this->headLink()->appendStylesheet($this->BaseUrl()."/css/bootstrap.css","screen"); ?>
+		<?php echo $this->headLink()->appendStylesheet($this->BaseUrl()."/css/bootstrap-responsive.css","screen"); ?>
+		<?php echo $this->headLink()->appendStylesheet($this->BaseUrl()."/css/style.css","screen"); ?>
+    </head>
+	<body>
+    
+ 		<!-- nav -->   
+ 		<div class="navbar navbar-fixed-top">
+ 			<div class="navbar-inner">
+ 				<div class="container-fluid">
+					<a class="brand" href="<?php echo $this->baseUrl()?>/index/admin">Cromos Torres</a>
+					<div class="btn-group pull-right">
+						<a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+							<i class="icon-user"></i> 
+							<?php echo $this->escape($this->user->username); ?>
+							<span class="caret"></span>
+						</a>
+						<ul class="dropdown-menu">
+							<li>
+								<a href="#">
+									Cambiar contraseña
+								</a>
+							</li>
+							<li class="divider"></li>
+							<li>
+								<a href="<?php echo $this->baseUrl()?>/login/logout">
+									Salir
+								</a>
+							</li>
+						</ul>
+					</div>
+					<ul class="nav">
+						<li class="dropdown">
+							<a href="#"  class="dropdown-toggle" data-toggle="dropdown">
+								Ventas<b class="caret"></b>
+							</a>
+							
+							<ul class="dropdown-menu">
+                				<li>
+                					<a href="<?php echo $this->baseUrl()?>/user/agregar">
+                						Últimas Ventas
+                					</a>
+                				</li>
+                				<li class="divider"></li>
+                				<li>
+									<a href="<?php echo $this->baseUrl()?>">Ir a la Tienda</a>
+								</li>
+							</ul>
+              
+						</li>
+						<li class="dropdown">
+							<a href="#"  class="dropdown-toggle" data-toggle="dropdown">
+								Editoriales<b class="caret"></b>
+							</a>
+							<ul class="dropdown-menu">
+								
+								<li>
+									<a href="<?php echo $this->baseUrl()?>/post/agregar">Listar editoriales</a>
+								</li>
+								<li>
+									<a href="<?php echo $this->baseUrl()?>/post/agregar">Agregar editorial</a>
+								</li>
+								<li>
+									<a href="<?php echo $this->baseUrl()?>/post/listar">Modificar editorial</a>
+								</li>
+               
+            				</ul>
+						</li>
+						<li class="dropdown">
+							<a href="#"  class="dropdown-toggle" data-toggle="dropdown">
+								Cromos<b class="caret"></b>
+							</a>
+							<ul class="dropdown-menu">
+								
+								<li>
+									<a href="<?php echo $this->baseUrl()?>/post/agregar">Listar cromos</a>
+								</li>
+								<li>
+									<a href="<?php echo $this->baseUrl()?>/post/agregar">Agregar cromos</a>
+								</li>
+								<li>
+									<a href="<?php echo $this->baseUrl()?>/post/listar">Modificar cromos</a>
+								</li>
+               
+            				</ul>
+						</li>
+        			</ul>
+        		</div>
+      		</div>
+    	</div> 
+    	<!-- end nav -->   
+    
+    	<div class="container">
+   			<?php echo $this->layout()->content; ?>
+    	</div>
+    
+    	<script src="<?php echo $this->baseUrl()?>/js/jquery.js"></script>
+    	<script src="<?php echo $this->baseUrl()?>/js/bootstrap-dropdown.js"></script>
+      
+	</body>
+</html>
+
