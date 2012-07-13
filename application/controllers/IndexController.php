@@ -10,12 +10,14 @@ class IndexController extends Zend_Controller_Action
         $this->view->user = Zend_Auth::getInstance()->getIdentity();
     }
 
+
     public function indexAction()
     {
         $table = new Application_Model_DbTable_Editorial();
 		
 		$this->view->editorials = $table->fetchAll();	
     }
+	
 	
 	/* Admin panel */
     public function adminAction()
@@ -38,6 +40,4 @@ class IndexController extends Zend_Controller_Action
 		$post = $posts->listar();
 		$this->view->datos = $post;*/
     }
-	
 }
-

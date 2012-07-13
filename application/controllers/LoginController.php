@@ -55,7 +55,7 @@ class LoginController extends Zend_Controller_Action
             		}
            
           		} else {
-					$this->view->message = "Ingrese usuario y contraseña";
+					$this->view->message = "Ingrese usuario y contrase&ntilde;a";
           		}
 			}
        
