@@ -7,15 +7,13 @@ class Admin_LoginController extends Zend_Controller_Action
     {
         $this->initView();
         $this->view->baseUrl = $this->_request->getBaseUrl();
-        
+        $this->_helper->layout()->setLayout('login');
     }
     
     
     /* login */
     public function indexAction()
-    {  
-		$this->_helper->layout()->setLayout('login');
-		
+    {  		
 		$user = Zend_Auth::getInstance()->getIdentity();
 		if (empty($user)) {
 			$this->view->title = "Login";

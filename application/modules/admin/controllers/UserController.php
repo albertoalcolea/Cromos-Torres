@@ -1,11 +1,12 @@
 <?php
 
-class Admin_UserController extends Zend_Controller_Action{
+class Admin_UserController extends Zend_Controller_Action
+{
     
 	public function preDispatch(){
 		$auth = Zend_Auth::getInstance();
         if (!$auth->hasIdentity()) {
-			$this->_redirect('/login');
+			$this->_redirect('/admin/login');
 		}
     }
 	

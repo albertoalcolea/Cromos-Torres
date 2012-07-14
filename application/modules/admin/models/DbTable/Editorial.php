@@ -1,5 +1,5 @@
 <?php
-class Application_Model_DbTable_Editorial extends Zend_Db_Table_Abstract{
+class Admin_Model_DbTable_Editorial extends Zend_Db_Table_Abstract{
     
     protected $_name = 'editorial';
     protected $_primary = 'id';
@@ -38,7 +38,7 @@ class Application_Model_DbTable_Editorial extends Zend_Db_Table_Abstract{
     public function getById($id)
 	{
 		 $row = $this->find($id)->current();
-		 return rowToObject($row);
+		 return $this->rowToObject($row);
 	}
     
     
@@ -52,14 +52,14 @@ class Application_Model_DbTable_Editorial extends Zend_Db_Table_Abstract{
 	/* add new editorial */
 	public function addEditorial(Core_Sticker_Editorial $editorial)
 	{
-		$this->insert(objectToRow($editorial));
+		$this->insert($this->objectToRow($editorial));
 	}
 	
 	
 	/* update a editorial */
 	public function updateEditorial(Core_Sticker_Editorial $editorial)
 	{
-		$this->update(objectToRow($editorial), 'editorial_id = '. $editorial->getId());
+		$this->update($this->objectToRow($editorial), 'id = '. $editorial->getId());
 	}
 	
 	
