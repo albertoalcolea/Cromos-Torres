@@ -10,7 +10,7 @@ class Core_Sticker_Editorial
     
     private $_name = null;
     
-    private $_priority = 0;
+    private $_priority = self::MINPRIORITY;
     
     private $_imageUrl = null;
     
@@ -79,4 +79,28 @@ class Core_Sticker_Editorial
         $this->_imageUrl = $imageUrl;
 		return $this;
     }
+	
+	
+	public function toArray()
+	{
+		$editorialArray = array(
+			'id' 		=> $this->_id,
+			'name' 		=> $this->_name,
+			'priority' 	=> $this->_priority,
+			'imageUrl'	=> $this->_imageUrl,
+		);
+		return $editorialArray;
+	}
+	
+	
+	public function fromArray($editorialArray)
+	{
+		$this->_id			= (int)$editorialArray['id'];
+		$this->_name		= $editorialArray['name'];
+		$priority = $editorialArray['priority'];
+		if ($priority >= self::MINPRIORITY && $priority <= self::MAXPRIORITY) {
+			$this->_priority	= $priority;
+		}
+		$this->_imageUrl	= $editorialArray['imageUrl'];
+	}
 }

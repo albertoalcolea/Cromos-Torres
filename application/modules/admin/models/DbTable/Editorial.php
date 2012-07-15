@@ -10,23 +10,20 @@ class Admin_Model_DbTable_Editorial extends Zend_Db_Table_Abstract{
 	/*****************************************************************/
     private function rowToObject($row)
     {
-        $editorial = new Core_Sticker_Editorial();
-        $editorial->setId($row['id']);
-        $editorial->setName($row['name']);
-        $editorial->setPriority($row['priority']);
-        $editorial->setImageURL($row['imageUrl']);
-         
-        return $editorial;
+    	if ($row !== null) {
+        	$editorial = new Core_Sticker_Editorial();
+		
+       		$editorial->fromArray($row);
+		
+        	return $editorial;
+		} else {
+			return false;
+		}
     }
     
     private function objectToRow(Core_Sticker_Editorial $editorial)
     {
-        $row = array(
-            'id' => $editorial->getId(),
-            'name' => $editorial->getName(),
-            'priority' => $editorial->getPriority(),
-            'imageUrl' => $editorial->getImageUrl(),
-        );
+        $row = $editorial->toArray();
         
         return $row;
     }

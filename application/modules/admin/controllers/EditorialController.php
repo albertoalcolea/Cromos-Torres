@@ -21,6 +21,8 @@ class Admin_EditorialController extends Zend_Controller_Action
 	public function indexAction()
 	{
 		$this->view->title = "Lista de Editoriales";
+		$this->view->minPriority = Core_Sticker_Editorial::MINPRIORITY;
+		$this->view->maxPriority = Core_Sticker_Editorial::MAXPRIORITY;
 		
 		$editorials = new Admin_Model_DbTable_Editorial();
 		$data = $editorials->getAll();
@@ -31,30 +33,28 @@ class Admin_EditorialController extends Zend_Controller_Action
 	/* insert a new editorial */
 	public function insertAction()
 	{
+		$this->view->title = "Agregar Editorial";
+		
+		$form = new Admin_Form_EditorialForm();
+		$form->submit->setLabel('Agregar');
+		$this->view->form = $form;
+		
 		if ($this->getRequest()->isPost()) {
-			$editorials = new Admin_Model_DbTable_Editorial();
-			$editorial = new Core_Sticker_Editorial();
-
-          	Zend_Loader::loadClass('Zend_Filter_StripTags');
-			$f = new Zend_Filter_StripTags();
+			$formData = $this->getRequest()->getPost();
 			
-			$editorial->setName(	$f->filter($this->_request->getPost('name')))
-					  ->setPriority($f->filter($this->_request->getPost('priority')))
-					  ->setImageUrl($f->filter($this->_request->getPost('imageUrl')));
-			
-			/* !! Check not null or empty !!!!!! */
-			if ($editorial->getName() === null || 
-				$editorial->getName() === '' ||
-			    $editorial->getPriority() === null || 
-			    !($editorial->getPriority() > $editorial->MINPRIORITY && $editorial->getPriority() < $editorial->MAXPRIORITY) ||
-			    $editorial->getImageUrl() === null || 
-			    $editorial->getImageUrl() === '')
-			{
-				$this->view->message = "Datos invalidos";
+			if ($form->isValid($formData)) {
+				$editorials = new Admin_Model_DbTable_Editorial();
+				$editorial = new Core_Sticker_Editorial();
 				
-			} else {
-          		$editorials->addEditorial($editorial);
+				$editorial->setId(null)
+						  ->setName($form->getValue('name'))
+						  ->setPriority($form->getValue('priority'))
+						  ->setImageUrl($form->getValue('imageUrl'));
+				
+				$editorials->addEditorial($editorial);
           		$this->_redirect('/admin/editorial');
+			} else {
+				$form->populate($formData);
 			}
       	}
 	}
@@ -63,38 +63,56 @@ class Admin_EditorialController extends Zend_Controller_Action
 	/* update a editorial */
 	public function updateAction()
 	{
-		$editorials = new Admin_Model_DbTable_Editorial();
-		$editorial = new Core_Sticker_Editorial();
+		$this->view->title = "Editar Editorial";
 		
-		/* show editorial */
-		if (! $this->_request->isPost()) {
-            $editorial = $editorials->getById($this->_getParam('id'));
-            if (! $editorial !== null) {
-                $this->view->editorial = $editorial;
-            }    
-           
-		/* update editorial */ 
-		} else {
-			Zend_Loader::loadClass('Zend_Filter_StripTags');
-			$f = new Zend_Filter_StripTags();			
+		$form = new Admin_Form_EditorialForm();
+		$form->submit->setLabel('Editar');
+		$this->view->form = $form;
+		
+		if ($this->getRequest()->isPost()) {
+			$formData = $this->getRequest()->getPost();
 			
-			$editorial->setId($f->filter($this->_request->getPost('id')));
-			$editorial->setName($f->filter($this->_request->getPost('name')));
-			$editorial->setPriority($f->filter($this->_request->getPost('priority')));
-			$editorial->setImageUrl($f->filter($this->_request->getPost('imageUrl')));
-			
-			/* !! Check not null or empty !!!!!! */
-			
-			$editorials->updateEditorial($editorial);
-			$this->_redirect('/admin/editorial');
-		}
+			if ($form->isValid($formData)) {
+				$editorials = new Admin_Model_DbTable_Editorial();
+				$editorial = new Core_Sticker_Editorial();
+				
+				$editorial->setId($form->getValue('id'))
+						  ->setName($form->getValue('name'))
+						  ->setPriority($form->getValue('priority'))
+						  ->setImageUrl($form->getValue('imageUrl'));
+				
+				$editorials->updateEditorial($editorial);
+          		$this->_redirect('/admin/editorial');
+			} else {
+				$form->populate($formData);
+			}
+      	} else {
+      		if ($this->_hasParam('id')) {
+      			$editorials = new Admin_Model_DbTable_Editorial();
+				$editorial = new Core_Sticker_Editorial();
+				
+				Zend_Loader::loadClass('Zend_Filter_StripTags');
+				$f = new Zend_Filter_StripTags();
+				$id = $f->filter($this->_getParam('id'));
+				
+				$editorial = $editorials->getById($id);
+				
+				if ($editorial) {
+					$form->populate($editorial->toArray());
+				} else {
+					$this->_redirect('/admin/editorial');	
+				}
+      		} else {
+      			$this->_redirect('/admin/editorial');
+      		}
+      	}
 	}
 	
 	
 	/* delete a editorial */
 	public function deleteAction()
 	{
-		if($this->_hasParam('id')){
+		if ($this->_hasParam('id')) {
 			$editorials = new Admin_Model_DbTable_Editorial();
 			
 			Zend_Loader::loadClass('Zend_Filter_StripTags');

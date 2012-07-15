@@ -1,6 +1,6 @@
 
 <div class="span9">
-    <h1 class="page-header"><?php echo $this->title ?></h1>   
+    <h1 class="page-header"><?php echo $this->title ?></h1>
     <table class="table table-bordered">
         <thead>
             <tr>
@@ -21,11 +21,27 @@
                     		<?php echo $this->escape($editorial->imageUrl); ?>
                     	</a>
                     </td>
-                    <td><a href="<?php echo $this->baseUrl() ?>/admin/editorial/update/id/<?php echo $editorial->id; ?>" ><i class="icon-edit"></i></a></td>  
-                    <td><a href="<?php echo $this->baseUrl() ?>/admin/editorial/delete/id/<?php echo $editorial->id; ?>" ><i class="icon-remove"></i></a></td>
+                    <td>
+                    	<a href="<?php echo $this->baseUrl() ?>/admin/editorial/update/id/<?php echo $editorial->id; ?>" >
+                    	<i class="icon-edit"></i>
+                    	</a>
+                    </td>  
+                    <td>
+                    	<a href="<?php echo $this->baseUrl() ?>/admin/editorial/delete/id/<?php echo $editorial->id; ?>" 
+                    		onclick="return confirm('&iquest;Est&aacute; seguro que desea eliminar esta editorial?');">
+                    		<i class="icon-remove"></i>
+                    	</a>
+                    </td>
                 </tr>
             <?php endforeach; ?>
         </tbody>
     </table>
+    <div class="alert">
+		<h3>Prioridades</h2>   
+		<ul>
+			<li>M&iacute;nima: <?php echo $this->minPriority ?></li>
+			<li>M&aacute;xima: <?php echo $this->maxPriority ?></li>
+		</ul>
+    </div>
 </div>    
 </div>

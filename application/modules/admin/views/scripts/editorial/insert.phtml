@@ -1,46 +1,7 @@
 <div class="span9">
 	<div class="entrada" id="formulario">
-		<h1 class="page-header">Agregar Editorial</h1>
-			<form action="<?php echo $this->baseUrl() ?>/admin/editorial/insert" method="post">
-				<div class=" alert-error">
-                	<?php 
-                		if (!empty($this->message))
-							echo $this->message
-					?> 
-				</div>
-                <ul>
-                    <li> 
-                        <label for="name">Nombre</label>
-                        <input type="text" class="input-largo" required="required" name="name" id="name" />
-                    </li>
-                    <li>
-                        <label for="priority">Prioridad</label>
-                        <select required="required" name="priority" id="priority">
-                        	<?php 
-                        		$minPriority = Core_Sticker_Editorial::MINPRIORITY;
-                        		$maxPriority = Core_Sticker_Editorial::MAXPRIORITY;
-                        		for ($i = $minPriority; $i <= $maxPriority; $i++): 
-                        	?>
-                        		<option value="<?php echo $i ?>">
-                        			<?php echo $i ?>
-                        			<?php 
-                        				if ($i == $minPriority) echo " - Menor prioridad";
-                        				if ($i == $maxPriority) echo " - Mayor prioridad";
-                        			?>
-                        		</option>
-                        	<?php endfor; ?>
-                        </select>
-                    </li>
-                    <li>
-                        <label for="imageUrl">URL de la imagen</label>
-                        <input type="text" class="input-largo" required="required" name="imageUrl" id="imageUrl" />
-                    </li>
-
-                    <li>
-                    	<input type="submit" class="btn btn-large btn-inverse" value="Agregar" /> 
-                    </li>  
-                </ul>
-			</form>
+		<h1 class="page-header"><?php echo $this->title ?></h1>
+			<?php echo $this->form ?>
 			                            
 		</div>  
 	</div>    
