@@ -17,8 +17,8 @@
                         <label for="priority">Prioridad</label>
                         <select required="required" name="priority" id="priority">
                         	<?php 
-                        		$minPriority = 1;
-                        		$maxPriority = 5;
+                        		$minPriority = Core_Sticker_Editorial::MINPRIORITY;
+                        		$maxPriority = Core_Sticker_Editorial::MAXPRIORITY;
                         		for ($i = $minPriority; $i <= $maxPriority; $i++): 
                         	?>
                         		<option value="<?php echo $i ?>">

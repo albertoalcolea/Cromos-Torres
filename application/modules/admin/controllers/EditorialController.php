@@ -3,12 +3,11 @@
 class Admin_EditorialController extends Zend_Controller_Action 
 { 
      
-	public function preDispatch(){
-		$auth = Zend_Auth::getInstance();
-        if (!$auth->hasIdentity()) {
-			$this->_redirect('/admin/login');
-		}
+	public function preDispatch()
+	{
+		$this->_helper->logged($this->_helper->redirector);
     }
+	 
 	 
 	public function init()
 	{
@@ -16,6 +15,7 @@ class Admin_EditorialController extends Zend_Controller_Action
 		$this->view->user = Zend_Auth::getInstance()->getIdentity();
 		$this->_helper->layout()->setLayout('admin');
 	}
+
 
     /* list all editorials */
 	public function indexAction()
@@ -38,14 +38,24 @@ class Admin_EditorialController extends Zend_Controller_Action
           	Zend_Loader::loadClass('Zend_Filter_StripTags');
 			$f = new Zend_Filter_StripTags();
 			
-			$editorial->setName($f->filter($this->_request->getPost('name')));
-			$editorial->setPriority($f->filter($this->_request->getPost('priority')));
-			$editorial->setImageUrl($f->filter($this->_request->getPost('imageUrl')));
+			$editorial->setName(	$f->filter($this->_request->getPost('name')))
+					  ->setPriority($f->filter($this->_request->getPost('priority')))
+					  ->setImageUrl($f->filter($this->_request->getPost('imageUrl')));
 			
 			/* !! Check not null or empty !!!!!! */
-			
-          	$editorials->addEditorial($editorial);
-          	$this->_redirect('/admin/editorial');
+			if ($editorial->getName() === null || 
+				$editorial->getName() === '' ||
+			    $editorial->getPriority() === null || 
+			    !($editorial->getPriority() > $editorial->MINPRIORITY && $editorial->getPriority() < $editorial->MAXPRIORITY) ||
+			    $editorial->getImageUrl() === null || 
+			    $editorial->getImageUrl() === '')
+			{
+				$this->view->message = "Datos invalidos";
+				
+			} else {
+          		$editorials->addEditorial($editorial);
+          		$this->_redirect('/admin/editorial');
+			}
       	}
 	}
 	

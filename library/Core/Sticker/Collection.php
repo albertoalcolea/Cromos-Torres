@@ -32,48 +32,62 @@ class Core_Sticker_Collection
         return $this->_id;
     }
     
+	
     public function setId($id)
     {
         $this->_id = (int)$id;
+		return $this;
     }
+	
     
     public function getName()
     {
         return $this->_name;
     }
     
+	
     public function setName($name)
     {
         $this->_name = $name;
+		return $this;
     }
-    
+
+
     public function getYear()
     {
         return $this->_year;
     }
     
+	
     public function setYear($year)
     {
         $this->_year = (int)$year;
+		return $this;
     }
     
+	
     public function getImageUrl()
     {
         return $this->_imageUrl;
     }
     
+	
     public function setImageUrl($imageUrl)
     {
         $this->_imageUrl = $imageUrl;
+		return $this;
     }
     
+	
     public function getEditorialId()
     {
         return $this->_editorialId;
     }
     
+	
     public function setEditorialId($editorialId)
     {
         $this->_editorialId = (int)$editorialId;
+		return $this;
     }
 }

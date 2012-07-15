@@ -52,98 +52,126 @@ class Core_Store_Order
         return $this->_id;
     }
     
+	
     public function setId($id)
     {
         $this->_id = (int)id;
+		return $this;
     }
     
+	
     public function getDate()
     {
         return $this->_date;
     }
     
+	
     public function setDate($date)
     {
         $this->_date = $date;
+		return $this;
     }
     
+	
     public function getFirstName()
     {
         return $this->_firstName;
     }
+	
     
     public function setFirstName($firstName)
     {
         $this->_firstName = $firstName;
+		return $this;
     }
     
+	
     public function getLastName()
     {
         return $this->_lastName;
     }
+	
     
     public function setLastName($lastName)
     {
         $this->_lastName = $lastName;
+		return $this;
     }
+	
     
     public function getAddress()
     {
         return $this->_address;
     }
+	
     
     public function setAddress($address)
     {
         $this->_address = $address;
+		return $this;
     }
     
     public function getCity()
     {
         return $this->_city;
     }
+	
     
     public function setCity($city)
     {
         $this->_city = $city;
+		return $this;
     }
     
+	
     public function getPostcode()
     {
         return $this->_postcode;
     }
     
+	
     public function setPostcode($postcode)
     {
         $this->_postcode = (int)$postcode;
+		return $this;
     }
     
+	
     public function getEmail()
     {
         return $this->_email;
     }
     
+	
     public function setEmail($email)
     {
         $this->_email = $email;
+		return $this;
     }
     
+	
     public function getPaymentMethod()
     {
         return $this->_paymentMethod;
     }
     
+	
     public function setPaymentMethod($paymentMethod)
     {
         $this->_paymentMethod = $paymentMethod;
+		return $this;
     }
     
+	
     public function getProducts()
     {
         return $this->_products;
     }
     
+	
     public function setProducts(ArrayAccess $products)
     {
         $this->_products = $products;
+		return $this;
     }
 }

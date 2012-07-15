@@ -25,38 +25,49 @@ class Core_Sticker_Category
         return $this->_id;
     }
     
+	
     public function setId($id)
     {
         $this->_id = (int)$id;
+		return $this;
     }
+	
     
     public function getName()
     {
         return $this->_name;
     }
+	
     
     public function setName($name)
     {
         $this->_name = $name;
+		return $this;
     }
+	
     
     public function getOrder()
     {
         return $this->_order;
     }
+	
     
     public function setOrder($order)
     {
         $this->_order = (int)$order;
+		return $this;
     }
+	
     
     public function getCollectionId()
     {
         return $this->_collectionId;
     }
     
+	
     public function setCollectionId($collectionId)
     {
         $this->_collectionId = (int)$collectionId;
+		return $this;
     }
 }
