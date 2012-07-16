@@ -89,6 +89,7 @@ class Core_Sticker_Editorial
 			'editorial_priority' 	=> $this->_priority,
 			'editorial_imageUrl'	=> $this->_imageUrl,
 		);
+		
 		return $editorialArray;
 	}
 	

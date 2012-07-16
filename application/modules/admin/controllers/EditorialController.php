@@ -27,6 +27,10 @@ class Admin_EditorialController extends Zend_Controller_Action
 		$editorials = new Admin_Model_DbTable_Editorial();
 		$data = $editorials->getAll();
 		$this->view->data = $data ;
+				
+		if (count($data) == 0) {
+			$this->view->msgempty = "No existen colecciones que mostrar";
+		}
 	}
 	
 	

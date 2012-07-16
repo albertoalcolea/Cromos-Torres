@@ -101,6 +101,7 @@ class Core_Sticker_Collection
 			'collection_imageUrl'	=> $this->_imageUrl,
 			'editorial_id' 			=> $this->_editorial->getId(),
 		);
+		
 		return $collectionArray;
 	}
 	

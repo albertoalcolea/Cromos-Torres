@@ -38,11 +38,12 @@ class Admin_Model_DbTable_Collection extends Zend_Db_Table_Abstract
 		$select = $this->select()
 					   ->setIntegrityCheck(false)
 					   ->from('collection')
-					   ->join('editorial', 'collection.editorial_id = editorial.editorial_id');
+					   ->join('editorial', 'collection.editorial_id = editorial.editorial_id')
+					   ->where('collection_id = ?', $id);
 		
-		$row = $select->fetchRow($select);
+		$row = $this->fetchRow($select);
 		 
-		return rowToObject($row);
+		return $this->rowToObject($row);
 	}
 	    
     
@@ -68,27 +69,36 @@ class Admin_Model_DbTable_Collection extends Zend_Db_Table_Abstract
     
     /* get all collections into a editorial */
 	public function getIntoEditorial($editorialId)
-	{
-		$select = $this->select();
-		$select->where('editorialId = ?', $editorialId);
- 
+	{	
+		$select = $this->select()
+                       ->setIntegrityCheck(false)
+					   ->from('collection')
+                       ->join('editorial', 'collection.editorial_id = editorial.editorial_id')
+					   ->where('collection.editorial_id = ?', $editorialId);
+					   
 		$rows = $this->fetchAll($select);
-					
-		return $rows;
+		
+		$collectionArray = array();
+
+		foreach ($rows as $row) {
+			array_push($collectionArray, $this->rowToObject($row));
+		}
+		
+		return $collectionArray;
 	}
 	
 	
 	/* add new collection */
 	public function addCollection(Core_Sticker_Collection $collection)
 	{
-		$this->insert(objectToRow($collection));
+		$this->insert($this->objectToRow($collection));
 	}
 	
 	
 	/* update a collection */
 	public function updateCollection(Core_Sticker_Collection $collection)
 	{
-		$this->update(objectToRow($collection), 'id = '. $collection->getId());
+		$this->update($this->objectToRow($collection), 'collection_id = '. $collection->getId());
 	}
 	
 	

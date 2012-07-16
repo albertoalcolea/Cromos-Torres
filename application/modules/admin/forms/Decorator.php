@@ -112,6 +112,13 @@ class Admin_Form_Decorator extends Zend_Form
                 case 'Zend_Form_Element_Submit':
                 	$element->setDecorators(self::$_submitElementDecorator);        
 					$element->setAttrib('class', 'btn btn-large btn-inverse');
+					$element->setAttrib('style', 'float: left; margin-right: 20px;');
+                	break;
+					
+				case 'Zend_Form_Element_Button':
+					$element->setDecorators(self::$_submitElementDecorator);        
+					$element->setAttrib('class', 'btn btn-large');
+					//$element->setAttrib('style', 'float: left;');
                 	break;
 					
                 case 'Zend_Form_Element_Radio':

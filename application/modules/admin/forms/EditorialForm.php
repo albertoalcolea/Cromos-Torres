@@ -4,7 +4,7 @@ class Admin_Form_EditorialForm extends Admin_Form_Decorator
 {
 	public function init()
 	{
-		$this->setName('agregarEditorial');
+		$this->setName('editorialForm');
 		
 		/* Id */
 		$id = new Zend_Form_Element_Hidden('editorial_id');
@@ -55,6 +55,12 @@ class Admin_Form_EditorialForm extends Admin_Form_Decorator
 		/* Submit */		 
 		$submit = new Zend_Form_Element_Submit('submit');
 		
-		$this->addElements(array($id, $name, $priority, $imageUrl, $submit));
+		/* Cancel */
+		$cancel = new Zend_Form_Element_Button('cancel');
+		$cancel->setRequired(false)
+    		   ->setLabel('Volver')
+			   ->setAttrib('onclick', 'javascript:history.go(-1)');
+		
+		$this->addElements(array($id, $name, $priority, $imageUrl, $submit, $cancel));
 	}
 }
