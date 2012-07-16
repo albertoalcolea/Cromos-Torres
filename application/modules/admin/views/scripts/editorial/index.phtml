@@ -7,27 +7,27 @@
                 <th>Nombre</th>
                 <th>Prioridad</th>
                 <th>URL imagen</th>
-                <th >Editar</th>
-                <th >Eliminar</th>
+                <th>Editar</th>
+                <th>Eliminar</th>
             </tr>
         </thead>
         <tbody>
             <?php foreach ($this->data as $editorial): ?>
                 <tr>
-                    <td><?php echo $this->escape($editorial->name); ?></td>
-                    <td><?php echo $this->escape($editorial->priority); ?></td>
+                    <td><?php echo $this->escape($editorial->getName()); ?></td>
+                    <td><?php echo $this->escape($editorial->getPriority()); ?></td>
                     <td>
-                    	<a href="<?php echo $this->escape($editorial->imageUrl) ?>">
-                    		<?php echo $this->escape($editorial->imageUrl); ?>
+                    	<a href="<?php echo $this->escape($editorial->getImageUrl()) ?>">
+                    		<?php echo $this->escape($editorial->getImageUrl()); ?>
                     	</a>
                     </td>
                     <td>
-                    	<a href="<?php echo $this->baseUrl() ?>/admin/editorial/update/id/<?php echo $editorial->id; ?>" >
+                    	<a href="<?php echo $this->baseUrl() ?>/admin/editorial/update/id/<?php echo $editorial->getId(); ?>" >
                     	<i class="icon-edit"></i>
                     	</a>
                     </td>  
                     <td>
-                    	<a href="<?php echo $this->baseUrl() ?>/admin/editorial/delete/id/<?php echo $editorial->id; ?>" 
+                    	<a href="<?php echo $this->baseUrl() ?>/admin/editorial/delete/id/<?php echo $editorial->getId(); ?>" 
                     		onclick="return confirm('&iquest;Est&aacute; seguro que desea eliminar esta editorial?');">
                     		<i class="icon-remove"></i>
                     	</a>

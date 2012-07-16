@@ -47,9 +47,9 @@ class Admin_EditorialController extends Zend_Controller_Action
 				$editorial = new Core_Sticker_Editorial();
 				
 				$editorial->setId(null)
-						  ->setName($form->getValue('name'))
-						  ->setPriority($form->getValue('priority'))
-						  ->setImageUrl($form->getValue('imageUrl'));
+						  ->setName($form->getValue('editorial_name'))
+						  ->setPriority($form->getValue('editorial_priority'))
+						  ->setImageUrl($form->getValue('editorial_imageUrl'));
 				
 				$editorials->addEditorial($editorial);
           		$this->_redirect('/admin/editorial');
@@ -76,10 +76,10 @@ class Admin_EditorialController extends Zend_Controller_Action
 				$editorials = new Admin_Model_DbTable_Editorial();
 				$editorial = new Core_Sticker_Editorial();
 				
-				$editorial->setId($form->getValue('id'))
-						  ->setName($form->getValue('name'))
-						  ->setPriority($form->getValue('priority'))
-						  ->setImageUrl($form->getValue('imageUrl'));
+				$editorial->setId($form->getValue('editorial_id'))
+						  ->setName($form->getValue('editorial_name'))
+						  ->setPriority($form->getValue('editorial_priority'))
+						  ->setImageUrl($form->getValue('editorial_imageUrl'));
 				
 				$editorials->updateEditorial($editorial);
           		$this->_redirect('/admin/editorial');

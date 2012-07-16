@@ -2,7 +2,7 @@
 class Admin_Model_DbTable_Editorial extends Zend_Db_Table_Abstract{
     
     protected $_name = 'editorial';
-    protected $_primary = 'id';
+    protected $_primary = 'editorial_id';
     
     
     /*****************************************************************/
@@ -34,15 +34,23 @@ class Admin_Model_DbTable_Editorial extends Zend_Db_Table_Abstract{
 	/*****************************************************************/
     public function getById($id)
 	{
-		 $row = $this->find($id)->current();
-		 return $this->rowToObject($row);
+		$row = $this->find($id)->current();
+		return $this->rowToObject($row);
 	}
     
     
     /* get all editorials */
 	public function getAll()
 	{
-		return $this->fetchAll();
+		$rows = $this->fetchAll();
+		
+		$editorialArray = array();
+		
+		foreach ($rows as $row) {
+			array_push($editorialArray, $this->rowToObject($row));
+		}
+		
+		return $editorialArray;
 	}
 	
 	
@@ -56,7 +64,7 @@ class Admin_Model_DbTable_Editorial extends Zend_Db_Table_Abstract{
 	/* update a editorial */
 	public function updateEditorial(Core_Sticker_Editorial $editorial)
 	{
-		$this->update($this->objectToRow($editorial), 'id = '. $editorial->getId());
+		$this->update($this->objectToRow($editorial), 'editorial_id = '. $editorial->getId());
 	}
 	
 	

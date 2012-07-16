@@ -7,11 +7,11 @@ class Admin_Form_EditorialForm extends Admin_Form_Decorator
 		$this->setName('agregarEditorial');
 		
 		/* Id */
-		$id = new Zend_Form_Element_Hidden('id');
+		$id = new Zend_Form_Element_Hidden('editorial_id');
 		$id->addFilter('Int');
 		
 		/* Name */
-		$name = new Zend_Form_Element_Text('name');
+		$name = new Zend_Form_Element_Text('editorial_name');
         $name->setLabel('Nombre')
              ->setRequired(true)
 			 ->setAttrib('required', 'required')
@@ -35,7 +35,7 @@ class Admin_Form_EditorialForm extends Admin_Form_Decorator
 			}
 		}
 			 
-		$priority = new Zend_Form_Element_Select('priority');
+		$priority = new Zend_Form_Element_Select('editorial_priority');
 		$priority->setLabel('Prioridad')
 				 ->setMultiOptions($priorityArray)
 				 ->setRequired(true)
@@ -44,7 +44,7 @@ class Admin_Form_EditorialForm extends Admin_Form_Decorator
 				 ->addFilter('Int');
 	
 		/* Image Url */			 
-		$imageUrl = new Zend_Form_Element_Text('imageUrl');
+		$imageUrl = new Zend_Form_Element_Text('editorial_imageUrl');
 		$imageUrl->setLabel('Url de la imagen')
 				 ->setRequired(true)
 				 ->setAttrib('required', 'required')

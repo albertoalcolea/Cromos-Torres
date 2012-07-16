@@ -10,20 +10,20 @@ class Core_Sticker_Collection
     
     private $_imageUrl = null;
     
-    private $_editorialId = null;
+    private $_editorial = null;
     
     
     public function __construct($id = null, 
                                 $name = null, 
                                 $year = null, 
                                 $imageUrl = null, 
-                                $editorialId = null)
+                                Core_Sticker_Editorial $editorial = null)
     {
         $this->_id = (int)$id;
         $this->_name = $name;
         $this->_year = (int)$year;
         $this->_imageUrl = $imageUrl;
-        $this->_editorialId = (int)$editorialId;
+        $this->_editorial = $editorial;
     }
     
     
@@ -79,15 +79,42 @@ class Core_Sticker_Collection
     }
     
 	
-    public function getEditorialId()
+    public function getEditorial()
     {
-        return $this->_editorialId;
+        return $this->_editorial;
     }
     
 	
-    public function setEditorialId($editorialId)
+    public function setEditorial(Core_Sticker_Editorial $editorial)
     {
-        $this->_editorialId = (int)$editorialId;
+        $this->_editorial = $editorial;
 		return $this;
     }
+	
+	
+	public function toArray()
+	{
+		$collectionArray = array(
+			'collection_id' 		=> $this->_id,
+			'collection_name' 		=> $this->_name,
+			'collection_year' 		=> $this->_year,
+			'collection_imageUrl'	=> $this->_imageUrl,
+			'editorial_id' 			=> $this->_editorial->getId(),
+		);
+		return $collectionArray;
+	}
+	
+	
+	public function fromArray($collectionArray)
+	{
+		$this->_id			= (int)$collectionArray['collection_id'];
+		$this->_name		= $collectionArray['collection_name'];
+		$this->_year		= (int)$collectionArray['collection_year'];
+		$this->_imageUrl	= $collectionArray['collection_imageUrl'];
+		
+		$editorial = new Core_Sticker_Editorial();
+		$editorial->fromArray($collectionArray);
+		
+		$this->_editorial 	= $editorial;
+	}
 }

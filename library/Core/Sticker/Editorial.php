@@ -84,10 +84,10 @@ class Core_Sticker_Editorial
 	public function toArray()
 	{
 		$editorialArray = array(
-			'id' 		=> $this->_id,
-			'name' 		=> $this->_name,
-			'priority' 	=> $this->_priority,
-			'imageUrl'	=> $this->_imageUrl,
+			'editorial_id' 			=> $this->_id,
+			'editorial_name' 		=> $this->_name,
+			'editorial_priority' 	=> $this->_priority,
+			'editorial_imageUrl'	=> $this->_imageUrl,
 		);
 		return $editorialArray;
 	}
@@ -95,12 +95,12 @@ class Core_Sticker_Editorial
 	
 	public function fromArray($editorialArray)
 	{
-		$this->_id			= (int)$editorialArray['id'];
-		$this->_name		= $editorialArray['name'];
-		$priority = $editorialArray['priority'];
+		$this->_id			= (int)$editorialArray['editorial_id'];
+		$this->_name		= $editorialArray['editorial_name'];
+		$priority = $editorialArray['editorial_priority'];
 		if ($priority >= self::MINPRIORITY && $priority <= self::MAXPRIORITY) {
 			$this->_priority	= $priority;
 		}
-		$this->_imageUrl	= $editorialArray['imageUrl'];
+		$this->_imageUrl	= $editorialArray['editorial_imageUrl'];
 	}
 }

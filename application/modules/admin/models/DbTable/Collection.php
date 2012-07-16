@@ -11,25 +11,20 @@ class Admin_Model_DbTable_Collection extends Zend_Db_Table_Abstract
 	/*****************************************************************/
     private function rowToObject($row)
     {
-        $collection = new Core_Sticker_Collection();
-        $collection->setId($row['collection_id']);
-        $collection->setName($row['collection_name']);
-        $collection->setYear($row['collection_year']);
-        $collection->setImageURL($row['collection_imageURL']);
-        $collection->setEditorialId($row['editorial_id']);
-         
-        return $collection;
+    	if ($row !== null) {
+        	$collection = new Core_Sticker_Collection();
+		
+       		$collection->fromArray($row);
+		
+        	return $collection;
+		} else {
+			return false;
+		}
     }
     
     private function objectToRow(Core_Sticker_Collection $collection)
     {
-        $row = array(
-            'collection_id' => $collection->getId(),
-            'collection_name' => $collection->getName(),
-            'collection_year' => $collection->getYear(),
-            'collection_imageURL' => $collection->getImageUrl(),
-            'editorial_id' => $collection->getEditorialId(),
-        );
+        $row = $collection->toArray();
         
         return $row;
     }
@@ -40,8 +35,34 @@ class Admin_Model_DbTable_Collection extends Zend_Db_Table_Abstract
 	/*****************************************************************/
     public function getById($id)
 	{
-		 $row = $this->find($id)->current();
-		 return rowToObject($row);
+		$select = $this->select()
+					   ->setIntegrityCheck(false)
+					   ->from('collection')
+					   ->join('editorial', 'collection.editorial_id = editorial.editorial_id');
+		
+		$row = $select->fetchRow($select);
+		 
+		return rowToObject($row);
+	}
+	    
+    
+    /* get all collections */
+	public function getAll()
+	{
+		$select = $this->select()
+                       ->setIntegrityCheck(false)
+					   ->from('collection')
+                       ->join('editorial', 'collection.editorial_id = editorial.editorial_id');
+					   
+		$rows = $this->fetchAll($select);
+		
+		$collectionArray = array();
+		
+		foreach ($rows as $row) {
+			array_push($collectionArray, $this->rowToObject($row));
+		}
+		
+		return $collectionArray;
 	}
     
     
@@ -49,7 +70,7 @@ class Admin_Model_DbTable_Collection extends Zend_Db_Table_Abstract
 	public function getIntoEditorial($editorialId)
 	{
 		$select = $this->select();
-		$select->where('editorial_id = ?', $editorialId);
+		$select->where('editorialId = ?', $editorialId);
  
 		$rows = $this->fetchAll($select);
 					
@@ -67,7 +88,7 @@ class Admin_Model_DbTable_Collection extends Zend_Db_Table_Abstract
 	/* update a collection */
 	public function updateCollection(Core_Sticker_Collection $collection)
 	{
-		$this->update(objectToRow($collection), 'collection_id = '. $collection->getId());
+		$this->update(objectToRow($collection), 'id = '. $collection->getId());
 	}
 	
 	
