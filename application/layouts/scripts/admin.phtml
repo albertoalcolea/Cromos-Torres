@@ -60,26 +60,17 @@
 										Resumen
 									</a>
 								</li>
+								<li class="divider"></li>
+								<li>
+                					<a href="<?php echo $this->baseUrl()?>/user/agregar">
+                						Historial de Ventas
+                					</a>
+                				</li>
                 				<li class="divider"></li>
                 				<li>
 									<a href="<?php echo $this->baseUrl()?>">Ir a la Tienda</a>
 								</li>
 							</ul>
-              
-						</li>
-						<li class="dropdown">
-							<a href="#"  class="dropdown-toggle" data-toggle="dropdown">
-								Ventas<b class="caret"></b>
-							</a>
-							
-							<ul class="dropdown-menu">
-                				<li>
-                					<a href="<?php echo $this->baseUrl()?>/user/agregar">
-                						Historial de Ventas
-                					</a>
-                				</li>
-							</ul>
-              
 						</li>
 						<li class="dropdown">
 							<a href="#"  class="dropdown-toggle" data-toggle="dropdown">
@@ -93,7 +84,6 @@
 								<li>
 									<a href="<?php echo $this->baseUrl()?>/admin/editorial/insert">Agregar editorial</a>
 								</li>
-               
             				</ul>
 						</li>
 						<li class="dropdown">
@@ -108,7 +98,6 @@
 								<li>
 									<a href="<?php echo $this->baseUrl()?>/admin/collection/insert">Agregar colecci&oacute;n</a>
 								</li>
-               
             				</ul>
 						</li>
 						<li class="dropdown">
@@ -118,15 +107,32 @@
 							<ul class="dropdown-menu">
 								
 								<li>
-									<a href="<?php echo $this->baseUrl()?>/post/agregar">Listar cromos</a>
+									<a href="<?php echo $this->baseUrl()?>/admin/sticker/list">Listar cromos</a>
 								</li>
 								<li>
-									<a href="<?php echo $this->baseUrl()?>/post/agregar">Agregar cromos</a>
+									<a href="<?php echo $this->baseUrl()?>/admin/sticker/insert">Agregar cromo</a>
+								</li>
+								<li class="divider"></li>
+								<li>
+									<a href="<?php echo $this->baseUrl()?>/admin/category/list">Listar categor&iacute;as</a>
 								</li>
 								<li>
-									<a href="<?php echo $this->baseUrl()?>/post/listar">Modificar cromos</a>
+									<a href="<?php echo $this->baseUrl()?>/admin/category/insert">Agregar categor&iacute;a</a>
 								</li>
-               
+            				</ul>
+						</li>
+						<li class="dropdown">
+							<a href="#"  class="dropdown-toggle" data-toggle="dropdown">
+								&Aacute;lbumes<b class="caret"></b>
+							</a>
+							<ul class="dropdown-menu">
+								
+								<li>
+									<a href="<?php echo $this->baseUrl()?>/admin/album/list">Listar &aacute;lbumes</a>
+								</li>
+								<li>
+									<a href="<?php echo $this->baseUrl()?>/admin/album/insert">Agregar &aacute;lbum</a>
+								</li>	
             				</ul>
 						</li>
         			</ul>

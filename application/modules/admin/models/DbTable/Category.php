@@ -11,25 +11,22 @@ class Admin_Model_DbTable_Category extends Zend_Db_Table_Abstract
 	/*****************************************************************/
 	private function rowToObject($row)
 	{
-		$category = new Core_Sticker_Category();
-		$categoty->setId($row['category_id']);
-		$categoty->setName($row['category_name']);
-		$categoty->setOrder($row['category_order']);
-		$categoty->setCollectionId($row['collection_id']);
-		 
-		return $category;
+		if ($row !== null) {
+        	$category = new Core_Sticker_Category();
+		
+       		$category->fromArray($row);
+		
+        	return $category;
+		} else {
+			return false;
+		}
 	}
 	
 	private function objectToRow(Core_Sticker_Category $category)
 	{
-		$row = array(
-			'category_id' => $category->getId(),
-			'category_name' => $category->getName(),
-			'category_order' => $category->getOrder(),
-			'collection_id' => $category->getCollectionId(),
-		);
-		
-		return $row;
+		 $row = $category->toArray();
+		         
+        return $row;
 	}
 	
 	
@@ -38,34 +35,73 @@ class Admin_Model_DbTable_Category extends Zend_Db_Table_Abstract
     /*****************************************************************/
 	public function getById($id)
 	{
-		 $row = $this->find($id)->current();
-		 return rowToObject($row);
+		$select = $this->select()
+					   ->setIntegrityCheck(false)
+					   ->from('category')
+					   ->join('collection', 'category.collection_id = collection.collection_id')
+					   ->join('editorial', 'editorial.editorial_id = collection.editorial_id')
+					   ->where('category_id = ?', $id);
+		
+		$row = $this->fetchRow($select);
+		 
+		return $this->rowToObject($row);
+	}
+
+
+    /* get all categories */
+	public function getAll()
+	{
+		$select = $this->select()
+                       ->setIntegrityCheck(false)
+					   ->from('category')
+                       ->join('collection', 'category.collection_id = collection.collection_id')
+					   ->join('editorial', 'editorial.editorial_id = collection.editorial_id');
+					   
+		$rows = $this->fetchAll($select);
+		
+		$categoryArray = array();
+		
+		foreach ($rows as $row) {
+			array_push($categoryArray, $this->rowToObject($row));
+		}
+		
+		return $categoryArray;
 	}
 
 
 	/* get all categories into a collection */
 	public function getIntoCollection($collectionId)
 	{
-		$select = $this->select();
-		$select->where('collection_id = ?', $collectionId);
- 
+		$select = $this->select()
+                       ->setIntegrityCheck(false)
+					   ->from('category')
+                       ->join('collection', 'category.collection_id = collection.collection_id')
+					   ->join('editorial', 'editorial.editorial_id = collection.editorial_id')
+					   ->where('category.collection_id = ?', $collectionId);
+					   
 		$rows = $this->fetchAll($select);
-					
-		return $rows;
+		
+		$categoryArray = array();
+
+		foreach ($rows as $row) {
+			array_push($categoryArray, $this->rowToObject($row));
+		}
+		
+		return $categoryArray;
 	}
 	
 	
 	/* add new category */
 	public function addCategory(Core_Sticker_Category $category)
 	{
-		$this->insert(objectToRow($category));
+		$this->insert($this->objectToRow($category));
 	}
 	
 	
 	/* update a category */
 	public function updateCategory(Core_Sticker_Category $category)
 	{
-		$this->update(objectToRow($category), 'category_id = '. $category->getId());
+		$this->update($this->objectToRow($category), 'category_id = '. $category->getId());
 	}
 	
 	

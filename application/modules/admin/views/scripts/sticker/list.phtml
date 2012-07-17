@@ -1,0 +1,84 @@
+
+<div class="span9">
+    <h1 class="page-header"><?php echo $this->title ?></h1>
+    <div>
+		<form id="filterCollectionForm" name="filterCollectionForm" method="get" action="<?php echo $this->baseUrl() ?>/admin/sticker/list" class="form-inline pull-right">
+			<label for="collection_id">Filtrar por: </label>
+			<select name="collection_id" id="collection_id">
+				<option value="0" label="Todas las colecciones" style="font-weight: bold;"
+					<?php if($this->collection == 0): ?>
+						selected="selected"
+					<?php endif; ?>
+				>
+					Todas las editoriales
+				</option>
+				<?php foreach ($this->collections as $collection): ?>
+					<option value="<?php echo $collection->getId() ?>" label="<?php echo $collection->getName() ?>"
+						<?php if($this->collection == $collection->getId()): ?>
+							selected="selected"
+						<?php endif; ?>						
+					>
+						<?php echo $collection->getName() ?>
+					</option>
+				<?php endforeach; ?>
+			</select>
+			<input type="submit" value="Filtrar" class="btn">
+		</form>
+    </div>
+    
+    <?php if (count($this->data) == 0): ?>
+    	<div class="alert" style="clear: both;">
+    		<p><?php echo $this->msgempty ?></p>
+    	</div>
+    	
+    <?php else: ?>
+	    <table class="table table-bordered">
+	        <thead>
+	            <tr>
+	                <th>N&uacute;mero</th>
+	                <th>URL imagen</th>
+	                <th>Colecci&oacute;n</th>
+	                <th>Categor&iacute;a</th>
+	                <th>Editar</th>
+	                <th>Eliminar</th>
+	            </tr>
+	        </thead>
+	        <tbody>
+	            <?php foreach ($this->data as $stick): ?>
+	                <tr>
+	                    <td><?php echo $this->escape($stick->getNumber()) ?></td>
+	                    <td>
+	                    	<a href="<?php echo $this->escape($stick->getImageUrl()) ?>">
+	                    		<?php echo $this->escape($stick->getImageUrl()) ?>
+	                    	</a>
+	                    </td>
+	                    <td>
+	                    	<a href="<?php echo $this->baseUrl() ?>/admin/collection/update/id/<?php echo $this->escape($stick->getCategory()->getCollection()->getId()) ?>">
+	                    		<?php echo $this->escape($stick->getCategory()->getCollection()->getName()) ?>	                    	
+	                    	</a>
+	                    </td>
+	                    <td>
+	                    	<a href="<?php echo $this->baseUrl() ?>/admin/category/update/id/<?php echo $this->escape($stick->getCategory()->getId()) ?>">
+	                    		<?php echo $this->escape($stick->getCategory()->getName()) ?>
+	                    	</a>
+	                    </td>
+	                    <td>
+	                    	<a href="<?php echo $this->baseUrl() ?>/admin/stick/update/id/<?php echo $stick->getId() ?>" >
+	                    		<i class="icon-edit"></i>
+	                    	</a>
+	                    </td>  
+	                    <td>
+	                    	<a href="<?php echo $this->baseUrl() ?>/admin/stick/delete/id/<?php echo $stick->getId() ?>" 
+	                    		onclick="return confirm('&iquest;Est&aacute; seguro que desea eliminar este cromo?');">
+	                    		<i class="icon-remove"></i>
+	                    	</a>
+	                    </td>
+	                </tr>
+	            <?php endforeach; ?>
+	        </tbody>
+	    </table>
+	    <?php
+			echo $this->paginationControl($this->data, 'Sliding', 'pagination.phtml', array("editorial_id" => $this->editorial));
+		?>
+	<?php endif; ?>
+</div>    

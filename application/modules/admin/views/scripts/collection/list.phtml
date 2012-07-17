@@ -5,7 +5,7 @@
 		<form id="filterEditorialForm" name="filterEditorialForm" method="get" action="<?php echo $this->baseUrl() ?>/admin/collection/list" class="form-inline pull-right">
 			<label for="editorial_id">Filtrar por: </label>
 			<select name="editorial_id" id="editorial_id">
-				<option value="0" label="Todas las editoriales"
+				<option value="0" label="Todas las editoriales" style="font-weight: bold;"
 					<?php if($this->editorial == 0): ?>
 						selected="selected"
 					<?php endif; ?>
@@ -60,12 +60,12 @@
 	                    </td>
 	                    <td>
 	                    	<a href="<?php echo $this->baseUrl() ?>/admin/collection/update/id/<?php echo $collection->getId() ?>" >
-	                    	<i class="icon-edit"></i>
+	                    		<i class="icon-edit"></i>
 	                    	</a>
 	                    </td>  
 	                    <td>
 	                    	<a href="<?php echo $this->baseUrl() ?>/admin/collection/delete/id/<?php echo $collection->getId() ?>" 
-	                    		onclick="return confirm('&iquest;Est&aacute; seguro que desea eliminar esta editorial?');">
+	                    		onclick="return confirm('&iquest;Est&aacute; seguro que desea eliminar esta colecci&oacute;n?');">
 	                    		<i class="icon-remove"></i>
 	                    	</a>
 	                    </td>
