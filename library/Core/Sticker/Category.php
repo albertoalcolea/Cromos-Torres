@@ -16,7 +16,9 @@ class Core_Sticker_Category
     							$order = 0, 
     							Core_Sticker_Collection $collection = null) 
     {
-        $this->_id = (int)$id;
+    	if ($id !== null) {
+        	$this->_id = (int)$id;
+		}
         $this->_name = $name;
         $this->_order = (int)$order;
         $this->_collection = $collection;
@@ -31,7 +33,9 @@ class Core_Sticker_Category
 	
     public function setId($id)
     {
-        $this->_id = (int)$id;
+    	if ($id !== null) {
+        	$this->_id = (int)$id;
+		}
 		return $this;
     }
 	

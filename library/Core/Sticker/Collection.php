@@ -19,7 +19,9 @@ class Core_Sticker_Collection
                                 $imageUrl = null, 
                                 Core_Sticker_Editorial $editorial = null)
     {
-        $this->_id = (int)$id;
+    	if ($id !== null) {
+        	$this->_id = (int)$id;
+		}
         $this->_name = $name;
         $this->_year = (int)$year;
         $this->_imageUrl = $imageUrl;
@@ -35,7 +37,9 @@ class Core_Sticker_Collection
 	
     public function setId($id)
     {
-        $this->_id = (int)$id;
+    	if ($id !== null) {
+        	$this->_id = (int)$id;
+		}
 		return $this;
     }
 	
@@ -93,7 +97,7 @@ class Core_Sticker_Collection
 	
 	
 	public function toArray()
-	{
+	{				
 		$collectionArray = array(
 			'collection_id' 		=> $this->_id,
 			'collection_name' 		=> $this->_name,

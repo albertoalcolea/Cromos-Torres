@@ -4,13 +4,14 @@ class Core_Sticker_Album extends Core_Store_Product
 {
     private $_images = null;
     
-    private $_collectionId = null;
+    private $_collection = null;
     
     
-    public function __construct(ArrayAccess $images = null, $collectionId = null)
+    public function __construct(ArrayAccess $images = null, 
+    							Core_Sticker_Collection $collection = null)
     {
         $this->_images = $images;
-        $this->_collectionId = (int)$collectionId;
+        $this->_collection = $collection;
     }
     
 	
@@ -27,15 +28,15 @@ class Core_Sticker_Album extends Core_Store_Product
     }
 	
     
-    public function getCollectionId()
+    public function getCollection()
     {
-        return $this->_collectionId;
+        return $this->_collection;
     }
 	
     
-    public function setCollectionId($collectionId)
+    public function setCollection(Core_Sticker_Collection $collection)
     {
-        $this->_collectionId = (int)$collectionId;
+        $this->_collection = $collection;
 		return $this;
     }
 }

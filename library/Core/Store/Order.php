@@ -34,7 +34,9 @@ class Core_Store_Order
                                 $paymentMethod = null,
                                 ArrayAccess $products = null)
     {
-        $this->_id = (int)$id;
+    	if ($id !== null) {
+        	$this->_id = (int)$id;
+		}
         $this->_date = $date;
         $this->_firstName = $firstName;
         $this->_lastName = $lastName;
@@ -55,7 +57,9 @@ class Core_Store_Order
 	
     public function setId($id)
     {
-        $this->_id = (int)id;
+    	if ($id !== null) {
+        	$this->_id = (int)id;
+		}
 		return $this;
     }
     

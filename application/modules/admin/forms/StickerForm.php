@@ -2,6 +2,8 @@
 
 class Admin_Form_StickerForm extends Admin_Form_Decorator
 {
+	private $_collectionId;
+	
 	public function init()
 	{
 		$this->setName('stickerForm');
@@ -10,15 +12,42 @@ class Admin_Form_StickerForm extends Admin_Form_Decorator
 		$id = new Zend_Form_Element_Hidden('sticker_id');
 		$id->addFilter('Int');
 		
+		/* Number */
+		$number = new Zend_Form_Element_Text('sticker_number');
+        $number->setLabel('Numero')
+			   ->setRequired(true)
+			   ->setAttrib('required', 'required')
+               ->addValidator('NotEmpty', true)
+			   ->addFilter('StripTags')
+			   ->addFilter('StringTrim');
+			 
 		/* Name */
-		$name = new Zend_Form_Element_Text('sticker_name');
+		$name = new Zend_Form_Element_Text('product_name');
         $name->setLabel('Nombre')
              ->setRequired(true)
 			 ->setAttrib('required', 'required')
              ->addValidator('NotEmpty', true)
 			 ->addFilter('StripTags')
 			 ->addFilter('StringTrim');
-	
+
+		/* Price */
+		$price = new Zend_Form_Element_Text('product_price');
+		$price->setLabel('Precio')
+			  ->setRequired(true)
+			  ->setAttrib('required', 'required')
+              ->addValidator('NotEmpty', true)
+			  ->addFilter('StripTags')
+			  ->addFilter('StringTrim')
+			  ->setAttrib('onblur', "checkPrice('product_price')")
+			  ->addValidator('regex', true, array('/[0-9]+.[0-9]{2}/'))
+			  ->getValidator('regex')->setMessage("El precio debe tener el siguiente formato 0.00"); 
+		
+		/* Details */
+		$details = new Zend_Form_Element_Textarea('product_details');
+		$details->setLabel("Detalles")
+				->addFilter('StripTags')
+				->addFilter('StringTrim');
+		
 		/* Image Url */			 
 		$imageUrl = new Zend_Form_Element_Text('sticker_imageUrl');
 		$imageUrl->setLabel('Url de la imagen')
@@ -33,7 +62,7 @@ class Admin_Form_StickerForm extends Admin_Form_Decorator
 		
 		$categoryArray = array();
 		
-		foreach ($categories->getAll() as $c) {
+		foreach ($categories->getIntoCollection($this->_collectionId) as $c) {
 			$categoryArray[$c->getId()] = $c->getName();
 		}
 		
@@ -54,6 +83,13 @@ class Admin_Form_StickerForm extends Admin_Form_Decorator
     		   ->setLabel('Volver')
 			   ->setAttrib('onclick', 'javascript:history.go(-1)');
 		
-		$this->addElements(array($id, $name, $imageUrl, $category, $submit, $cancel));
+		$this->addElements(array($id, $number, $name, $price, $details, 
+								 $imageUrl, $category, $submit, $cancel));
+	}
+
+
+	public function setCollectionId($collectionId)
+	{
+		$this->_collectionId = (int)$collectionId;
 	}
 }

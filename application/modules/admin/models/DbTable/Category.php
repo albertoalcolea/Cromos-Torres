@@ -55,7 +55,9 @@ class Admin_Model_DbTable_Category extends Zend_Db_Table_Abstract
                        ->setIntegrityCheck(false)
 					   ->from('category')
                        ->join('collection', 'category.collection_id = collection.collection_id')
-					   ->join('editorial', 'editorial.editorial_id = collection.editorial_id');
+					   ->join('editorial', 'editorial.editorial_id = collection.editorial_id')
+					   ->order(array('editorial.editorial_id ASC', 'collection.collection_id ASC',
+					   				 'category.category_order ASC'));
 					   
 		$rows = $this->fetchAll($select);
 		
@@ -77,7 +79,8 @@ class Admin_Model_DbTable_Category extends Zend_Db_Table_Abstract
 					   ->from('category')
                        ->join('collection', 'category.collection_id = collection.collection_id')
 					   ->join('editorial', 'editorial.editorial_id = collection.editorial_id')
-					   ->where('category.collection_id = ?', $collectionId);
+					   ->where('category.collection_id = ?', $collectionId)
+					   ->order(array('category.category_order ASC'));
 					   
 		$rows = $this->fetchAll($select);
 		
@@ -94,7 +97,7 @@ class Admin_Model_DbTable_Category extends Zend_Db_Table_Abstract
 	/* add new category */
 	public function addCategory(Core_Sticker_Category $category)
 	{
-		$this->insert($this->objectToRow($category));
+		return $this->insert($this->objectToRow($category));
 	}
 	
 	

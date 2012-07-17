@@ -20,6 +20,7 @@
 		<?php echo $this->headLink()->appendStylesheet($this->baseUrl()."/css/bootstrap.css","screen"); ?>
 		<?php echo $this->headLink()->appendStylesheet($this->baseUrl()."/css/bootstrap-responsive.css","screen"); ?>
 		<?php echo $this->headLink()->appendStylesheet($this->baseUrl()."/css/admin.css","screen"); ?>
+		<?php echo $this->headScript()->appendFile($this->baseUrl()."/js/admin.js"); ?>
     </head>
 	<body>
     
@@ -107,10 +108,10 @@
 							<ul class="dropdown-menu">
 								
 								<li>
-									<a href="<?php echo $this->baseUrl()?>/admin/sticker/list">Listar cromos</a>
+									<a href="<?php echo $this->baseUrl()?>/admin/sticker">Listar cromos</a>
 								</li>
 								<li>
-									<a href="<?php echo $this->baseUrl()?>/admin/sticker/insert">Agregar cromo</a>
+									<a href="<?php echo $this->baseUrl()?>/admin/sticker/index/action_method/insert">Agregar cromo</a>
 								</li>
 								<li class="divider"></li>
 								<li>

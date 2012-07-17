@@ -57,7 +57,7 @@ class Admin_Model_DbTable_Editorial extends Zend_Db_Table_Abstract{
 	/* add new editorial */
 	public function addEditorial(Core_Sticker_Editorial $editorial)
 	{
-		$this->insert($this->objectToRow($editorial));
+		return $this->insert($this->objectToRow($editorial));
 	}
 	
 	

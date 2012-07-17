@@ -17,9 +17,11 @@ class Core_Store_Product
                                 $name = null,
                                 $details = null,
                                 $price = null,
-                                $dateAdded = null)
+                                Zend_Date $dateAdded = null)
     {
-        $this->_id = (int)$id;
+    	if ($id !== null) {
+        	$this->_id = (int)$id;
+		}
         $this->_name = $name;
         $this->_details = $details;
         $this->_price = (double)$price;
@@ -35,7 +37,9 @@ class Core_Store_Product
     
     public function setId($id)
     {
-        $this->_id = (int)$id;
+    	if ($id !== null) {
+        	$this->_id = (int)$id;
+		}
 		return $this;
     }
     
@@ -84,7 +88,7 @@ class Core_Store_Product
     }
 	
     
-    public function setDateAdded($dateAdded)
+    public function setDateAdded(Zend_Date $dateAdded)
     {
         $this->_dateAdded = $dateAdded;
 		return $this;

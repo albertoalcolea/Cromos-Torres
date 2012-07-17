@@ -101,7 +101,21 @@ class Admin_CollectionController extends Zend_Controller_Action
 				
 				$collection->setEditorial($editorial);
 				 
-				$collections->addCollection($collection);
+				$collectionId = $collections->addCollection($collection);
+				
+				/* Add a default category for this collection */
+				$categories = new Admin_Model_DbTable_Category();
+				$category = new Core_Sticker_Category();
+				
+				$collection->setId($collectionId);
+				
+				$category->setId(null)
+						 ->setName($collection->getName())
+						 ->setOrder(1)
+						 ->setCollection($collection);
+						 
+				$categories->addCategory($category);
+				
           		$this->_redirect('/admin/collection');
 			} else {
 				$form->populate($formData);

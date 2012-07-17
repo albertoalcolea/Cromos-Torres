@@ -53,7 +53,8 @@ class Admin_Model_DbTable_Collection extends Zend_Db_Table_Abstract
 		$select = $this->select()
                        ->setIntegrityCheck(false)
 					   ->from('collection')
-                       ->join('editorial', 'collection.editorial_id = editorial.editorial_id');
+                       ->join('editorial', 'collection.editorial_id = editorial.editorial_id')
+					   ->order(array('editorial.editorial_id ASC', 'collection.collection_year DESC'));
 					   
 		$rows = $this->fetchAll($select);
 		
@@ -74,7 +75,8 @@ class Admin_Model_DbTable_Collection extends Zend_Db_Table_Abstract
                        ->setIntegrityCheck(false)
 					   ->from('collection')
                        ->join('editorial', 'collection.editorial_id = editorial.editorial_id')
-					   ->where('collection.editorial_id = ?', $editorialId);
+					   ->where('collection.editorial_id = ?', $editorialId)
+					   ->order(array('collection.collection_year DESC'));
 					   
 		$rows = $this->fetchAll($select);
 		
@@ -91,7 +93,7 @@ class Admin_Model_DbTable_Collection extends Zend_Db_Table_Abstract
 	/* add new collection */
 	public function addCollection(Core_Sticker_Collection $collection)
 	{
-		$this->insert($this->objectToRow($collection));
+		return $this->insert($this->objectToRow($collection));
 	}
 	
 	

@@ -20,7 +20,9 @@ class Core_Sticker_Editorial
                                 $priority = 0,
                                 $imageUrl = null)
     {
-        $this->_id = (int)$id;
+    	if ($id !== null) {
+        	$this->_id = (int)$id;
+		}
         $this->_name = $name;
         $this->_priority = (int)$priority;
         $this->_imageUrl = $imageUrl;
@@ -35,7 +37,9 @@ class Core_Sticker_Editorial
 	
     public function setId($id)
     {
-        $this->_id = (int)$id;
+    	if ($id !== null) {
+        	$this->_id = (int)$id;
+		}
 		return $this;
     }
     

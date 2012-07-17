@@ -138,6 +138,10 @@ class Admin_Form_Decorator extends Zend_Form
 					$element->setDecorators(self::$_standardElementDecorator);
 					break;
 				
+				case 'Zend_Form_Element_Textarea':
+					$element->setDecorators(self::$_standardElementDecorator);
+					break;
+				
                 default:
 					$element->setDecorators(self::$_standardElementDecorator);
             }
