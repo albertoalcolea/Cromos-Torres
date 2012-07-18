@@ -39,6 +39,7 @@
 	                <th>A&ntilde;o</th>
 	                <th>URL imagen</th>
 	                <th>Editorial</th>
+	                <th>Ver cromos</th>
 	                <th>Editar</th>
 	                <th>Eliminar</th>
 	            </tr>
@@ -57,6 +58,11 @@
 	                    	<a href="<?php echo $this->baseUrl() ?>/admin/editorial/update/id/<?php echo $this->escape($collection->getEditorial()->getId()) ?>">
 	                    		<?php echo $this->escape($collection->getEditorial()->getName()) ?>
 	                    	</a>
+	                    </td>
+	                    <td>
+	                    	<a href="<?php echo $this->baseUrl() ?>/admin/sticker/list/collection_id/<?php echo $collection->getId() ?>">
+								<i class="icon-list"></i>
+							</a>
 	                    </td>
 	                    <td>
 	                    	<a href="<?php echo $this->baseUrl() ?>/admin/collection/update/id/<?php echo $collection->getId() ?>" >

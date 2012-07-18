@@ -2,6 +2,12 @@
 
 class Core_Store_Order
 {
+	const PAYMENTMETHOD = array(
+		'paypal', 
+		'transferencia bancaria',
+	);
+	
+	
     private $_id = null;
     
     private $_date = null;
@@ -18,7 +24,7 @@ class Core_Store_Order
     
     private $_email = null;
     
-    private $_paymentMethod = null;
+    private $_paymentMethod = 0;
     
     private $_products = null;
     
@@ -44,7 +50,7 @@ class Core_Store_Order
         $this->_city = $city;
         $this->_postcode = (int)$postcode;
         $this->_email = $email;
-        $this->_paymentMethod = $paymentMethod;
+        $this->_paymentMethod = (int)$paymentMethod;
         $this->_products = $products;
     }
     
@@ -160,9 +166,16 @@ class Core_Store_Order
     }
     
 	
+	public function getPaymentMethodName()
+	{
+		$pmArray = self::PAYMENTMETHOD; 
+		return $pmArray[$this->_paymentMethod];
+	}
+	
+	
     public function setPaymentMethod($paymentMethod)
     {
-        $this->_paymentMethod = $paymentMethod;
+        $this->_paymentMethod = (int)$paymentMethod;
 		return $this;
     }
     

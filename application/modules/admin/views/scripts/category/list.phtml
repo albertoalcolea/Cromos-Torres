@@ -38,6 +38,7 @@
 	                <th>Nombre</th>
 	                <th>Orden</th>
 	                <th>Colecci&oacute;n</th>
+	                <th>Ver cromos</th>
 	                <th>Editar</th>
 	                <th>Eliminar</th>
 	            </tr>
@@ -51,6 +52,11 @@
 	                    	<a href="<?php echo $this->baseUrl() ?>/admin/collection/update/id/<?php echo $this->escape($category->getCollection()->getId()) ?>">
 	                    		<?php echo $this->escape($category->getCollection()->getName()) ?>
 	                    	</a>
+	                    </td>
+	                    <td>
+	                    	<a href="<?php echo $this->baseUrl() ?>/admin/sticker/list/category_id/<?php echo $category->getId() ?>/collection_id/<?php echo $category->getCollection()->getId() ?>">
+								<i class="icon-list"></i>
+							</a>
 	                    </td>
 	                    <td>
 	                    	<a href="<?php echo $this->baseUrl() ?>/admin/category/update/id/<?php echo $category->getId() ?>" >
