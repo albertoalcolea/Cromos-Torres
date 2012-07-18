@@ -31,14 +31,12 @@ class Admin_CollectionController extends Zend_Controller_Action
 		$collections = new Admin_Model_DbTable_Collection();	
 		
 		/* Filter by editorial */
-		if ($this->_hasParam('editorial_id') && $this->_getParam('editorial_id') > 0) {			
-			Zend_Loader::loadClass('Zend_Filter_StripTags');
-			$f = new Zend_Filter_StripTags();
-			$editorialId = $f->filter($this->_getParam('editorial_id'));
-			
-			if (!empty($editorialId)) {          
-				$data = $collections->getIntoEditorial($editorialId);
+		if ($this->_hasParam('editorial_id') && $this->_getParam('editorial_id') > 0) {
+			if ( !($editorialId = $this->_helper->filter($this->_getParam('editorial_id')))) {
+				$this->_redirect('/admin/collection');	
 			}
+			         
+			$data = $collections->getIntoEditorial($editorialId);
 
 			$this->view->editorial = $editorialId;
 			
@@ -162,9 +160,9 @@ class Admin_CollectionController extends Zend_Controller_Action
       			$collections = new Admin_Model_DbTable_Collection();
 				$collection = new Core_Sticker_Collection();
 				
-				Zend_Loader::loadClass('Zend_Filter_StripTags');
-				$f = new Zend_Filter_StripTags();
-				$id = $f->filter($this->_getParam('id'));
+				if ( !($id = $this->_helper->filter($this->_getParam('id')))) {
+					$this->_redirect('/admin/collection');	
+				}
 				
 				$collection = $collections->getById($id);
 				
@@ -188,14 +186,12 @@ class Admin_CollectionController extends Zend_Controller_Action
 		if ($this->_hasParam('id')) {
 			$collections = new Admin_Model_DbTable_Collection();
 			
-			Zend_Loader::loadClass('Zend_Filter_StripTags');
-			$f = new Zend_Filter_StripTags();
-			$id = $f->filter($this->_getParam('id'));
-			
-			if (!empty($id)) {          
-				$collections->deleteCollection($id); 
-				$this->_redirect('/admin/collection');  
-			}   
+			if ( !($id = $this->_helper->filter($this->_getParam('id')))) {
+				$this->_redirect('/admin/editorial');	
+			}
+        
+			$collections->deleteCollection($id); 
+			$this->_redirect('/admin/collection');  
 		}
 	}
  }

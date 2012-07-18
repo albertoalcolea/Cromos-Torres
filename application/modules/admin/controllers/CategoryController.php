@@ -31,14 +31,13 @@ class Admin_CategoryController extends Zend_Controller_Action
 		$categories = new Admin_Model_DbTable_Category();	
 		
 		/* Filter by collection */
-		if ($this->_hasParam('collection_id') && $this->_getParam('collection_id') > 0) {			
-			Zend_Loader::loadClass('Zend_Filter_StripTags');
-			$f = new Zend_Filter_StripTags();
-			$collectionId = $f->filter($this->_getParam('collection_id'));
+		if ($this->_hasParam('collection_id') && $this->_getParam('collection_id') > 0) {
 			
-			if (!empty($collectionId)) {          
-				$data = $categories->getIntoCollection($collectionId);
-			}
+			if ( !($collectionId = $this->_helper->filter($this->_getParam('collection_id')))) {
+				$this->_redirect('/admin/category');	
+			}			
+			       
+			$data = $categories->getIntoCollection($collectionId);
 
 			$this->view->collection = $collectionId;
 			
@@ -117,9 +116,9 @@ class Admin_CategoryController extends Zend_Controller_Action
 		$this->view->title = "Agregar Categor&iacute;a";
 		
 		if ($this->_hasParam('collection_id')) {
-			Zend_Loader::loadClass('Zend_Filter_StripTags');
-			$f = new Zend_Filter_StripTags();
-			$collectionId = $f->filter($this->_getParam('collection_id'));
+			if ( !($collectionId = $this->_helper->filter($this->_getParam('collection_id')))) {
+				$this->_redirect('/admin/category');	
+			}
 			
 			$formArray = array();
 			$formArray['collection_id'] = $collectionId;
@@ -171,9 +170,9 @@ class Admin_CategoryController extends Zend_Controller_Action
 	public function updateintocollectionAction()
 	{
 		if ($this->_hasParam('collection_id')) {
-			Zend_Loader::loadClass('Zend_Filter_StripTags');
-			$f = new Zend_Filter_StripTags();
-			$collectionId = $f->filter($this->_getParam('collection_id'));
+			if ( !($collectionId = $this->_helper->filter($this->_getParam('collection_id')))) {
+				$this->_redirect('/admin/category');	
+			}
 			
 			$this->updateCategory('/admin/sticker/list/collection_id/' . $collectionId);
 		} else {
@@ -192,9 +191,9 @@ class Admin_CategoryController extends Zend_Controller_Action
 	public function deleteintocollectionAction()
 	{
 		if ($this->_hasParam('collection_id')) {
-			Zend_Loader::loadClass('Zend_Filter_StripTags');
-			$f = new Zend_Filter_StripTags();
-			$collectionId = $f->filter($this->_getParam('collection_id'));
+			if ( !($collectionId = $this->_helper->filter($this->_getParam('collection_id')))) {
+				$this->_redirect('/admin/category');	
+			}
 			
 			$this->deleteCategory('/admin/sticker/list/collection_id/' . $collectionId);
 		} else {
@@ -238,9 +237,9 @@ class Admin_CategoryController extends Zend_Controller_Action
       			$categories = new Admin_Model_DbTable_Category();
 				$category = new Core_Sticker_Category();
 				
-				Zend_Loader::loadClass('Zend_Filter_StripTags');
-				$f = new Zend_Filter_StripTags();
-				$id = $f->filter($this->_getParam('id'));
+				if ( !($id = $this->_helper->filter($this->_getParam('id')))) {
+					$this->_redirect($returnUrl);	
+				}
 				
 				$category = $categories->getById($id);
 				
@@ -263,14 +262,12 @@ class Admin_CategoryController extends Zend_Controller_Action
 		if ($this->_hasParam('id')) {
 			$categories = new Admin_Model_DbTable_Category();
 			
-			Zend_Loader::loadClass('Zend_Filter_StripTags');
-			$f = new Zend_Filter_StripTags();
-			$id = $f->filter($this->_getParam('id'));
-			
-			if (!empty($id)) {          
-				$categories->deleteCategory($id);
-				$this->_redirect($returnUrl);  
-			}   
+			if ( !($id = $this->_helper->filter($this->_getParam('id')))) {
+				$this->_redirect($returnUrl);	
+			}
+			      
+			$categories->deleteCategory($id);
+			$this->_redirect($returnUrl);  
 		}
 	}
  }

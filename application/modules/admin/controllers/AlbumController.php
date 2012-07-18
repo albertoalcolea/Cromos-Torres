@@ -121,9 +121,9 @@ class Admin_AlbumController extends Zend_Controller_Action
       			$albums = new Admin_Model_DbTable_Album();
 				$album = new Core_Sticker_Album();
 				
-				Zend_Loader::loadClass('Zend_Filter_StripTags');
-				$f = new Zend_Filter_StripTags();
-				$id = $f->filter($this->_getParam('id'));
+				if ( !($id = $this->_helper->filter($this->_getParam('id')))) {
+					$this->_redirect('/admin/album');	
+				}
 				
 				$album = $albums->getById($id);
 				
@@ -147,14 +147,12 @@ class Admin_AlbumController extends Zend_Controller_Action
 		if ($this->_hasParam('id')) {
 			$albums = new Admin_Model_DbTable_Album();
 			
-			Zend_Loader::loadClass('Zend_Filter_StripTags');
-			$f = new Zend_Filter_StripTags();
-			$id = $f->filter($this->_getParam('id'));
-			
-			if (!empty($id)) {          
-				$albums->deleteAlbum($id); 
-				$this->_redirect('/admin/album');  
-			}   
+			if ( !($id = $this->_helper->filter($this->_getParam('id')))) {
+				$this->_redirect('/admin/album');	
+			}
+			         
+			$albums->deleteAlbum($id); 
+			$this->_redirect('/admin/album');  
 		}
 	}
  }

@@ -13,6 +13,7 @@
 					<th>Colecci&oacute;n</th>
 	            	<th>Nombre</th>
 	            	<th>Precio</th>
+	            	<th>Ver im&aacute;genes</th>
 	                <th>Editar</th>
 	                <th>Eliminar</th>
 	            </tr>
@@ -27,6 +28,11 @@
 	                    </td>
 	                	<td><?php echo $this->escape($album->getName()); ?></td>
 						<td><span class="pull-right"><?php echo $this->escape($album->getPrice()); ?> &euro;</span></td>
+	                    <td>
+	                    	<a href="<?php echo $this->baseUrl() ?>/admin/albumimages/list/album_id/<?php echo $album->getId() ?>">
+	                    		<i class="icon-picture"></i>
+	                    	</a>
+	                    </td>
 	                    <td>
 	                    	<a href="<?php echo $this->baseUrl() ?>/admin/album/update/id/<?php echo $album->getId(); ?>" >
 	                    		<i class="icon-edit"></i>

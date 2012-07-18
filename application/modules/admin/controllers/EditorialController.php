@@ -97,9 +97,9 @@ class Admin_EditorialController extends Zend_Controller_Action
       			$editorials = new Admin_Model_DbTable_Editorial();
 				$editorial = new Core_Sticker_Editorial();
 				
-				Zend_Loader::loadClass('Zend_Filter_StripTags');
-				$f = new Zend_Filter_StripTags();
-				$id = $f->filter($this->_getParam('id'));
+				if ( !($id = $this->_helper->filter($this->_getParam('id')))) {
+					$this->_redirect('/admin/editorial');	
+				}
 				
 				$editorial = $editorials->getById($id);
 				
@@ -123,14 +123,12 @@ class Admin_EditorialController extends Zend_Controller_Action
 		if ($this->_hasParam('id')) {
 			$editorials = new Admin_Model_DbTable_Editorial();
 			
-			Zend_Loader::loadClass('Zend_Filter_StripTags');
-			$f = new Zend_Filter_StripTags();
-			$id = $f->filter($this->_getParam('id'));
-			
-			if (!empty($id)) {          
-				$editorials->deleteEditorial($id); 
-				$this->_redirect('/admin/editorial');  
-			}   
+			if ( !($id = $this->_helper->filter($this->_getParam('id')))) {
+				$this->_redirect('/admin/editorial');	
+			}
+			       
+			$editorials->deleteEditorial($id); 
+			$this->_redirect('/admin/editorial');  
 		}
 	}
  }

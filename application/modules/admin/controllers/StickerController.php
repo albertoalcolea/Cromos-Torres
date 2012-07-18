@@ -49,13 +49,10 @@ class Admin_StickerController extends Zend_Controller_Action
 	{
 		/* Check the collection_id param */
 		if ($this->_hasParam('collection_id') && $this->_getParam('collection_id') > 0) {
-			Zend_Loader::loadClass('Zend_Filter_StripTags');
-			$f = new Zend_Filter_StripTags();
-			$collectionId = $f->filter($this->_getParam('collection_id'));
-			
-			if (empty($collectionId)) {          
-				$this->_redirect('admin/sticker');
+			if ( !($collectionId = $this->_helper->filter($this->_getParam('collection_id')))) {
+				$this->_redirect('/admin/sticker');	
 			}
+
 		} else {
 			$this->_redirect('admin/sticker');
 		}
@@ -72,11 +69,11 @@ class Admin_StickerController extends Zend_Controller_Action
 		
 		/* Filter by category */
 		if ($this->_hasParam('category_id') && $this->_getParam('category_id') > 0) {
-			$categoryId = $f->filter($this->_getParam('category_id'));
+			if ( !($categoryId = $this->_helper->filter($this->_getParam('category_id')))) {
+				$this->_redirect('/admin/sticker');	
+			}       
 			
-			if (!empty($categoryId)) {          
-				$data = $stickers->getIntoCategory($categoryId);
-			}
+			$data = $stickers->getIntoCategory($categoryId);
 			
 			$this->view->category = $categoryId;
 			
@@ -120,9 +117,9 @@ class Admin_StickerController extends Zend_Controller_Action
 	public function insertAction()
 	{
 		if ($this->_hasParam("collection_id")) {
-  			Zend_Loader::loadClass('Zend_Filter_StripTags');
-			$f = new Zend_Filter_StripTags();
-			$collectionId = $f->filter($this->_getParam('collection_id'));
+			if ( !($collectionId = $this->_helper->filter($this->_getParam('collection_id')))) {
+				$this->_redirect('/admin/sticker/index/action_method/insert');	
+			}
 			
   			$form = new Admin_Form_StickerForm(array('collectionId' => $collectionId));
   		} else {
@@ -169,9 +166,9 @@ class Admin_StickerController extends Zend_Controller_Action
 	public function updateAction()
 	{
 		if ($this->_hasParam("collection_id")) {
-  			Zend_Loader::loadClass('Zend_Filter_StripTags');
-			$f = new Zend_Filter_StripTags();
-			$collectionId = $f->filter($this->_getParam('collection_id'));
+			if ( !($collectionId = $this->_helper->filter($this->_getParam('collection_id')))) {
+				$this->_redirect('/admin/sticker');	
+			}
 			
   			$form = new Admin_Form_StickerForm(array('collectionId' => $collectionId));
   		} else {
@@ -213,9 +210,9 @@ class Admin_StickerController extends Zend_Controller_Action
       			$stickers = new Admin_Model_DbTable_Sticker();
 				$sticker = new Core_Sticker_Sticker();
 				
-				Zend_Loader::loadClass('Zend_Filter_StripTags');
-				$f = new Zend_Filter_StripTags();
-				$id = $f->filter($this->_getParam('id'));
+				if ( !($id = $this->_helper->filter($this->_getParam('id')))) {
+					$this->_redirect('/admin/sticker/list/collection_id/' . $collectionId);	
+				}
 				
 				$sticker = $stickers->getById($id);
 				
