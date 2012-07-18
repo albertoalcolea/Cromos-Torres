@@ -121,6 +121,8 @@ class Admin_CollectionController extends Zend_Controller_Action
 				$form->populate($formData);
 			}
       	}
+
+		$this->render('form');
 	}
 	
   	
@@ -175,6 +177,8 @@ class Admin_CollectionController extends Zend_Controller_Action
       			$this->_redirect('/admin/collection');
       		}
       	}
+		
+		$this->render('form');
 	}
 	
 	

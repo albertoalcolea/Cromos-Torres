@@ -110,6 +110,9 @@ class Admin_StickerController extends Zend_Controller_Action
 		/* Get the categories for filtering */		
 		$categories = new Admin_Model_DbTable_Category();
 		$this->view->categories = $categories->getIntoCollection($collectionId);
+		
+		$this->view->titleCategories = "Categor&iacute;as";
+		$this->view->msgemptyCategories = "No existen categor&iacute;as que mostrar";
 	}
 	
 	
@@ -157,6 +160,8 @@ class Admin_StickerController extends Zend_Controller_Action
 				$form->populate($formData);
 			}
       	}
+		
+		$this->render('form');
 	}
 	
   	
@@ -223,6 +228,8 @@ class Admin_StickerController extends Zend_Controller_Action
       			$this->_redirect('/admin/sticker/list/collection_id/' . $collectionId);
       		}
       	}
+		
+		$this->render('form');
 	}
 	
 	

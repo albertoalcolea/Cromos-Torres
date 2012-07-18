@@ -61,6 +61,8 @@ class Admin_EditorialController extends Zend_Controller_Action
 				$form->populate($formData);
 			}
       	}
+		
+		$this->render('form');
 	}
 	
   	
@@ -110,6 +112,8 @@ class Admin_EditorialController extends Zend_Controller_Action
       			$this->_redirect('/admin/editorial');
       		}
       	}
+		
+		$this->render('form');
 	}
 	
 	

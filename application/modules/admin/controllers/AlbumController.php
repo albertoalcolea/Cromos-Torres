@@ -24,8 +24,24 @@ class Admin_AlbumController extends Zend_Controller_Action
 		
 		$albums = new Admin_Model_DbTable_Album();
 		$data = $albums->getAll();
-		$this->view->data = $data ;
-				
+		
+		/* Get the actuall page */
+    	$page = $this->_getParam('page', 1);
+		
+		/* The number of registers to show */ 
+    	$registers_per_page = 10;  
+		
+		/* Max number of pages in the paginator */
+    	$max_pages = 10;
+		
+		$paginator = Zend_Paginator::factory($data);  
+		
+		$paginator->setItemCountPerPage($registers_per_page)  
+              	  ->setCurrentPageNumber($page)  
+              	  ->setPageRange($max_pages);  
+		
+		$this->view->data = $paginator;
+		
 		if (count($data) == 0) {
 			$this->view->msgempty = "No existen &aacute;lbumes que mostrar";
 		}
@@ -49,16 +65,23 @@ class Admin_AlbumController extends Zend_Controller_Action
 				$album = new Core_Sticker_Album();
 				
 				$album->setId(null)
-					  ->setName($form->getValue('editorial_name'))
-					  ->setPriority($form->getValue('editorial_priority'))
-					  ->setImageUrl($form->getValue('editorial_imageUrl'));
+					  ->setName($form->getValue('product_name'))
+					  ->setDetails($form->getValue('product_details'))
+					  ->setPrice($form->getValue('product_price'));
 				
-				$albums->addEditorial($album);
+				$collection = new Core_Sticker_Collection();
+				$collection->setId($form->getValue('collection_id'));
+				
+				$album->setCollection($collection);
+				
+				$albums->addAlbum($album);
           		$this->_redirect('/admin/album');
 			} else {
 				$form->populate($formData);
 			}
       	}
+      	
+      	$this->render('form');
 	}
 	
   	
@@ -78,12 +101,17 @@ class Admin_AlbumController extends Zend_Controller_Action
 				$albums = new Admin_Model_DbTable_Album();
 				$album = new Core_Sticker_Album();
 				
-				$album->setId($form->getValue('editorial_id'))
-					  ->setName($form->getValue('editorial_name'))
-					  ->setPriority($form->getValue('editorial_priority'))
-					  ->setImageUrl($form->getValue('editorial_imageUrl'));
+				$album->setId($form->getValue('album_id'))
+					  ->setName($form->getValue('product_name'))
+					  ->setDetails($form->getValue('product_details'))
+					  ->setPrice($form->getValue('product_price'));
 				
-				$albums->updateEditorial($album);
+				$collection = new Core_Sticker_Collection();
+				$collection->setId($form->getValue('collection_id'));
+				
+				$album->setCollection($collection);
+				
+				$albums->updateAlbum($album);
           		$this->_redirect('/admin/album');
 			} else {
 				$form->populate($formData);
@@ -108,6 +136,8 @@ class Admin_AlbumController extends Zend_Controller_Action
       			$this->_redirect('/admin/album');
       		}
       	}
+		
+		$this->render('form');
 	}
 	
 	

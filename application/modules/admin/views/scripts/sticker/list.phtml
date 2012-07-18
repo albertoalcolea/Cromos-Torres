@@ -78,7 +78,55 @@
 	        </tbody>
 	    </table>
 	    <?php
-			echo $this->paginationControl($this->data, 'Sliding', 'pagination.phtml', array("editorial_id" => $this->editorial));
+			echo $this->paginationControl($this->data, 'Sliding', 'pagination.phtml', array("collection_id" => $this->collectionId));
 		?>
+	<?php endif; ?>
+</div>    
+
+<div class="span9"> 
+    <h2 class="page-header"><?php echo $this->titleCategories ?></h2>
+    <p><a href="<?php echo $this->baseUrl() ?>/admin/category/caca/collection_id/<?php echo $this->collectionId ?>">Agregar categor&iacute;a</a></p>
+    
+    <?php if (count($this->categories) == 0): ?>
+    	<div class="alert" style="clear: both;">
+    		<p><?php echo $this->msgemptyCategories ?></p>
+    	</div>
+    	
+    <?php else: ?>
+	    <table class="table table-bordered">
+	        <thead>
+	            <tr>
+	                <th>Nombre</th>
+	                <th>Orden</th>
+	                <th>Colecci&oacute;n</th>
+	                <th>Editar</th>
+	                <th>Eliminar</th>
+	            </tr>
+	        </thead>
+	        <tbody>
+	            <?php foreach ($this->categories as $category): ?>
+	                <tr>
+	                    <td><?php echo $this->escape($category->getName()) ?></td>
+	                    <td><?php echo $this->escape($category->getOrder()) ?></td>
+	                    <td>
+	                    	<a href="<?php echo $this->baseUrl() ?>/admin/collection/update/id/<?php echo $this->escape($category->getCollection()->getId()) ?>">
+	                    		<?php echo $this->escape($category->getCollection()->getName()) ?>
+	                    	</a>
+	                    </td>
+	                    <td>
+	                    	<a href="<?php echo $this->baseUrl() ?>/admin/category/updateintocollection/collection_id/<?php echo $this->collectionId ?>/id/<?php echo $category->getId() ?>" >
+	                    		<i class="icon-edit"></i>
+	                    	</a>
+	                    </td>  
+	                    <td>
+	                    	<a href="<?php echo $this->baseUrl() ?>/admin/category/deleteintocollection/collection_id/<?php echo $this->collectionId ?>/id/<?php echo $category->getId() ?>" 
+	                    		onclick="return confirm('&iquest;Est&aacute; seguro que desea eliminar esta categor&iacute;a?');">
+	                    		<i class="icon-remove"></i>
+	                    	</a>
+	                    </td>
+	                </tr>
+	            <?php endforeach; ?>
+	        </tbody>
+	    </table>
 	<?php endif; ?>
 </div>    

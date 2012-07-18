@@ -4,7 +4,7 @@ class Admin_Form_AlbumForm extends Admin_Form_Decorator
 {
 	public function init()
 	{
-		$this->setName('stickerForm');
+		$this->setName('albumForm');
 		
 		/* Id */
 		$id = new Zend_Form_Element_Hidden('album_id');
@@ -27,38 +27,32 @@ class Admin_Form_AlbumForm extends Admin_Form_Decorator
 				   ->addValidator('NotEmpty', true)
 				   ->addFilter('Int');
 		
-		/* Image Url 1 */			 
-		$imageUrl1 = new Zend_Form_Element_Text('album__imageUrl1');
-		$imageUrl1->setLabel('Url de la imagen')
-				  ->setRequired(true)
-				  ->setAttrib('required', 'required')
-             	  ->addValidator('NotEmpty', true)
-			 	  ->addFilter('StripTags')
-			 	  ->addFilter('StringTrim');
-				  
-		/* Image Url 2 */			 
-		$imageUrl2 = new Zend_Form_Element_Text('album__imageUrl2');
-		$imageUrl2->setLabel('Url de la imagen')
-			 	  ->addFilter('StripTags')
-			 	  ->addFilter('StringTrim');
-				
-		/* Image Url 3 */			 
-		$imageUrl3 = new Zend_Form_Element_Text('album__imageUrl3');
-		$imageUrl3->setLabel('Url de la imagen')
-			 	  ->addFilter('StripTags')
-			 	  ->addFilter('StringTrim');
-				  
-		/* Image Url 4 */			 
-		$imageUrl4 = new Zend_Form_Element_Text('album__imageUrl4');
-		$imageUrl4->setLabel('Url de la imagen')
-			 	  ->addFilter('StripTags')
-			 	  ->addFilter('StringTrim');
-				  
-		/* Image Url 5 */			 
-		$imageUrl5 = new Zend_Form_Element_Text('album_imageUrl5');
-		$imageUrl5->setLabel('Url de la imagen')
-			 	  ->addFilter('StripTags')
-			 	  ->addFilter('StringTrim');
+		/* Name */
+		$name = new Zend_Form_Element_Text('product_name');
+        $name->setLabel('Nombre')
+             ->setRequired(true)
+			 ->setAttrib('required', 'required')
+             ->addValidator('NotEmpty', true)
+			 ->addFilter('StripTags')
+			 ->addFilter('StringTrim');
+
+		/* Price */
+		$price = new Zend_Form_Element_Text('product_price');
+		$price->setLabel('Precio')
+			  ->setRequired(true)
+			  ->setAttrib('required', 'required')
+              ->addValidator('NotEmpty', true)
+			  ->addFilter('StripTags')
+			  ->addFilter('StringTrim')
+			  ->setAttrib('onblur', "checkPrice('product_price')")
+			  ->addValidator('regex', true, array('/[0-9]+.[0-9]{2}/'))
+			  ->getValidator('regex')->setMessage("El precio debe tener el siguiente formato 0.00"); 
+		
+		/* Details */
+		$details = new Zend_Form_Element_Textarea('product_details');
+		$details->setLabel("Detalles")
+				->addFilter('StripTags')
+				->addFilter('StringTrim');
 		
 		/* Submit */		 
 		$submit = new Zend_Form_Element_Submit('submit');
@@ -69,7 +63,6 @@ class Admin_Form_AlbumForm extends Admin_Form_Decorator
     		   ->setLabel('Volver')
 			   ->setAttrib('onclick', 'javascript:history.go(-1)');
 		
-		$this->addElements(array($id, $collection, $imageUrl1, $imageUrl2, 
-			$imageUrl3, $imageUrl4, $imageUrl5, $submit, $cancel));
+		$this->addElements(array($id, $collection, $name, $price, $details, $submit, $cancel));
 	}
 }

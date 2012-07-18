@@ -101,16 +101,110 @@ class Admin_CategoryController extends Zend_Controller_Action
 				$category->setCollection($collection);
 				 
 				$categories->addCategory($category);
-          		$this->_redirect('/admin/category');
+				$this->_redirect('/admin/category');          		
 			} else {
 				$form->populate($formData);
 			}
       	}
+		
+		$this->render('form');
+	}
+	
+	
+	/* insert a new category into a collection */
+	public function cacaAction()
+	{
+		$this->view->title = "Agregar Categor&iacute;a";
+		
+		if ($this->_hasParam('collection_id')) {
+			Zend_Loader::loadClass('Zend_Filter_StripTags');
+			$f = new Zend_Filter_StripTags();
+			$collectionId = $f->filter($this->_getParam('collection_id'));
+			
+			$formArray = array();
+			$formArray['collection_id'] = $collectionId;
+			
+			$form = new Admin_Form_CategoryForm();
+			$form->submit->setLabel('Agregar');
+			$this->view->form = $form;
+			
+			$form->populate($formArray);
+			
+			if ($this->getRequest()->isPost()) {
+				$formData = $this->getRequest()->getPost();
+				
+				if ($form->isValid($formData)) {
+					$categories = new Admin_Model_DbTable_Category();
+					$category = new Core_Sticker_Category();
+					
+					$category->setId(null)
+							 ->setName($form->getValue('category_name'))
+							 ->setOrder($form->getValue('category_order'));
+					
+					$collection = new Core_Sticker_Collection();
+					$collection->setId($form->getValue('collection_id'));
+					
+					$category->setCollection($collection);
+					 
+					$categories->addCategory($category);
+					$this->_redirect('/admin/sticker/list/collection_id/' . $collection->getId());
+				} else {
+					$form->populate($formData);
+				}
+	      	}
+		} else {
+			$this->_redirect('/admin/category');
+		}
+		
+		$this->render('form');
 	}
 	
   	
 	/* update a category */
 	public function updateAction()
+	{		
+		$this->updateCategory('/admin/category');
+	}
+	
+	
+	/* update a category into a collection */
+	public function updateintocollectionAction()
+	{
+		if ($this->_hasParam('collection_id')) {
+			Zend_Loader::loadClass('Zend_Filter_StripTags');
+			$f = new Zend_Filter_StripTags();
+			$collectionId = $f->filter($this->_getParam('collection_id'));
+			
+			$this->updateCategory('/admin/sticker/list/collection_id/' . $collectionId);
+		} else {
+			$this->updateCategory('/admin/category');
+		}
+	}
+	
+	/* delete a category */
+	public function deleteAction()
+	{
+		$this->deleteCategory('/admin/category');
+	}
+	
+	
+	/* delete a category into a collection */
+	public function deleteintocollectionAction()
+	{
+		if ($this->_hasParam('collection_id')) {
+			Zend_Loader::loadClass('Zend_Filter_StripTags');
+			$f = new Zend_Filter_StripTags();
+			$collectionId = $f->filter($this->_getParam('collection_id'));
+			
+			$this->deleteCategory('/admin/sticker/list/collection_id/' . $collectionId);
+		} else {
+			$this->deleteCategory('/admin/category');
+		}
+	}
+	
+	
+	/* Private methods with returnUrl in param */
+	public function updateCategory($returnUrl)
 	{		
 		$this->view->title = "Editar Categor&iacute;a";
 		
@@ -135,7 +229,7 @@ class Admin_CategoryController extends Zend_Controller_Action
 				$category->setCollection($collection);
 				
 				$categories->updateCategory($category);
-          		$this->_redirect('/admin/category');
+          		$this->_redirect($returnUrl);
 			} else {
 				$form->populate($formData);
 			}
@@ -153,17 +247,18 @@ class Admin_CategoryController extends Zend_Controller_Action
 				if ($category) {
 					$form->populate($category->toArray());
 				} else {
-					$this->_redirect('/admin/category');	
+					$this->_redirect($returnUrl);	
 				}
       		} else {
-      			$this->_redirect('/admin/category');
+      			$this->_redirect($returnUrl);
       		}
       	}
+		
+		$this->render('form');
 	}
-	
-	
-	/* delete a category */
-	public function deleteAction()
+
+
+	private function deleteCategory($returnUrl)
 	{
 		if ($this->_hasParam('id')) {
 			$categories = new Admin_Model_DbTable_Category();
@@ -173,8 +268,8 @@ class Admin_CategoryController extends Zend_Controller_Action
 			$id = $f->filter($this->_getParam('id'));
 			
 			if (!empty($id)) {          
-				$categories->deleteCategory($id); 
-				$this->_redirect('/admin/category');  
+				$categories->deleteCategory($id);
+				$this->_redirect($returnUrl);  
 			}   
 		}
 	}

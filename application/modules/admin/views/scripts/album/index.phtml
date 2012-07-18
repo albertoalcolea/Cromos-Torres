@@ -10,37 +10,31 @@
 	    <table class="table table-bordered">
 	        <thead>
 	            <tr>
-	                <th>Nombre</th>
-	                <th>Prioridad</th>
-	                <th>URL imagen</th>
-	                <th>Ver colecciones</th>
+					<th>Colecci&oacute;n</th>
+	            	<th>Nombre</th>
+	            	<th>Precio</th>
 	                <th>Editar</th>
 	                <th>Eliminar</th>
 	            </tr>
 	        </thead>
 	        <tbody>
-	            <?php foreach ($this->data as $editorial): ?>
+	            <?php foreach ($this->data as $album): ?>
 	                <tr>
-	                    <td><?php echo $this->escape($editorial->getName()); ?></td>
-	                    <td><?php echo $this->escape($editorial->getPriority()); ?></td>
-	                    <td>
-	                    	<a href="<?php echo $this->escape($editorial->getImageUrl()) ?>">
-	                    		<?php echo $this->escape($editorial->getImageUrl()); ?>
+	                	<td>
+	                    	<a href="<?php echo $this->baseUrl() ?>/admin/collection/update/id/<?php echo $album->getCollection()->getId(); ?>" >
+								<?php echo $album->getCollection()->getName(); ?>
 	                    	</a>
 	                    </td>
+	                	<td><?php echo $this->escape($album->getName()); ?></td>
+						<td><span class="pull-right"><?php echo $this->escape($album->getPrice()); ?> &euro;</span></td>
 	                    <td>
-	                    	<a href="<?php echo $this->baseUrl() ?>/admin/collection/list/editorial_id/<?php echo $editorial->getId(); ?>" >
-	                    		<i class="icon-list"></i>
-	                    	</a>
-	                    </td>
-	                    <td>
-	                    	<a href="<?php echo $this->baseUrl() ?>/admin/editorial/update/id/<?php echo $editorial->getId(); ?>" >
+	                    	<a href="<?php echo $this->baseUrl() ?>/admin/album/update/id/<?php echo $album->getId(); ?>" >
 	                    		<i class="icon-edit"></i>
 	                    	</a>
 	                    </td>  
 	                    <td>
-	                    	<a href="<?php echo $this->baseUrl() ?>/admin/editorial/delete/id/<?php echo $editorial->getId(); ?>" 
-	                    		onclick="return confirm('&iquest;Est&aacute; seguro que desea eliminar esta editorial?');">
+	                    	<a href="<?php echo $this->baseUrl() ?>/admin/album/delete/id/<?php echo $album->getId(); ?>" 
+	                    		onclick="return confirm('&iquest;Est&aacute; seguro que desea eliminar este &aacute;lbum?');">
 	                    		<i class="icon-remove"></i>
 	                    	</a>
 	                    </td>
@@ -48,12 +42,8 @@
 	            <?php endforeach; ?>
 	        </tbody>
 	    </table>
-	    <div class="alert">
-			<h3>Prioridades</h2>   
-			<ul>
-				<li>M&iacute;nima: <?php echo $this->minPriority ?></li>
-				<li>M&aacute;xima: <?php echo $this->maxPriority ?></li>
-			</ul>
-	    </div>
+	    <?php
+			echo $this->paginationControl($this->data, 'Sliding', 'pagination.phtml');
+		?>
 	<?php endif; ?>
 </div>

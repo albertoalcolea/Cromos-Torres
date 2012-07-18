@@ -22,7 +22,7 @@ class Admin_Form_CollectionForm extends Admin_Form_Decorator
 		/* Year */			
 		$yearArray = array();
 		
-		foreach (range(date('Y', time()), 1950) as $y) {
+		foreach (range(date('Y', time()), 1960) as $y) {
 			$yearArray[$y] = $y;
 		}
 			 
