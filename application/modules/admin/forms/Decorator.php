@@ -6,7 +6,7 @@ class Admin_Form_Decorator extends Zend_Form
 	protected static $_standardElementDecorator = array(
         array('ViewHelper'),
         array('Label',			array('separator' => ' ', )),
-        array('Description'),	//array('tag' => 'span', 'class' => 'element-description-append', 'placement' => 'append' )),
+        array('Description',	array('tag' => 'span', 'class' => 'element-description-append', 'placement' => 'append' )),
         array('Errors',			array('tag' => 'div', 'class' => 'alert-error')),
         array('HtmlTag',		array('tag' => 'li')),
     );  

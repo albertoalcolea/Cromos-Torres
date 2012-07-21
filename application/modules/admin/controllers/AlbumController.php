@@ -81,6 +81,7 @@ class Admin_AlbumController extends Zend_Controller_Action
 			}
       	}
       	
+		$this->view->imagesLink = 'href="#" onclick="alert(\'Debe crear un &aacute;lbum antes de a&ntilde;adir im&aacute;genes en &eacute;l\')"';
       	$this->render('form');
 	}
 	
@@ -114,6 +115,7 @@ class Admin_AlbumController extends Zend_Controller_Action
 				$albums->updateAlbum($album);
           		$this->_redirect('/admin/album');
 			} else {
+				$id = $form->getValue('album_id');
 				$form->populate($formData);
 			}
       	} else {
@@ -137,6 +139,7 @@ class Admin_AlbumController extends Zend_Controller_Action
       		}
       	}
 		
+		$this->view->imagesLink = 'href="' . $this->view->baseUrl() . '/admin/album/images/album_id/' . $id . '"';
 		$this->render('form');
 	}
 	

@@ -27,11 +27,12 @@ class Admin_Form_CategoryForm extends Admin_Form_Decorator
 				 
 		$order = new Zend_Form_Element_Select('category_order');
 		$order->setLabel('Orden')
-				 ->setMultiOptions($orderArray)
-				 ->setRequired(true)
-				 ->setAttrib('required', 'required')
-				 ->addValidator('NotEmpty', true)
-				 ->addFilter('Int');
+	    	  ->setAttrib('style', 'width: 60px;')
+			  ->setMultiOptions($orderArray)
+			  ->setRequired(true)
+		  	  ->setAttrib('required', 'required')
+			  ->addValidator('NotEmpty', true)
+			  ->addFilter('Int');
 		
 		/* Collection */				
 		$collections = new Admin_Model_DbTable_Collection();

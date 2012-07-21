@@ -16,3 +16,20 @@ function checkPrice(input_id) {
 		document.getElementById(input_id).value = new_price;
 	}
 }
+
+
+function deleteOnFocus(fieldId, value) {
+	field = document.getElementById(fieldId);
+	
+	if (field.value == value) {
+		field.value = "";
+	}
+}
+
+function revertOnBlur(fieldId, value) {
+	field = document.getElementById(fieldId);
+	
+	if (field.value == "") {
+		field.value = value;
+	}
+}

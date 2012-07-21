@@ -109,7 +109,9 @@ class Admin_Form_DecoratorInline extends Zend_Form
                 	break;
 					
 				case 'Zend_Form_Element_Button':
-					$element->setDecorators(self::$_submitElementDecorator);        
+					$element->setDecorators(self::$_submitElementDecorator);   
+					$element->setAttrib('class', 'btn');    
+					$element->setAttrib('style', 'margin-left: 5px;');
                 	break;
 					
                 case 'Zend_Form_Element_Radio':

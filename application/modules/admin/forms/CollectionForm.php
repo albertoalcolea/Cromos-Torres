@@ -28,17 +28,21 @@ class Admin_Form_CollectionForm extends Admin_Form_Decorator
 			 
 		$year = new Zend_Form_Element_Select('collection_year');
 		$year->setLabel('Año')
-				 ->setMultiOptions($yearArray)
-				 ->setRequired(true)
-				 ->setAttrib('required', 'required')
-				 ->addValidator('NotEmpty', true)
-				 ->addFilter('Int');
+			 ->setAttrib('style', 'width: 80px;')
+			 ->setMultiOptions($yearArray)
+			 ->setRequired(true)
+			 ->setAttrib('required', 'required')
+			 ->addValidator('NotEmpty', true)
+			 ->addFilter('Int');
 	
 		/* Image Url */			 
 		$imageUrl = new Zend_Form_Element_Text('collection_imageUrl');
 		$imageUrl->setLabel('Url de la imagen')
 				 ->setRequired(true)
 				 ->setAttrib('required', 'required')
+				 ->setAttrib('onfocus', "deleteOnFocus('collection_imageUrl', 'http://')")
+				 ->setAttrib('onblur', "revertOnBlur('collection_imageUrl', 'http://')")
+				 ->setValue('http://')
              	 ->addValidator('NotEmpty', true)
 			 	 ->addFilter('StripTags')
 			 	 ->addFilter('StringTrim');

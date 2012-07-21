@@ -48,6 +48,9 @@ class Admin_Form_EditorialForm extends Admin_Form_Decorator
 		$imageUrl->setLabel('Url de la imagen')
 				 ->setRequired(true)
 				 ->setAttrib('required', 'required')
+				 ->setAttrib('onfocus', "deleteOnFocus('editorial_imageUrl', 'http://')")
+				 ->setAttrib('onblur', "revertOnBlur('editorial_imageUrl', 'http://')")
+				 ->setValue('http://')
              	 ->addValidator('NotEmpty', true)
 			 	 ->addFilter('StripTags')
 			 	 ->addFilter('StringTrim');

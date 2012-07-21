@@ -11,6 +11,9 @@ class Admin_Form_AlbumimageForm extends Admin_Form_DecoratorInline
 		$imageUrl->setLabel('Url de la imagen:')
 				 ->setRequired(true)
 				 ->setAttrib('required', 'required')
+				 ->setAttrib('onfocus', "deleteOnFocus('albumImage_imageUrl', 'http://')")
+				 ->setAttrib('onblur', "revertOnBlur('albumImage_imageUrl', 'http://')")
+				 ->setValue('http://')
              	 ->addValidator('NotEmpty', true)
 			 	 ->addFilter('StripTags')
 			 	 ->addFilter('StringTrim');
@@ -19,6 +22,12 @@ class Admin_Form_AlbumimageForm extends Admin_Form_DecoratorInline
 		$submit = new Zend_Form_Element_Submit('submit');
 		$submit->setLabel('Agregar imagen');
 		
-		$this->addElements(array($imageUrl, $submit));
+		/* Go back */
+		$goBack = new Zend_Form_Element_Button('goBack');
+		$goBack->setRequired(false)
+    		   ->setLabel('Volver')
+			   ->setAttrib('onclick', 'javascript:history.go(-1)');
+		
+		$this->addElements(array($imageUrl, $submit, $goBack));
 	}
 }

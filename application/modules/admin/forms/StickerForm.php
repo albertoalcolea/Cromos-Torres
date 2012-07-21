@@ -33,6 +33,9 @@ class Admin_Form_StickerForm extends Admin_Form_Decorator
 		/* Price */
 		$price = new Zend_Form_Element_Text('product_price');
 		$price->setLabel('Precio')
+			  ->setDescription('€')
+			  ->setAttrib('style', 'text-align: right; width: 60px;')
+			  ->setValue('0.00')
 			  ->setRequired(true)
 			  ->setAttrib('required', 'required')
               ->addValidator('NotEmpty', true)
@@ -53,6 +56,9 @@ class Admin_Form_StickerForm extends Admin_Form_Decorator
 		$imageUrl->setLabel('Url de la imagen')
 				 ->setRequired(true)
 				 ->setAttrib('required', 'required')
+				 ->setAttrib('onfocus', "deleteOnFocus('sticker_imageUrl', 'http://')")
+				 ->setAttrib('onblur', "revertOnBlur('sticker_imageUrl', 'http://')")
+				 ->setValue('http://')
              	 ->addValidator('NotEmpty', true)
 			 	 ->addFilter('StripTags')
 			 	 ->addFilter('StringTrim');

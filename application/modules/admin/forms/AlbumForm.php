@@ -39,6 +39,9 @@ class Admin_Form_AlbumForm extends Admin_Form_Decorator
 		/* Price */
 		$price = new Zend_Form_Element_Text('product_price');
 		$price->setLabel('Precio')
+			  ->setDescription('€')
+			  ->setAttrib('style', 'text-align: right; width: 60px;')
+			  ->setValue('0.00')
 			  ->setRequired(true)
 			  ->setAttrib('required', 'required')
               ->addValidator('NotEmpty', true)
