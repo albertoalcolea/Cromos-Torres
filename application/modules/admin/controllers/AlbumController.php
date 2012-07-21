@@ -155,4 +155,102 @@ class Admin_AlbumController extends Zend_Controller_Action
 			$this->_redirect('/admin/album');  
 		}
 	}
+	
+	
+	/* show images of album */
+	public function imagesAction()
+	{
+		if ($this->_hasParam('album_id')) {
+			if ( !($albumId = $this->_helper->filter($this->_getParam('album_id')))) {
+				$this->_redirect('/admin/album');
+			}
+			
+			$albumImages = new Admin_Model_DbTable_Albumimage();
+			
+			$form = new Admin_Form_AlbumimageForm();
+			$form->setAction($this->view->baseUrl() . "/admin/album/images/album_id/" . $albumId);
+			
+			if ($this->getRequest()->isPost()) {
+				$formData = $this->getRequest()->getPost();
+				
+				if ($form->isValid($formData)) {
+					$albumImage = new Core_Sticker_Albumimage();
+					
+					$albumImage->setId(null)
+							   ->setImageUrl($form->getValue('albumImage_imageUrl'))
+							   ->setAlbumId($albumId);
+					 
+					$albumImages->addAlbumImage($albumImage);
+				} else {
+					$form->populate($formData);
+				}
+	      	}
+			
+			
+			$albums = new Admin_Model_DbTable_Album();
+			$album = new Core_Sticker_Album();
+			
+			$album = $albums->getById($albumId);
+			
+			$this->view->title = "Im&aacute;genes del &aacute;lbum " . $album->getName();
+			
+			$this->view->albumId = $albumId;
+					
+			$this->view->titleForm = "Agregar imagen";
+			
+			$this->view->form = $form;
+			
+			
+			$albumImages = new Admin_Model_DbTable_Albumimage();
+			$data = $albumImages->getIntoAlbum($albumId);
+		
+			/* Get the actuall page */
+	    	$page = $this->_getParam('page', 1);
+			
+			/* The number of registers to show */ 
+	    	$registers_per_page = 12;  
+			
+			/* Max number of pages in the paginator */
+	    	$max_pages = 10;
+			
+			$paginator = Zend_Paginator::factory($data);  
+			
+			$paginator->setItemCountPerPage($registers_per_page)  
+	              	  ->setCurrentPageNumber($page)  
+	              	  ->setPageRange($max_pages);  
+			
+			$this->view->data = $paginator;
+		
+			if (count($data) == 0) {
+				$this->view->msgempty = "No existen im&aacute;genes que mostrar";
+			}
+		} else {
+			$this->_redirect('/admin/album');
+		}
+	}
+
+
+	/* delete image of album */
+	public function deleteimageAction ()
+	{
+		if ($this->_hasParam('id')) {
+			$albumImages = new Admin_Model_DbTable_Albumimage();
+			
+			Zend_Loader::loadClass('Zend_Filter_StripTags');
+			$f = new Zend_Filter_StripTags();
+			$id = $f->filter($this->_getParam('id'));
+			
+			if (!empty($id)) {          
+				$albumImages->deleteAlbumImage($id);
+				
+				if ($this->_hasParam('album_id')) {
+					$albumId = $f->filter($this->_getParam('album_id'));
+					
+					$this->_redirect('admin/album/images/album_id/' . $albumId);
+				} else {
+					$this->_redirect('/admin/album');
+				}  
+			}   
+		}
+	}
  }

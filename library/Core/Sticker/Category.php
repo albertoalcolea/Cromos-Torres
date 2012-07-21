@@ -81,14 +81,14 @@ class Core_Sticker_Category
 	
 	public function toArray()
 	{
-		$collectionArray = array(
+		$categoryArray = array(
 			'category_id'		=> $this->_id,
 			'category_name'		=> $this->_name,
 			'category_order'	=> $this->_order,
 			'collection_id'		=> $this->_collection->getId(),
 		);
 		
-		return $collectionArray;
+		return $categoryArray;
 	}
 	
 	

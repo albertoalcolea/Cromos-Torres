@@ -1,6 +1,6 @@
 <?php
 
-class Admin_Form_Decorator extends Zend_Form
+class Admin_Form_DecoratorInline extends Zend_Form
 {
 	
 	protected static $_standardElementDecorator = array(
@@ -8,7 +8,6 @@ class Admin_Form_Decorator extends Zend_Form
         array('Label',			array('separator' => ' ', )),
         array('Description'),	//array('tag' => 'span', 'class' => 'element-description-append', 'placement' => 'append' )),
         array('Errors',			array('tag' => 'div', 'class' => 'alert-error')),
-        array('HtmlTag',		array('tag' => 'li')),
     );  
 
 
@@ -17,7 +16,6 @@ class Admin_Form_Decorator extends Zend_Form
         array('ViewHelper'),
         array('Label',         	array('separator' => ' ', )),
         array('Errors',			array('tag' => 'div', 'class' => 'alert-error')),
-        array('HtmlTag',     	array('tag' => 'li')),
     );
 
 
@@ -26,7 +24,6 @@ class Admin_Form_Decorator extends Zend_Form
         array('Label',         	array('separator' => ' ', )),
         array('Description'),   //array('tag' => 'span', 'class' => 'element-description-append', 'placement' => 'append' )),
         array('Errors',			array('tag' => 'div', 'class' => 'alert-error')),
-        array('HtmlTag',     	array('tag' => 'li', 'class' => 'clearRight')),
     ); 
 
 
@@ -35,7 +32,6 @@ class Admin_Form_Decorator extends Zend_Form
         array('Label',         	array('separator' => ' ', )),
         array('Description'),   //array('tag' => 'span', 'class' => 'element-description-append', 'placement' => 'append' )),
         array('Errors',			array('tag' => 'div', 'class' => 'alert-error')),
-        array('HtmlTag',     	array('tag' => 'li', 'class' => 'clearLeft')),
     ); 
 
 
@@ -61,7 +57,6 @@ class Admin_Form_Decorator extends Zend_Form
 
     protected static $_submitElementDecorator = array(
         array('ViewHelper'),
-        array('HtmlTag',		array('tag' => 'li')),
     );
 
 
@@ -81,8 +76,7 @@ class Admin_Form_Decorator extends Zend_Form
         if (!$this->loadDefaultDecoratorsIsDisabled()) {
             $this->clearDecorators()
                  ->addDecorator('FormElements')
-				 ->addDecorator('HtmlTag', array('tag' => 'ul'))
-                 ->addDecorator('Form')
+                 ->addDecorator('Form', array('class' => 'form-inline'))
             ;
         } 
 
@@ -111,14 +105,11 @@ class Admin_Form_Decorator extends Zend_Form
 					
                 case 'Zend_Form_Element_Submit':
                 	$element->setDecorators(self::$_submitElementDecorator);        
-					$element->setAttrib('class', 'btn btn-large btn-inverse');
-					$element->setAttrib('style', 'float: left; margin-right: 20px;');
+					$element->setAttrib('class', 'btn btn-inverse');
                 	break;
 					
 				case 'Zend_Form_Element_Button':
 					$element->setDecorators(self::$_submitElementDecorator);        
-					$element->setAttrib('class', 'btn btn-large');
-					//$element->setAttrib('style', 'float: right;');
                 	break;
 					
                 case 'Zend_Form_Element_Radio':
@@ -130,17 +121,16 @@ class Admin_Form_Decorator extends Zend_Form
                 	break;
 					
                 case 'Zend_Form_Element_Select':
-					$element->setAttrib('class', 'input-xlarge');
 					$element->setDecorators(self::$_standardElementDecorator);
 					break;
 					
                 case 'Zend_Form_Element_Text':
 					$element->setAttrib('class', 'input-xlarge');
+					$element->setAttrib('style', 'margin: 0 5px;');
 					$element->setDecorators(self::$_standardElementDecorator);
 					break;
 				
 				case 'Zend_Form_Element_Textarea':
-					$element->setAttrib('class', 'input-xlarge');
 					$element->setDecorators(self::$_standardElementDecorator);
 					break;
 				

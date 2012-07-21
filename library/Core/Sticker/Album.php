@@ -43,7 +43,7 @@ class Core_Sticker_Album extends Core_Store_Product
 	
 	public function toArray()
 	{
-		$collectionArray = array(
+		$albumArray = array(
 			'album_id'			=> $this->_id,
 			'collection_id'		=> $this->_collection->getId(),
 			'product_name'		=> $this->_name,
@@ -52,7 +52,7 @@ class Core_Sticker_Album extends Core_Store_Product
 			//'product_dateAdded'	=> $this->_dateAdded->get('yyyy-mm-dd'),
 		);
 		
-		return $collectionArray;
+		return $albumArray;
 	}
 	
 	

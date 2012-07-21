@@ -60,7 +60,7 @@ class Core_Sticker_Sticker extends Core_Store_Product
 	
 	public function toArray()
 	{
-		$collectionArray = array(
+		$stickerArray = array(
 			'sticker_id'		=> $this->_id,
 			'sticker_number'	=> $this->_number,
 			'sticker_imageUrl'	=> $this->_imageUrl,
@@ -71,7 +71,7 @@ class Core_Sticker_Sticker extends Core_Store_Product
 			//'product_dateAdded'	=> $this->_dateAdded->get('yyyy-mm-dd'),
 		);
 		
-		return $collectionArray;
+		return $stickerArray;
 	}
 	
 	

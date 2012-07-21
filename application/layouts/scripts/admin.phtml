@@ -17,10 +17,20 @@
       		}
     	</style>
 
-		<?php echo $this->headLink()->appendStylesheet($this->baseUrl()."/css/bootstrap.css","screen"); ?>
-		<?php echo $this->headLink()->appendStylesheet($this->baseUrl()."/css/bootstrap-responsive.css","screen"); ?>
-		<?php echo $this->headLink()->appendStylesheet($this->baseUrl()."/css/admin.css","screen"); ?>
-		<?php echo $this->headScript()->appendFile($this->baseUrl()."/js/admin.js"); ?>
+		<?php 
+			$this->headLink()->appendStylesheet($this->baseUrl()."/css/bootstrap.css","screen")
+			                 ->appendStylesheet($this->baseUrl()."/css/bootstrap-responsive.css","screen")
+							 ->appendStylesheet($this->baseUrl()."/css/lightbox.css", "screen")
+			                 ->appendStylesheet($this->baseUrl()."/css/admin.css","screen");
+			
+			$this->headScript()->appendFile($this->baseUrl()."/js/jquery-1.7.2.min.js")
+							   ->appendFile($this->baseUrl()."/js/bootstrap-dropdown.js")
+							   ->appendFile($this->baseUrl()."/js/lightbox.js")
+							   ->appendFile($this->baseUrl()."/js/admin.js");
+			
+			echo $this->headLink();
+		?>
+
     </head>
 	<body>
     
@@ -145,9 +155,8 @@
     	<div class="container">
    			<?php echo $this->layout()->content; ?>
     	</div>
-    
-    	<script src="<?php echo $this->baseUrl()?>/js/jquery.js"></script>
-    	<script src="<?php echo $this->baseUrl()?>/js/bootstrap-dropdown.js"></script>
+      
+      	<?php echo $this->headScript(); ?>
       
 	</body>
 </html>

@@ -68,3 +68,7 @@ textarea {
 	margin-top: 4px;
 	text-align: center;
 }
+
+.image-list .image-details i {
+	margin-right: 7px;
+}

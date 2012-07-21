@@ -1,0 +1,30 @@
+
+<div class="span9">
+    <h1 class="page-header"><?php echo $this->title ?></h1>
+    <?php if (count($this->data) == 0): ?>
+		<div class="alert">
+    		<p><?php echo $this->msgempty ?></p>
+    	</div>
+    	
+    <?php else: ?>
+	    <div class="image-list">
+	    	<ul>
+	    		<?php foreach ($this->data as $image): ?>
+	    		<li>
+	    			<a href="<?php echo $this->escape($image->getImageUrl()) ?>" rel="lightbox[roadtrip]">
+	    				<img src="<?php echo $this->escape($image->getImageUrl()) ?>">
+	    			</a>
+	    			<div class="image-details">
+	    				<a href="<?php echo $this->baseUrl() ?>/admin/album/deleteimage/album_id/<?php echo $this->albumId ?>/id/<?php echo $image->getId() ?>"><i class="icon-remove"></i>Eliminar</a>
+	    			</div>
+	    		</li>
+	    		<?php endforeach; ?>
+	    	</ul>
+	    </div>
+	    <?php
+			echo $this->paginationControl($this->data, 'Sliding', 'pagination.phtml');
+		?>
+	<?php endif; ?>
+	<h3 class="page-header"><?php echo $this->titleForm ?></h3>
+	<?php echo $this->form ?>
+</div>
