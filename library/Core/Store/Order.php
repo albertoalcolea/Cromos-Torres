@@ -7,6 +7,9 @@ class Core_Store_Order
 		'transferencia bancaria',
 	);
 	
+	const TYPE_PAYPAL		= 0;
+	const TYPE_BANKTRANSFER	= 1;
+	
 	
     private $_id = null;
     
