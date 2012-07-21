@@ -1,9 +1,75 @@
 <div class="span9">
-	<h1 class="page-header">&Uacute;ltimas ventas</h1>   
-        
-</div>    
-
-<div class="span9">
-    <h1 class="page-header">Lista de cromos</h1>   
+	<h1 class="page-header"><?php echo $this->title ?></h1>   
+	<div>
+		<form id="filterDateHistoriyForm" name="filterDateHistoriyForm" method="get" action="<?php echo $this->baseUrl() ?>/admin/index" class="form-inline pull-right">
+			<label for="from">Desde: </label>
+			<input type="text" class="input-small" required="required" name="from" id="from" value="<?php echo $this->fromDate ?>" />
+			<label for="from">Hasta: </label>
+			<input type="text" class="input-small" required="required" name="to" id="to" value="<?php echo $this->toDate ?>" />
+			<input type="submit" value="Filtrar" class="btn btn-inverse">
+		</form>
+    </div>
     
-</div>    
+    <?php if (count($this->data) == 0): ?>
+    	<div class="alert" style="clear: both;">
+    		<p><?php echo $this->msgempty ?></p>
+    	</div>
+    	
+    <?php else: ?>
+		<?php foreach ($this->data as $order): ?>			
+		    <dl class="dl-horizontal" style="clear: both;">
+		    	<dt>Fecha:</dt>
+		    	<dd><?php echo $this->escape($order->getDate()->get(Zend_Date::DATETIME_SHORT)) ?></dd>
+		    	<dt>Apellidos, Nombre:</dt>
+		    	<dd><?php echo $this->escape($order->getLastName()) ?>, <?php echo $this->escape($order->getFirstName()) ?></dd>
+		    	<dt>Direcci&oacute;n:</dt>
+		    	<dd><?php echo $this->escape($order->getAddress()) ?></dd>
+		    	<dt>Localidad:</dt>
+		    	<dd><?php echo $this->escape($order->getCity()) ?></dd>
+		    	<dt>C&oacute;digo Postal:</dt>
+		    	<dd><?php echo $this->escape($order->getPostcode()) ?></dd>
+		    	<dt>Email:</dt>
+		    	<dd><?php echo $this->escape($order->getEmail()) ?></dd>
+		    	<dt>M&eacute;todo de pago:</dt>
+		    	<dd><?php echo $this->escape($order->getPaymentMethodName()) ?></dd>
+		    </dl>
+			
+		    <table class="table table-condensed">
+		    	<thead>
+			            <tr>
+			                <th>Tipo</th>
+			                <th>Nombre</th>
+			                <th>Precio</th>
+			                <th>Unidades</th>
+			                <th>Precio Total</th>
+			            </tr>
+			        </thead>
+			        <tbody>
+			        	<?php
+			        		$total = (double)0.0;
+			        		foreach ($order->getProducts() as $product):
+								$total = $total + $product->getPrice();	
+			        	?>
+				        	<tr>
+				        		<td><?php echo $product->getTypeName() ?></td>
+				        		<td><?php echo $product->getName() ?></td>
+				        		<td><span class="pull-right"><?php echo $product->getPrice() ?> €</span></td>
+				        		<td><span class="pull-right"><?php echo $product->getStock() ?></span></td>
+				        		<td><span class="pull-right"><strong><?php echo $product->getStock() * $product->getPrice() ?> €</strong></span></td>
+				        	</tr>
+			        	<?php endforeach; ?>
+			        </tbody>
+			        <tfoot>
+			        	<tr>
+			        		<td colspan="4"><span class="pull-right">Total:</span></td>
+			        		<td><span class="pull-right"><strong><?php echo $total ?> €</strong></span></td>
+			        	</tr>
+			        </tfoot>
+		    </table>
+		    <div class="separator"></div>
+	    <?php endforeach; ?>
+		<?php
+			echo $this->paginationControl($this->data, 'Sliding', 'pagination.phtml', array("editorial_id" => $this->editorial));
+		?>
+	<?php endif; ?>
+</div> 

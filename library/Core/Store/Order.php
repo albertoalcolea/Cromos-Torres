@@ -1,12 +1,7 @@
 <?php
 
 class Core_Store_Order
-{
-	const PAYMENTMETHOD = array(
-		'paypal', 
-		'transferencia bancaria',
-	);
-	
+{	
 	const TYPE_PAYPAL		= 0;
 	const TYPE_BANKTRANSFER	= 1;
 	
@@ -41,7 +36,7 @@ class Core_Store_Order
                                 $postcode = null,
                                 $email = null,
                                 $paymentMethod = null,
-                                ArrayAccess $products = null)
+                                $products = null)
     {
     	if ($id !== null) {
         	$this->_id = (int)$id;
@@ -171,8 +166,18 @@ class Core_Store_Order
 	
 	public function getPaymentMethodName()
 	{
-		$pmArray = self::PAYMENTMETHOD; 
-		return $pmArray[$this->_paymentMethod];
+		$paymentMethod = null;
+		
+		switch ($this->_paymentMethod) {
+		    case self::TYPE_PAYPAL:
+		        $paymentMethod = "Paypal";
+		        break;
+		    case self::TYPE_BANKTRANSFER:
+		        $paymentMethod = "Transferencia bancaria";
+		        break;
+		}
+		
+		return $paymentMethod;
 	}
 	
 	
@@ -189,9 +194,41 @@ class Core_Store_Order
     }
     
 	
-    public function setProducts(ArrayAccess $products)
+    public function setProducts($products)
     {
         $this->_products = $products;
 		return $this;
     }
+	
+		
+	public function toArray()
+	{
+		$orderArray = array(
+			'order_id'				=> $this->_id,
+			//'order_date'			=> $this->_date->toString('yyyyMMddHHmmss'),
+			'order_firstName'		=> $this->_firstName,
+			'order_lastName'		=> $this->_lastName,
+			'order_address'			=> $this->_address,
+			'order_city'			=> $this->_city,
+			'order_postcode'		=> $this->_postcode,
+			'order_email'			=> $this->_email,
+			'order_paymentMethod' 	=> $this->_paymentMethod,
+		);
+		
+		return $orderArray;
+	}
+	
+	
+	public function fromArray($orderArray)
+	{
+		$this->_id				= (int)$orderArray['order_id'];
+		$this->_date			= new Zend_Date($orderArray['order_date'], Zend_Date::ISO_8601);
+		$this->_firstName		= $orderArray['order_firstName'];
+		$this->_lastName		= $orderArray['order_lastName'];
+		$this->_address			= $orderArray['order_address'];
+		$this->_city			= $orderArray['order_city'];
+		$this->_postcode		= (int)$orderArray['order_postcode'];
+		$this->_email			= $orderArray['order_email'];
+		$this->_paymentMethod 	= (int)$orderArray['order_paymentMethod'];
+	}
 }

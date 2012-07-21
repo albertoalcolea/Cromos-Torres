@@ -114,4 +114,22 @@ class Core_Store_Product
         $this->_dateAdded = $dateAdded;
 		return $this;
     }
+	
+	
+	public function getTypeName()
+	{
+		$typeName = substr(get_class($this), 13);
+		$type = null;
+		
+		switch ($typeName) {
+			case "Sticker":
+				$type = "Cromo";
+				break;
+			case "Album":
+				$type = "Álbum";
+				break;
+		}
+		
+		return $type;
+	}
 }

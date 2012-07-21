@@ -7,7 +7,7 @@ class Core_Sticker_Album extends Core_Store_Product
     private $_collection = null;
     
     
-    public function __construct(ArrayAccess $images = null, 
+    public function __construct($images = null, 
     							Core_Sticker_Collection $collection = null)
     {
         $this->_images = $images;
@@ -21,7 +21,7 @@ class Core_Sticker_Album extends Core_Store_Product
     }
     
 	
-    public function setImages(ArrayAccess $images)
+    public function setImages($images)
     {
         $this->_images = $images;
 		return $this;
@@ -51,7 +51,7 @@ class Core_Sticker_Album extends Core_Store_Product
 			'product_details'	=> $this->_details,
 			'product_price'		=> $this->_price,
 			'product_stock'		=> $this->_stock,
-			//'product_dateAdded'	=> $this->_dateAdded->get('yyyy-mm-dd'),
+			//'product_dateAdded'	=> $this->_dateAdded->toString('yyyyMMddHHmmss'),
 		);
 		
 		return $albumArray;
@@ -71,6 +71,6 @@ class Core_Sticker_Album extends Core_Store_Product
 		$this->_details		= $albumArray['product_details'];
 		$this->_price		= (double)$albumArray['product_price'];
 		$this->_stock		= (int)$albumArray['product_stock'];
-		//$this->_dateAdded	= $albumArray['product_dateAdded'];
+		$this->_dateAdded	= new Zend_Date($albumArray['product_dateAdded'], Zend_Date::ISO_8601);
 	}
 }

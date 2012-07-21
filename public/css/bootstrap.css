@@ -571,7 +571,7 @@ dd {
 
 .dl-horizontal dt {
   float: left;
-  width: 120px;
+  width: 125px;
   overflow: hidden;
   clear: left;
   text-align: right;
@@ -581,6 +581,10 @@ dd {
 
 .dl-horizontal dd {
   margin-left: 130px;
+}
+
+.dl-horizontal dt, .dl-horizontal dd {
+	margin-bottom: 4px;
 }
 
 hr {

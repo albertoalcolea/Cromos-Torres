@@ -72,3 +72,7 @@ textarea {
 .image-list .image-details i {
 	margin-right: 7px;
 }
+
+.separator {
+	border-top: 1px dashed #cccccc;
+}

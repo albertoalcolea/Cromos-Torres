@@ -70,7 +70,7 @@ class Core_Sticker_Sticker extends Core_Store_Product
 			'product_details'	=> $this->_details,
 			'product_price'		=> $this->_price,
 			'product_stock'		=> $this->_stock,
-			//'product_dateAdded'	=> $this->_dateAdded->get('yyyy-mm-dd'),
+			//'product_dateAdded'	=> $this->_dateAdded->toString('yyyy-MM-dd HH:mm:ss'),
 		);
 		
 		return $stickerArray;
@@ -92,6 +92,6 @@ class Core_Sticker_Sticker extends Core_Store_Product
 		$this->_details		= $stickerArray['product_details'];
 		$this->_price		= (double)$stickerArray['product_price'];
 		$this->_stock		= (int)$stickerArray['product_stock'];
-		//$this->_dateAdded	= $stickerArray['product_dateAdded'];
+		$this->_dateAdded	= new Zend_Date($stickerArray['product_dateAdded'], Zend_Date::ISO_8601);
 	}
 }
