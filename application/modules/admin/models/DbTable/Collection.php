@@ -84,7 +84,7 @@ class Admin_Model_DbTable_Collection extends Admin_Model_DbTablePagination
 	/* update a collection */
 	public function updateCollection(Core_Sticker_Collection $collection)
 	{
-		$this->update(self::objectToRow($collection), 'collection_id = '. $collection->getId());
+		$this->update(self::objectToRow($collection), $this->_primary . ' = ' . $collection->getId());
 	}
 	
 	

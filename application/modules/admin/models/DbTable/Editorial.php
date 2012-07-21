@@ -64,7 +64,7 @@ class Admin_Model_DbTable_Editorial extends Zend_Db_Table_Abstract{
 	/* update a editorial */
 	public function updateEditorial(Core_Sticker_Editorial $editorial)
 	{
-		$this->update(self::objectToRow($editorial), 'editorial_id = '. $editorial->getId());
+		$this->update(self::objectToRow($editorial), $this->_primary . ' = ' . $editorial->getId());
 	}
 	
 	

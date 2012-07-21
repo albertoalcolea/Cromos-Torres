@@ -61,13 +61,15 @@ class Core_Sticker_Sticker extends Core_Store_Product
 	public function toArray()
 	{
 		$stickerArray = array(
-			'sticker_id'		=> $this->_id,
+			'product_id'		=> $this->_id,
+			'product_type'		=> Core_Store_Product::TYPE_STICKER,
 			'sticker_number'	=> $this->_number,
 			'sticker_imageUrl'	=> $this->_imageUrl,
 			'category_id'		=> $this->_category->getId(),
 			'product_name'		=> $this->_name,
 			'product_details'	=> $this->_details,
 			'product_price'		=> $this->_price,
+			'product_stock'		=> $this->_stock,
 			//'product_dateAdded'	=> $this->_dateAdded->get('yyyy-mm-dd'),
 		);
 		
@@ -77,7 +79,7 @@ class Core_Sticker_Sticker extends Core_Store_Product
 	
 	public function fromArray($stickerArray)
 	{
-		$this->_id			= (int)$stickerArray['sticker_id'];
+		$this->_id			= (int)$stickerArray['product_id'];
 		$this->_number		= $stickerArray['sticker_number'];
 		$this->_imageUrl	= $stickerArray['sticker_imageUrl'];
 		
@@ -89,6 +91,7 @@ class Core_Sticker_Sticker extends Core_Store_Product
 		$this->_name		= $stickerArray['product_name'];
 		$this->_details		= $stickerArray['product_details'];
 		$this->_price		= (double)$stickerArray['product_price'];
+		$this->_stock		= (int)$stickerArray['product_stock'];
 		//$this->_dateAdded	= $stickerArray['product_dateAdded'];
 	}
 }

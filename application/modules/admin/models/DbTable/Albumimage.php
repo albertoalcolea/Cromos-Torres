@@ -62,7 +62,7 @@ class Admin_Model_DbTable_Albumimage extends Admin_Model_DbTablePagination
 	/* update an album */
 	public function updateAlbumImage(Core_Sticker_Albumimage $albumImage)
 	{
-		$this->update(self::objectToRow($albumImage), 'albumImage_id = '. $id);
+		$this->update(self::objectToRow($albumImage), $this->_primary . ' = ' . $id);
 	}
 	
 	

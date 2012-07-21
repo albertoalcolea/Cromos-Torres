@@ -9,7 +9,7 @@ class Admin_Form_StickerForm extends Admin_Form_Decorator
 		$this->setName('stickerForm');
 		
 		/* Id */
-		$id = new Zend_Form_Element_Hidden('sticker_id');
+		$id = new Zend_Form_Element_Hidden('product_id');
 		$id->addFilter('Int');
 		
 		/* Number */
@@ -45,6 +45,20 @@ class Admin_Form_StickerForm extends Admin_Form_Decorator
 			  ->addValidator('regex', true, array('/[0-9]+.[0-9]{2}/'))
 			  ->getValidator('regex')->setMessage("El precio debe tener el siguiente formato 0.00"); 
 		
+		/* Stock */
+		$stock = new Zend_Form_Element_Text('product_stock');
+		$stock->setLabel('Stock')
+			  ->setDescription('unidades')
+			  ->setAttrib('style', 'text-align: right; width: 60px;')
+			  ->setValue('1')
+			  ->setRequired(true)
+			  ->setAttrib('required', 'required')
+              ->addValidator('NotEmpty', true)
+			  ->addFilter('StripTags')
+			  ->addFilter('StringTrim')
+			  ->setAttrib('onblur', "checkIsInt('product_stock', 1)")
+			  ->addFilter('Int');
+			   
 		/* Details */
 		$details = new Zend_Form_Element_Textarea('product_details');
 		$details->setLabel("Detalles")
@@ -89,7 +103,7 @@ class Admin_Form_StickerForm extends Admin_Form_Decorator
     		   ->setLabel('Volver')
 			   ->setAttrib('onclick', 'javascript:history.go(-1)');
 		
-		$this->addElements(array($id, $number, $name, $price, $details, 
+		$this->addElements(array($id, $number, $name, $price, $stock, $details,
 								 $imageUrl, $category, $submit, $cancel));
 	}
 

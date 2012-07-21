@@ -2,8 +2,8 @@
 
 class Admin_Model_DbTable_Sticker extends Admin_Model_DbTablePagination
 {
-    protected $_name = 'sticker';
-    protected $_primary = 'sticker_id';
+    protected $_name = 'product';
+    protected $_primary = 'product_id';
 	
     
     /*****************************************************************/
@@ -37,11 +37,12 @@ class Admin_Model_DbTable_Sticker extends Admin_Model_DbTablePagination
 	{
 		$select = $this->select()
 					   ->setIntegrityCheck(false)
-					   ->from('sticker')
-					   ->join('category', 'sticker.category_id = category.category_id')
+					   ->from('product')
+					   ->join('category', 'product.category_id = category.category_id')
 					   ->join('collection', 'category.collection_id = collection.collection_id')
 					   ->join('editorial', 'editorial.editorial_id = collection.editorial_id')
-					   ->where('sticker_id = ?', $id);
+					   ->where('product_id = ?', $id)
+					   ->where('product_type = ?', Core_Store_Product::TYPE_STICKER);
 		
 		$row = $this->fetchRow($select);
 		 
@@ -54,12 +55,13 @@ class Admin_Model_DbTable_Sticker extends Admin_Model_DbTablePagination
 	{
 		$select = $this->select()
                        ->setIntegrityCheck(false)
-					   ->from('sticker')
-                       ->join('category', 'sticker.category_id = category.category_id')
+					   ->from('product')
+                       ->join('category', 'product.category_id = category.category_id')
 					   ->join('collection', 'category.collection_id = collection.collection_id')
 					   ->join('editorial', 'editorial.editorial_id = collection.editorial_id')
+					   ->where('product_type = ?', Core_Store_Product::TYPE_STICKER)
 					   ->order(array('editorial.editorial_id ASC', 'collection.collection_id ASC',
-					   				 'category.category_id ASC', 'sticker.sticker_number ASC'));
+					   				 'category.category_id ASC', 'product.sticker_number ASC'));
 					   
 		return $this->createPaginator($select);
 	}
@@ -70,12 +72,13 @@ class Admin_Model_DbTable_Sticker extends Admin_Model_DbTablePagination
 	{	
 		$select = $this->select()
                        ->setIntegrityCheck(false)
-					   ->from('sticker')
-                       ->join('category', 'sticker.category_id = category.category_id')
+					   ->from('product')
+                       ->join('category', 'product.category_id = category.category_id')
 					   ->join('collection', 'category.collection_id = collection.collection_id')
 					   ->join('editorial', 'editorial.editorial_id = collection.editorial_id')
 					   ->where('collection.collection_id = ?', $collectionId)
-					   ->order(array('category.category_id ASC', 'sticker.sticker_number ASC'));
+					   ->where('product_type = ?', Core_Store_Product::TYPE_STICKER)
+					   ->order(array('category.category_id ASC', 'product.sticker_number ASC'));
 					   
 		return $this->createPaginator($select);
 	}
@@ -86,12 +89,13 @@ class Admin_Model_DbTable_Sticker extends Admin_Model_DbTablePagination
 	{	
 		$select = $this->select()
                        ->setIntegrityCheck(false)
-					   ->from('sticker')
-                       ->join('category', 'sticker.category_id = category.category_id')
+					   ->from('product')
+                       ->join('category', 'product.category_id = category.category_id')
 					   ->join('collection', 'category.collection_id = collection.collection_id')
 					   ->join('editorial', 'editorial.editorial_id = collection.editorial_id')
 					   ->where('category.category_id = ?', $categoryId)
-					   ->order(array('sticker.sticker_number ASC'));
+					   ->where('product_type = ?', Core_Store_Product::TYPE_STICKER)
+					   ->order(array('product.sticker_number ASC'));
 					   
 		return $this->createPaginator($select);
 	}
@@ -107,7 +111,7 @@ class Admin_Model_DbTable_Sticker extends Admin_Model_DbTablePagination
 	/* update a sticker */
 	public function updateSticker(Core_Sticker_Sticker $sticker)
 	{
-		$this->update(self::objectToRow($sticker), 'sticker_id = '. $sticker->getId());
+		$this->update(self::objectToRow($sticker), $this->_primary . ' = ' . $sticker->getId());
 	}
 	
 	

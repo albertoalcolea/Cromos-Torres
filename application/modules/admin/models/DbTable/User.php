@@ -24,7 +24,7 @@ class Admin_Model_DbTable_User extends Zend_Db_Table_Abstract{
             'password' => md5($pass),
         );
 		
-		$this->update($row, 'id = '. $id);
+		$this->update($row, $this->_primary . ' = '. $id);
 	}
 	
 }

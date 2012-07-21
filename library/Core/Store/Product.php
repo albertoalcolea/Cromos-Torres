@@ -2,6 +2,10 @@
 
 class Core_Store_Product
 {
+	const TYPE_STICKER	= 1;
+	const TYPE_ALBUM	= 2;
+	
+	
     protected $_id = null;
     
     protected $_name = null;
@@ -10,6 +14,8 @@ class Core_Store_Product
     
     protected $_price = null;
     
+	protected $_stock = 0;
+	
     protected $_dateAdded = null;
     
     
@@ -17,6 +23,7 @@ class Core_Store_Product
                                 $name = null,
                                 $details = null,
                                 $price = null,
+                                $stock = 0,
                                 Zend_Date $dateAdded = null)
     {
     	if ($id !== null) {
@@ -25,6 +32,7 @@ class Core_Store_Product
         $this->_name = $name;
         $this->_details = $details;
         $this->_price = (double)$price;
+		$this->_stock = (int)$stock;
         $this->_dateAdded = $dateAdded;
     }
     
@@ -81,6 +89,19 @@ class Core_Store_Product
 		return $this;
     }
     
+	
+	public function getStock()
+	{
+		return $this->_stock;
+	}
+	
+	
+	public function setStock($stock)
+	{
+		$this->_stock = (int)$stock;
+		return $this;
+	}
+	
 	
     public function getDateAdded()
     {

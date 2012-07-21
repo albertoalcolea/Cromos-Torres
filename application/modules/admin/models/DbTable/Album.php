@@ -2,8 +2,8 @@
 
 class Admin_Model_DbTable_Album extends Admin_Model_DbTablePagination
 {
-    protected $_name = 'album';
-    protected $_primary = 'album_id';
+    protected $_name = 'product';
+    protected $_primary = 'product_id';
 	
     
     /*****************************************************************/
@@ -37,10 +37,11 @@ class Admin_Model_DbTable_Album extends Admin_Model_DbTablePagination
 	{
 		$select = $this->select()
 					   ->setIntegrityCheck(false)
-					   ->from('album')
-					   ->join('collection', 'album.collection_id = collection.collection_id')
+					   ->from('product')
+					   ->join('collection', 'product.collection_id = collection.collection_id')
 					   ->join('editorial', 'editorial.editorial_id = collection.editorial_id')
-					   ->where('album_id = ?', $id);
+					   ->where('product_id = ?', $id)
+					   ->where('product_type = ?', Core_Store_Product::TYPE_ALBUM);
 		
 		$row = $this->fetchRow($select);
 		 
@@ -53,11 +54,12 @@ class Admin_Model_DbTable_Album extends Admin_Model_DbTablePagination
 	{
 		$select = $this->select()
                        ->setIntegrityCheck(false)
-					   ->from('album')
-                       ->join('collection', 'album.collection_id = collection.collection_id')
+					   ->from('product')
+                       ->join('collection', 'product.collection_id = collection.collection_id')
 					   ->join('editorial', 'editorial.editorial_id = collection.editorial_id')
+					   ->where('product_type = ?', Core_Store_Product::TYPE_ALBUM)
 					   ->order(array('editorial.editorial_id ASC', 'collection.collection_id ASC',
-					   				 'album.album_id ASC'));
+					   				 'product.product_id ASC'));
 					   
 		return $this->createPaginator($select);
 	}
@@ -68,11 +70,12 @@ class Admin_Model_DbTable_Album extends Admin_Model_DbTablePagination
 	{
 		$select = $this->select()
                        ->setIntegrityCheck(false)
-					   ->from('album')
-                       ->join('collection', 'album.collection_id = collection.collection_id')
+					   ->from('product')
+                       ->join('collection', 'product.collection_id = collection.collection_id')
 					   ->join('editorial', 'editorial.editorial_id = collection.editorial_id')
-					   ->where('album.collection_id = ?', $collectionId)
-					   ->order(array('album.album_id ASC'));
+					   ->where('collection.collection_id = ?', $collectionId)
+					   ->where('product_type = ?', Core_Store_Product::TYPE_ALBUM)
+					   ->order(array('product.product_id ASC'));
 					   
 		return $this->createPaginator($select);
 	}
@@ -88,7 +91,7 @@ class Admin_Model_DbTable_Album extends Admin_Model_DbTablePagination
 	/* update an album */
 	public function updateAlbum(Core_Sticker_Album $album)
 	{
-		$this->update(self::objectToRow($album), 'album_id = '. $album->getId());
+		$this->update(self::objectToRow($album), $this->_primary . ' = ' . $album->getId());
 	}
 	
 	

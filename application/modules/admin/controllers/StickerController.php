@@ -138,7 +138,8 @@ class Admin_StickerController extends Zend_Controller_Action
 						->setImageUrl($form->getValue('sticker_imageUrl'))
 						->setName($form->getValue('product_name'))
 						->setDetails($form->getValue('product_details'))
-						->setPrice($form->getValue('product_price'));
+						->setPrice($form->getValue('product_price'))
+						->setStock($form->getValue('product_stock'));
 				
 				$category = new Core_Sticker_Category();
 				$category->setId($form->getValue('category_id'));
@@ -182,12 +183,13 @@ class Admin_StickerController extends Zend_Controller_Action
 				$stickers = new Admin_Model_DbTable_Sticker();
 				$sticker = new Core_Sticker_Sticker();
 			
-				$sticker->setId($form->getValue('sticker_id'))
+				$sticker->setId($form->getValue('product_id'))
 						->setNumber($form->getValue('sticker_number'))
 						->setImageUrl($form->getValue('sticker_imageUrl'))
 						->setName($form->getValue('product_name'))
 						->setDetails($form->getValue('product_details'))
-						->setPrice($form->getValue('product_price'));
+						->setPrice($form->getValue('product_price'))
+						->setStock($form->getValue('product_stock'));
 				
 				$category = new Core_Sticker_Category();
 				$category->setId($form->getValue('category_id'));

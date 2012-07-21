@@ -61,7 +61,8 @@ class Admin_AlbumController extends Zend_Controller_Action
 				$album->setId(null)
 					  ->setName($form->getValue('product_name'))
 					  ->setDetails($form->getValue('product_details'))
-					  ->setPrice($form->getValue('product_price'));
+					  ->setPrice($form->getValue('product_price'))
+					  ->setStock($form->getValue('product_stock'));
 				
 				$collection = new Core_Sticker_Collection();
 				$collection->setId($form->getValue('collection_id'));
@@ -96,10 +97,11 @@ class Admin_AlbumController extends Zend_Controller_Action
 				$albums = new Admin_Model_DbTable_Album();
 				$album = new Core_Sticker_Album();
 				
-				$album->setId($form->getValue('album_id'))
+				$album->setId($form->getValue('product_id'))
 					  ->setName($form->getValue('product_name'))
 					  ->setDetails($form->getValue('product_details'))
-					  ->setPrice($form->getValue('product_price'));
+					  ->setPrice($form->getValue('product_price'))
+					  ->setStock($form->getValue('product_stock'));
 				
 				$collection = new Core_Sticker_Collection();
 				$collection->setId($form->getValue('collection_id'));

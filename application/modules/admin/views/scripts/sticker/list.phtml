@@ -40,6 +40,7 @@
 	                <th>N&uacute;mero</th>
 	                <th>Nombre</th>
 	                <th>Precio</th>
+	                <th>Stock</th>
 	                <th>URL imagen</th>
 	                <th>Categor&iacute;a</th>
 	                <th>Editar</th>
@@ -52,6 +53,7 @@
 	                    <td><?php echo $this->escape($stick->getNumber()) ?></td>
 	                    <td><?php echo $this->escape($stick->getName()) ?></td>
 	                    <td><span class="pull-right"><?php echo $this->escape($stick->getPrice()) ?> &euro;</span></td>
+	                    <td><span class="pull-right"><?php echo $this->escape($stick->getStock()) ?></span></td>
 	                    <td>
 	                    	<a href="<?php echo $this->escape($stick->getImageUrl()) ?>">
 	                    		<?php echo $this->escape($stick->getImageUrl()) ?>

@@ -88,7 +88,7 @@ class Admin_Model_DbTable_Category extends Admin_Model_DbTablePagination
 	/* update a category */
 	public function updateCategory(Core_Sticker_Category $category)
 	{
-		$this->update(self::objectToRow($category), 'category_id = '. $category->getId());
+		$this->update(self::objectToRow($category), $this->_primary . ' = ' . $category->getId());
 	}
 	
 	
