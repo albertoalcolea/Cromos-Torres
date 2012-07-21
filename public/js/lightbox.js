@@ -55,8 +55,8 @@ const baseUrl = "http://localhost/cromos-torres/public/";
       this.fileCloseImage = baseUrl + 'images/close.png';
       this.resizeDuration = 700;
       this.fadeDuration = 500;
-      this.labelImage = "Image";
-      this.labelOf = "of";
+      this.labelImage = "Imagen";
+      this.labelOf = "de";
     }
 
     return LightboxOptions;
