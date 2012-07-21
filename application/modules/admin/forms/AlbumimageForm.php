@@ -20,14 +20,8 @@ class Admin_Form_AlbumimageForm extends Admin_Form_DecoratorInline
 		
 		/* Submit */		 
 		$submit = new Zend_Form_Element_Submit('submit');
-		$submit->setLabel('Agregar imagen');
+		$submit->setLabel('Agregar imagen'); 
 		
-		/* Go back */
-		$goBack = new Zend_Form_Element_Button('goBack');
-		$goBack->setRequired(false)
-    		   ->setLabel('Volver')
-			   ->setAttrib('onclick', 'javascript:history.go(-1)');
-		
-		$this->addElements(array($imageUrl, $submit, $goBack));
+		$this->addElements(array($imageUrl, $submit));
 	}
 }
