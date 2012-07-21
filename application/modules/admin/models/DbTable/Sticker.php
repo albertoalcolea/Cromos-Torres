@@ -1,15 +1,15 @@
 <?php
 
-class Admin_Model_DbTable_Sticker extends Zend_Db_Table_Abstract
+class Admin_Model_DbTable_Sticker extends Admin_Model_DbTablePagination
 {
     protected $_name = 'sticker';
     protected $_primary = 'sticker_id';
-    
+	
     
     /*****************************************************************/
-	/* Private                                                       */
+	/* Static                                                        */
 	/*****************************************************************/
-    private function rowToObject($row)
+    public static function rowToObject($row)
     {
     	if ($row !== null) {
         	$sticker = new Core_Sticker_Sticker();
@@ -22,13 +22,13 @@ class Admin_Model_DbTable_Sticker extends Zend_Db_Table_Abstract
 		}
     }
     
-    private function objectToRow(Core_Sticker_Sticker $sticker)
+    public static function objectToRow(Core_Sticker_Sticker $sticker)
     {
         $row = $sticker->toArray();
         
         return $row;
     }
-    
+	
     
     /*****************************************************************/
 	/* Public                                                        */
@@ -45,7 +45,7 @@ class Admin_Model_DbTable_Sticker extends Zend_Db_Table_Abstract
 		
 		$row = $this->fetchRow($select);
 		 
-		return $this->rowToObject($row);
+		return self::rowToObject($row);
 	}
 	    
     
@@ -61,15 +61,7 @@ class Admin_Model_DbTable_Sticker extends Zend_Db_Table_Abstract
 					   ->order(array('editorial.editorial_id ASC', 'collection.collection_id ASC',
 					   				 'category.category_id ASC', 'sticker.sticker_number ASC'));
 					   
-		$rows = $this->fetchAll($select);
-		
-		$stickerArray = array();
-		
-		foreach ($rows as $row) {
-			array_push($stickerArray, $this->rowToObject($row));
-		}
-		
-		return $stickerArray;
+		return $this->createPaginator($select);
 	}
     
     
@@ -85,15 +77,7 @@ class Admin_Model_DbTable_Sticker extends Zend_Db_Table_Abstract
 					   ->where('collection.collection_id = ?', $collectionId)
 					   ->order(array('category.category_id ASC', 'sticker.sticker_number ASC'));
 					   
-		$rows = $this->fetchAll($select);
-		
-		$stickerArray = array();
-
-		foreach ($rows as $row) {
-			array_push($stickerArray, $this->rowToObject($row));
-		}
-		
-		return $stickerArray;
+		return $this->createPaginator($select);
 	}
 
 
@@ -109,29 +93,21 @@ class Admin_Model_DbTable_Sticker extends Zend_Db_Table_Abstract
 					   ->where('category.category_id = ?', $categoryId)
 					   ->order(array('sticker.sticker_number ASC'));
 					   
-		$rows = $this->fetchAll($select);
-		
-		$stickerArray = array();
-
-		foreach ($rows as $row) {
-			array_push($stickerArray, $this->rowToObject($row));
-		}
-		
-		return $stickerArray;
+		return $this->createPaginator($select);
 	}
 	
 	
 	/* add new sticker */
 	public function addSticker(Core_Sticker_Sticker $sticker)
 	{
-		return $this->insert($this->objectToRow($sticker));
+		return $this->insert(self::objectToRow($sticker));
 	}
 	
 	
 	/* update a sticker */
 	public function updateSticker(Core_Sticker_Sticker $sticker)
 	{
-		$this->update($this->objectToRow($sticker), 'sticker_id = '. $sticker->getId());
+		$this->update(self::objectToRow($sticker), 'sticker_id = '. $sticker->getId());
 	}
 	
 	

@@ -30,6 +30,15 @@ class Admin_CategoryController extends Zend_Controller_Action
 
 		$categories = new Admin_Model_DbTable_Category();	
 		
+		/* Get the actuall page, the number of registers to show and  
+		 * the max number of pages in the paginator */
+    	$page = $this->_getParam('page', 1);
+    	$registers_per_page = 10;  
+    	$max_pages = 10;
+		
+		$categories->setPaginator($page, $registers_per_page, $max_pages);
+		
+		
 		/* Filter by collection */
 		if ($this->_hasParam('collection_id') && $this->_getParam('collection_id') > 0) {
 			
@@ -37,34 +46,20 @@ class Admin_CategoryController extends Zend_Controller_Action
 				$this->_redirect('/admin/category');	
 			}			
 			       
-			$data = $categories->getIntoCollection($collectionId);
+			$paginator = $categories->getIntoCollection($collectionId);
 
 			$this->view->collection = $collectionId;
 			
 		} else {	
-			$data = $categories->getAll();
+			$paginator = $categories->getAll();
 			
 			$this->view->collection = 0;
 		}
-		
-		/* Get the actuall page */
-    	$page = $this->_getParam('page', 1);
-		
-		/* The number of registers to show */ 
-    	$registers_per_page = 10;  
-		
-		/* Max number of pages in the paginator */
-    	$max_pages = 10;
-		
-		$paginator = Zend_Paginator::factory($data);  
-		
-		$paginator->setItemCountPerPage($registers_per_page)  
-              	  ->setCurrentPageNumber($page)  
-              	  ->setPageRange($max_pages);  
+		 
 		
 		$this->view->data = $paginator;
 		
-		if (count($data) == 0) {
+		if ($paginator->getTotalItemCount() == 0) {
 			$this->view->msgempty = "No existen categor&iacute;s que mostrar";
 		}
 		

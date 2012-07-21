@@ -1,15 +1,15 @@
 <?php
 
-class Admin_Model_DbTable_Album extends Zend_Db_Table_Abstract
+class Admin_Model_DbTable_Album extends Admin_Model_DbTablePagination
 {
     protected $_name = 'album';
     protected $_primary = 'album_id';
-    
+	
     
     /*****************************************************************/
-	/* Private                                                       */
+	/* Static                                                        */
 	/*****************************************************************/
-    private function rowToObject($row)
+    public static function rowToObject($row)
     {
     	if ($row !== null) {
         	$album = new Core_Sticker_Album();
@@ -22,7 +22,7 @@ class Admin_Model_DbTable_Album extends Zend_Db_Table_Abstract
 		}
     }
     
-    private function objectToRow(Core_Sticker_Album $album)
+    public static function objectToRow(Core_Sticker_Album $album)
     {
         $row = $album->toArray();
         
@@ -44,7 +44,7 @@ class Admin_Model_DbTable_Album extends Zend_Db_Table_Abstract
 		
 		$row = $this->fetchRow($select);
 		 
-		return $this->rowToObject($row);
+		return self::rowToObject($row);
 	}
 
 
@@ -59,15 +59,7 @@ class Admin_Model_DbTable_Album extends Zend_Db_Table_Abstract
 					   ->order(array('editorial.editorial_id ASC', 'collection.collection_id ASC',
 					   				 'album.album_id ASC'));
 					   
-		$rows = $this->fetchAll($select);
-		
-		$albumArray = array();
-		
-		foreach ($rows as $row) {
-			array_push($albumArray, $this->rowToObject($row));
-		}
-		
-		return $albumArray;
+		return $this->createPaginator($select);
 	}
 
 
@@ -82,29 +74,21 @@ class Admin_Model_DbTable_Album extends Zend_Db_Table_Abstract
 					   ->where('album.collection_id = ?', $collectionId)
 					   ->order(array('album.album_id ASC'));
 					   
-		$rows = $this->fetchAll($select);
-		
-		$albumArray = array();
-
-		foreach ($rows as $row) {
-			array_push($albumArray, $this->rowToObject($row));
-		}
-		
-		return $albumArray;
+		return $this->createPaginator($select);
 	}
 	
 	
 	/* add new album */
 	public function addAlbum(Core_Sticker_Album $album)
 	{
-		return $this->insert($this->objectToRow($album));
+		return $this->insert(self::objectToRow($album));
 	}
 	
 	
 	/* update an album */
 	public function updateAlbum(Core_Sticker_Album $album)
 	{
-		$this->update($this->objectToRow($album), 'album_id = '. $album->getId());
+		$this->update(self::objectToRow($album), 'album_id = '. $album->getId());
 	}
 	
 	

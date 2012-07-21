@@ -1,15 +1,15 @@
 <?php
 
-class Admin_Model_DbTable_Category extends Zend_Db_Table_Abstract
+class Admin_Model_DbTable_Category extends Admin_Model_DbTablePagination
 {
 	protected $_name = 'category';
 	protected $_primary = 'category_id';
 	
 	
 	/*****************************************************************/
-	/* Private                                                       */
+	/* Static                                                        */
 	/*****************************************************************/
-	private function rowToObject($row)
+	public static function rowToObject($row)
 	{
 		if ($row !== null) {
         	$category = new Core_Sticker_Category();
@@ -22,7 +22,7 @@ class Admin_Model_DbTable_Category extends Zend_Db_Table_Abstract
 		}
 	}
 	
-	private function objectToRow(Core_Sticker_Category $category)
+	public static function objectToRow(Core_Sticker_Category $category)
 	{
 		 $row = $category->toArray();
 		         
@@ -44,7 +44,7 @@ class Admin_Model_DbTable_Category extends Zend_Db_Table_Abstract
 		
 		$row = $this->fetchRow($select);
 		 
-		return $this->rowToObject($row);
+		return self::rowToObject($row);
 	}
 
 
@@ -59,15 +59,7 @@ class Admin_Model_DbTable_Category extends Zend_Db_Table_Abstract
 					   ->order(array('editorial.editorial_id ASC', 'collection.collection_id ASC',
 					   				 'category.category_order ASC'));
 					   
-		$rows = $this->fetchAll($select);
-		
-		$categoryArray = array();
-		
-		foreach ($rows as $row) {
-			array_push($categoryArray, $this->rowToObject($row));
-		}
-		
-		return $categoryArray;
+		return $this->createPaginator($select);
 	}
 
 
@@ -82,29 +74,21 @@ class Admin_Model_DbTable_Category extends Zend_Db_Table_Abstract
 					   ->where('category.collection_id = ?', $collectionId)
 					   ->order(array('category.category_order ASC'));
 					   
-		$rows = $this->fetchAll($select);
-		
-		$categoryArray = array();
-
-		foreach ($rows as $row) {
-			array_push($categoryArray, $this->rowToObject($row));
-		}
-		
-		return $categoryArray;
+		return $this->createPaginator($select);
 	}
 	
 	
 	/* add new category */
 	public function addCategory(Core_Sticker_Category $category)
 	{
-		return $this->insert($this->objectToRow($category));
+		return $this->insert(self::objectToRow($category));
 	}
 	
 	
 	/* update a category */
 	public function updateCategory(Core_Sticker_Category $category)
 	{
-		$this->update($this->objectToRow($category), 'category_id = '. $category->getId());
+		$this->update(self::objectToRow($category), 'category_id = '. $category->getId());
 	}
 	
 	

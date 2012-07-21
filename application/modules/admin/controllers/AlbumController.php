@@ -23,26 +23,20 @@ class Admin_AlbumController extends Zend_Controller_Action
 		$this->view->title = "Lista de &Aacute;lbumes";
 		
 		$albums = new Admin_Model_DbTable_Album();
-		$data = $albums->getAll();
 		
-		/* Get the actuall page */
+		/* Get the actuall page, the number of registers to show and  
+		 * the max number of pages in the paginator */
     	$page = $this->_getParam('page', 1);
-		
-		/* The number of registers to show */ 
     	$registers_per_page = 10;  
-		
-		/* Max number of pages in the paginator */
     	$max_pages = 10;
 		
-		$paginator = Zend_Paginator::factory($data);  
+		$albums->setPaginator($page, $registers_per_page, $max_pages);
 		
-		$paginator->setItemCountPerPage($registers_per_page)  
-              	  ->setCurrentPageNumber($page)  
-              	  ->setPageRange($max_pages);  
+		$paginator = $albums->getAll();
 		
 		$this->view->data = $paginator;
 		
-		if (count($data) == 0) {
+		if ($paginator->getTotalItemCount() == 0) {
 			$this->view->msgempty = "No existen &aacute;lbumes que mostrar";
 		}
 	}
@@ -205,26 +199,20 @@ class Admin_AlbumController extends Zend_Controller_Action
 			
 			
 			$albumImages = new Admin_Model_DbTable_Albumimage();
-			$data = $albumImages->getIntoAlbum($albumId);
 		
-			/* Get the actuall page */
-	    	$page = $this->_getParam('page', 1);
+			/* Get the actuall page, the number of registers to show and  
+		 	* the max number of pages in the paginator */
+    		$page = $this->_getParam('page', 1);
+    		$registers_per_page = 12;  
+    		$max_pages = 10;
 			
-			/* The number of registers to show */ 
-	    	$registers_per_page = 12;  
+			$albumImages->setPaginator($page, $registers_per_page, $max_pages);
 			
-			/* Max number of pages in the paginator */
-	    	$max_pages = 10;
-			
-			$paginator = Zend_Paginator::factory($data);  
-			
-			$paginator->setItemCountPerPage($registers_per_page)  
-	              	  ->setCurrentPageNumber($page)  
-	              	  ->setPageRange($max_pages);  
+			$paginator = $albumImages->getIntoAlbum($albumId); 
 			
 			$this->view->data = $paginator;
 		
-			if (count($data) == 0) {
+			if ($paginator->getTotalItemCount() == 0) {
 				$this->view->msgempty = "No existen im&aacute;genes que mostrar";
 			}
 		} else {

@@ -26,9 +26,18 @@ class Admin_CollectionController extends Zend_Controller_Action
     /* list all collections */
 	public function listAction()
 	{
-		$this->view->title = "Lista de Colecciones"; 
+		$this->view->title = "Lista de Colecciones";
 
-		$collections = new Admin_Model_DbTable_Collection();	
+		$collections = new Admin_Model_DbTable_Collection();
+		
+		/* Get the actuall page, the number of registers to show and  
+		 * the max number of pages in the paginator */
+    	$page = $this->_getParam('page', 1);
+    	$registers_per_page = 10;  
+    	$max_pages = 10;
+		
+		$collections->setPaginator($page, $registers_per_page, $max_pages);
+			
 		
 		/* Filter by editorial */
 		if ($this->_hasParam('editorial_id') && $this->_getParam('editorial_id') > 0) {
@@ -36,34 +45,19 @@ class Admin_CollectionController extends Zend_Controller_Action
 				$this->_redirect('/admin/collection');	
 			}
 			         
-			$data = $collections->getIntoEditorial($editorialId);
+			$paginator = $collections->getIntoEditorial($editorialId);
 
 			$this->view->editorial = $editorialId;
 			
 		} else {	
-			$data = $collections->getAll();
+			$paginator = $collections->getAll();
 			
 			$this->view->editorial = 0;
-		}
-		
-		/* Get the actuall page */
-    	$page = $this->_getParam('page', 1);
-		
-		/* The number of registers to show */ 
-    	$registers_per_page = 10;  
-		
-		/* Max number of pages in the paginator */
-    	$max_pages = 10;
-		
-		$paginator = Zend_Paginator::factory($data);  
-		
-		$paginator->setItemCountPerPage($registers_per_page)  
-              	  ->setCurrentPageNumber($page)  
-              	  ->setPageRange($max_pages);  
+		} 
 		
 		$this->view->data = $paginator;
 		
-		if (count($data) == 0) {
+		if ($paginator->getTotalItemCount() == 0) {
 			$this->view->msgempty = "No existen colecciones que mostrar";
 		}
 		

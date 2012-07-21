@@ -1,15 +1,15 @@
 <?php
 
-class Admin_Model_DbTable_Albumimage extends Zend_Db_Table_Abstract
+class Admin_Model_DbTable_Albumimage extends Admin_Model_DbTablePagination
 {
     protected $_name = 'albumImage';
     protected $_primary = 'albumImage_id';
     
     
     /*****************************************************************/
-	/* Private                                                       */
+	/* Static                                                        */
 	/*****************************************************************/
-    private function rowToObject($row)
+    public static function rowToObject($row)
     {
     	if ($row !== null) {
         	$albumImage = new Core_Sticker_Albumimage();
@@ -22,13 +22,14 @@ class Admin_Model_DbTable_Albumimage extends Zend_Db_Table_Abstract
 		}
     }
     
-    private function objectToRow(Core_Sticker_Albumimage $albumImage)
+    public static function objectToRow(Core_Sticker_Albumimage $albumImage)
     {
         $row = $albumImage->toArray();
         
         return $row;
     }
-    
+	
+	
 	/*****************************************************************/
 	/* Public                                                        */
     /*****************************************************************/
@@ -36,7 +37,7 @@ class Admin_Model_DbTable_Albumimage extends Zend_Db_Table_Abstract
 	{
 		$row = $this->find($id);
 		 
-		return $this->rowToObject($row);
+		return self::rowToObject($row);
 	}
 
 
@@ -47,29 +48,21 @@ class Admin_Model_DbTable_Albumimage extends Zend_Db_Table_Abstract
 					   ->where('album_id = ?', $album_id)
 					   ->order(array('albumImage_id ASC'));
 					   
-		$rows = $this->fetchAll($select);
-		
-		$albumImageArray = array();
-		
-		foreach ($rows as $row) {
-			array_push($albumImageArray, $this->rowToObject($row));
-		}
-		
-		return $albumImageArray;
+		return $this->createPaginator($select);
 	}
 	
 	
 	/* add new album image */
 	public function addAlbumImage(Core_Sticker_Albumimage $albumImage)
 	{
-		return $this->insert($this->objectToRow($albumImage));
+		return $this->insert(self::objectToRow($albumImage));
 	}
 	
 	
 	/* update an album */
 	public function updateAlbumImage(Core_Sticker_Albumimage $albumImage)
 	{
-		$this->update($this->objectToRow($albumImage), 'albumImage_id = '. $id);
+		$this->update(self::objectToRow($albumImage), 'albumImage_id = '. $id);
 	}
 	
 	
