@@ -55,8 +55,8 @@
 	                    <td><span class="pull-right"><?php echo $this->escape($stick->getPrice()) ?> &euro;</span></td>
 	                    <td><span class="pull-right"><?php echo $this->escape($stick->getStock()) ?></span></td>
 	                    <td>
-	                    	<a href="<?php echo $this->escape($stick->getImageUrl()) ?>">
-	                    		<?php echo $this->escape($stick->getImageUrl()) ?>
+	                    	<a href="<?php echo $this->escape($stick->getImageUrl()) ?>" rel="lightbox">
+	                    		<?php echo $this->stringLength($this->escape($stick->getImageUrl())) ?>
 	                    	</a>
 	                    </td>
 	                    <td>

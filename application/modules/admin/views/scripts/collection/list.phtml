@@ -50,8 +50,8 @@
 	                    <td><?php echo $this->escape($collection->getName()) ?></td>
 	                    <td><?php echo $this->escape($collection->getYear()) ?></td>
 	                    <td>
-	                    	<a href="<?php echo $this->escape($collection->getImageUrl()) ?>">
-	                    		<?php echo $this->escape($collection->getImageUrl()) ?>
+	                    	<a href="<?php echo $this->escape($collection->getImageUrl()) ?>"  rel="lightbox">
+	                    		<?php echo $this->stringLength($this->escape($collection->getImageUrl())) ?>
 	                    	</a>
 	                    </td>
 	                    <td>

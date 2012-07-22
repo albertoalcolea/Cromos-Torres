@@ -53,16 +53,16 @@
 				        	<tr>
 				        		<td><?php echo $product->getTypeName() ?></td>
 				        		<td><?php echo $product->getName() ?></td>
-				        		<td><span class="pull-right"><?php echo $product->getPrice() ?> €</span></td>
-				        		<td><span class="pull-right"><?php echo $product->getStock() ?></span></td>
-				        		<td><span class="pull-right"><strong><?php echo $product->getStock() * $product->getPrice() ?> €</strong></span></td>
+				        		<td><?php echo $product->getPrice() ?> €</td>
+				        		<td><?php echo $product->getStock() ?></td>
+				        		<td><strong><?php echo $product->getStock() * $product->getPrice() ?> €</strong></td>
 				        	</tr>
 			        	<?php endforeach; ?>
 			        </tbody>
 			        <tfoot>
 			        	<tr>
 			        		<td colspan="4"><span class="pull-right">Total:</span></td>
-			        		<td><span class="pull-right"><strong><?php echo $total ?> €</strong></span></td>
+			        		<td><strong><?php echo $total ?> €</strong></td>
 			        	</tr>
 			        </tfoot>
 		    </table>

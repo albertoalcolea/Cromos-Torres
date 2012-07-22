@@ -24,8 +24,8 @@
 	                    <td><?php echo $this->escape($editorial->getName()); ?></td>
 	                    <td><?php echo $this->escape($editorial->getPriority()); ?></td>
 	                    <td>
-	                    	<a href="<?php echo $this->escape($editorial->getImageUrl()) ?>">
-	                    		<?php echo $this->escape($editorial->getImageUrl()); ?>
+	                    	<a href="<?php echo $this->escape($editorial->getImageUrl()) ?>" rel="lightbox">
+	                    		<?php echo $this->stringLength($this->escape($editorial->getImageUrl())); ?>
 	                    	</a>
 	                    </td>
 	                    <td>
