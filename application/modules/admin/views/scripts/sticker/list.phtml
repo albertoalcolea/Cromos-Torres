@@ -49,7 +49,11 @@
 	        </thead>
 	        <tbody>
 	            <?php foreach ($this->data as $stick): ?>
+	            	<?php if ($stick->getStock() == 0): ?>
+	                <tr class="soldOut">
+	                <?php else: ?>
 	                <tr>
+	                <?php endif; ?>	
 	                    <td><?php echo $this->escape($stick->getNumber()) ?></td>
 	                    <td><?php echo $this->escape($stick->getName()) ?></td>
 	                    <td><span class="pull-right"><?php echo $this->escape($stick->getPrice()) ?> &euro;</span></td>

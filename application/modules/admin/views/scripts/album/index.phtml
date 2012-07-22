@@ -21,7 +21,11 @@
 	        </thead>
 	        <tbody>
 	            <?php foreach ($this->data as $album): ?>
+	            	<?php if ($album->getStock() == 0): ?>
+	                <tr class="soldOut">
+	                <?php else: ?>
 	                <tr>
+	                <?php endif; ?>	
 	                	<td>
 	                    	<a href="<?php echo $this->baseUrl() ?>/admin/collection/update/id/<?php echo $album->getCollection()->getId(); ?>" >
 								<?php echo $album->getCollection()->getName(); ?>
