@@ -15,7 +15,9 @@
 	    				<img src="<?php echo $this->escape($image->getImageUrl()) ?>">
 	    			</a>
 	    			<div class="image-details">
-	    				<a href="<?php echo $this->baseUrl() ?>/admin/album/deleteimage/album_id/<?php echo $this->albumId ?>/id/<?php echo $image->getId() ?>"><i class="icon-remove"></i>Eliminar</a>
+	    				<a href="<?php echo $this->baseUrl() ?>/admin/album/deleteimage/album_id/<?php echo $this->albumId ?>/id/<?php echo $image->getId() ?>"
+	    					onclick="return confirm('&iquest;Est&aacute; seguro que desea eliminar esta imagen?');">
+	    					<i class="icon-remove"></i>Eliminar</a>
 	    			</div>
 	    		</li>
 	    		<?php endforeach; ?>
