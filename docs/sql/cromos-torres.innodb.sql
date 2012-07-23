@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: localhost
--- Tiempo de generación: 23-07-2012 a las 15:52:03
+-- Tiempo de generación: 22-07-2012 a las 19:49:51
 -- Versión del servidor: 5.5.16
 -- Versión de PHP: 5.3.8
 
@@ -32,7 +32,7 @@ CREATE TABLE IF NOT EXISTS `albumImage` (
   `album_id` int(11) NOT NULL,
   PRIMARY KEY (`albumImage_id`),
   KEY `album_id` (`album_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=20 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=20 ;
 
 --
 -- Volcado de datos para la tabla `albumImage`
@@ -72,7 +72,7 @@ CREATE TABLE IF NOT EXISTS `category` (
   `collection_id` int(11) NOT NULL,
   PRIMARY KEY (`category_id`),
   KEY `collection_id` (`collection_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=18 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=18 ;
 
 --
 -- Volcado de datos para la tabla `category`
@@ -99,7 +99,7 @@ CREATE TABLE IF NOT EXISTS `collection` (
   `editorial_id` int(11) NOT NULL,
   PRIMARY KEY (`collection_id`),
   KEY `editorial_id` (`editorial_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=25 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=25 ;
 
 --
 -- Volcado de datos para la tabla `collection`
@@ -123,7 +123,7 @@ CREATE TABLE IF NOT EXISTS `editorial` (
   `editorial_priority` int(11) NOT NULL,
   `editorial_imageUrl` varchar(255) COLLATE utf8_spanish_ci NOT NULL,
   PRIMARY KEY (`editorial_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=6 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=6 ;
 
 --
 -- Volcado de datos para la tabla `editorial`
@@ -151,7 +151,7 @@ CREATE TABLE IF NOT EXISTS `order` (
   `order_email` varchar(255) COLLATE utf8_spanish_ci NOT NULL,
   `order_paymentMethod` int(1) NOT NULL,
   PRIMARY KEY (`order_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=3 ;
 
 --
 -- Volcado de datos para la tabla `order`
@@ -173,7 +173,7 @@ CREATE TABLE IF NOT EXISTS `orderProducts` (
   `number_products` int(5) NOT NULL,
   PRIMARY KEY (`order_id`,`product_id`),
   KEY `product_id` (`product_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
 -- Volcado de datos para la tabla `orderProducts`
@@ -206,7 +206,7 @@ CREATE TABLE IF NOT EXISTS `product` (
   PRIMARY KEY (`product_id`),
   KEY `category_id` (`category_id`),
   KEY `collection_id` (`collection_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=6 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=6 ;
 
 --
 -- Volcado de datos para la tabla `product`
@@ -229,7 +229,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `username` varchar(255) COLLATE utf8_spanish_ci NOT NULL,
   `password` varchar(255) COLLATE utf8_spanish_ci NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=2 ;
 
 --
 -- Volcado de datos para la tabla `users`
@@ -238,64 +238,41 @@ CREATE TABLE IF NOT EXISTS `users` (
 INSERT INTO `users` (`id`, `username`, `password`) VALUES
 (1, 'admin', '21232f297a57a5a743894a0e4a801fc3');
 
-
--- --------------------------------------------------------
-
 --
--- Triggers para simular ON DELETE CASCADE con motor MYISAM
+-- Restricciones para tablas volcadas
 --
 
-DELIMITER ;;
+--
+-- Filtros para la tabla `albumImage`
+--
+ALTER TABLE `albumImage`
+  ADD CONSTRAINT `albumImage_ibfk_1` FOREIGN KEY (`album_id`) REFERENCES `product` (`product_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Editorial
+-- Filtros para la tabla `category`
 --
-
-CREATE TRIGGER `del_editorial` AFTER DELETE ON `editorial` FOR EACH ROW BEGIN
-	DELETE FROM collection WHERE editorial_id = old.editorial_id;
-END;;
-
+ALTER TABLE `category`
+  ADD CONSTRAINT `category_ibfk_1` FOREIGN KEY (`collection_id`) REFERENCES `collection` (`collection_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Collection
+-- Filtros para la tabla `collection`
 --
-
-CREATE TRIGGER `del_collection` AFTER DELETE ON `collection` FOR EACH ROW BEGIN
-	DELETE FROM category WHERE collection_id = old.collection_id;
-	DELETE FROM product WHERE collection_id = old.collection_id;
-END;;
-
+ALTER TABLE `collection`
+  ADD CONSTRAINT `collection_ibfk_1` FOREIGN KEY (`editorial_id`) REFERENCES `editorial` (`editorial_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Category
+-- Filtros para la tabla `orderProducts`
 --
-
-CREATE TRIGGER `del_category` AFTER DELETE ON `category` FOR EACH ROW BEGIN
-	DELETE FROM product WHERE category_id = old.category_id;
-END;;
-
+ALTER TABLE `orderProducts`
+  ADD CONSTRAINT `orderProducts_ibfk_1` FOREIGN KEY (`order_id`) REFERENCES `order` (`order_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `orderProducts_ibfk_2` FOREIGN KEY (`product_id`) REFERENCES `product` (`product_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Product
+-- Filtros para la tabla `product`
 --
-
-CREATE TRIGGER `del_product` AFTER DELETE ON `product` FOR EACH ROW BEGIN
-	DELETE FROM albumImage WHERE album_id = old.product_id;
-	DELETE FROM orderProducts WHERE product_id = old.product_id;
-END;;
-
-
---
--- Order
---
-
-CREATE TRIGGER `del_order` AFTER DELETE ON `order` FOR EACH ROW BEGIN
-	DELETE FROM orderProducts WHERE order_id = old.order_id;
-END;;
-
-DELIMITER ;
-
-
+ALTER TABLE `product`
+  ADD CONSTRAINT `product_ibfk_1` FOREIGN KEY (`category_id`) REFERENCES `category` (`category_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `product_ibfk_2` FOREIGN KEY (`collection_id`) REFERENCES `collection` (`collection_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
