@@ -268,7 +268,8 @@ header .menu .cart:hover span {
 
 #editorials article {
 	display: inline-block;
-	font-size: 12px;
+	font-size: 14px;
+	letter-spacing: 0.1em;
 	margin: 0 20px 50px 20px;
 	text-align: center;
 	width: 200px;
@@ -382,11 +383,17 @@ footer #credits {
 
 @media screen and (max-width: 1000px) {
 	#banner article #addCart {
-		position: static;
+		position: absolute;
 	}
 
 	header h1 {
 		float: left;
+		position: static;
+	}
+}
+
+@media screen and (max-width: 934px) {
+	#banner article #addCart {
 		position: static;
 	}
 }
