@@ -26,33 +26,35 @@ header h1 {
 	box-shadow: 5px 5px 20px 0px black;
 	display: block;
 	font-family: 'Montserrat', sans-serif;
+	float: left;
 	font-size: 25px;
 	font-weight: bold;
-	left: 17%;
+	/*left: 17%;*/
 	letter-spacing: 0.1em;
 	padding: 20px 15px 17px;
-	position: absolute;
+	text-align: center;
+	width: 275px;
 	word-spacing: 0.4em;
-	z-index: 1;
 
 	-webkit-border-top-left-radius: 0;
 	-webkit-border-top-right-radius: 0;
-	-webkit-border-bottom-right-radius: 7px;
-	-webkit-border-bottom-left-radius: 7px;
+	-webkit-border-bottom-right-radius: 10px;
+	-webkit-border-bottom-left-radius: 0;
 
 	-moz-border-radius-topleft: 0;
 	-moz-border-radius-topright: 0;
-	-moz-border-radius-bottomright: 7px;
-	-moz-border-radius-bottomleft: 7px;
+	-moz-border-radius-bottomright: 10px;
+	-moz-border-radius-bottomleft: 0;
 
 	border-top-left-radius: 0;
 	border-top-right-radius: 0;
-	border-bottom-right-radius: 7px;
-	border-bottom-left-radius: 7px;
+	border-bottom-right-radius: 10px;
+	border-bottom-left-radius: 0;
 }
 
 header .menu {
 	background-color: #2d2d2d;
+	clear: none;
 }
 
 header .menu ul {
@@ -122,6 +124,7 @@ header .menu .cart:hover span {
 
 
 #wrapper {
+	background-image: url('../images/bg.gif');
 	background-color: #101010;
 }
 
@@ -142,7 +145,7 @@ header .menu .cart:hover span {
 #banner article {
 	box-shadow: 2px 2px 20px black;
 	clear: both;
-	color: #525252;
+	color: #323232;
 	padding: 20px;
 	position: relative;
 
@@ -163,7 +166,7 @@ header .menu .cart:hover span {
 }
 
 #banner article a {
-	color: #525252;
+	color: #424242;
 }
 
 #banner article a:hover {
@@ -199,7 +202,8 @@ header .menu .cart:hover span {
 }
 
 #banner article .banner-description li .price {
-	font-weight: bold;
+	/*font-weight: bold;*/
+	color: #424242;
 }
 
 #banner article #addCart {
@@ -215,7 +219,7 @@ header .menu .cart:hover span {
 	padding: 10px;
 	position: absolute;
 	margin: 20px;
-	text-align: center;
+	/*text-align: center;*/
 	text-transform: uppercase;
 	top: 73%;
 	vertical-align: middle;
@@ -247,14 +251,14 @@ header .menu .cart:hover span {
 }
 
 
-#editorials {
+.init-list {
 	clear: both;
 	font-size: 0px;
 	padding: 20px;
 	text-align: center;
 }
 
-#editorials h2 {
+.init-list h2 {
 	background-color: #101010;
 	display: block;
 	font-size: 20px;
@@ -266,7 +270,7 @@ header .menu .cart:hover span {
 	width: 200px;
 }
 
-#editorials article {
+.init-list article {
 	display: inline-block;
 	font-size: 14px;
 	letter-spacing: 0.1em;
@@ -275,24 +279,59 @@ header .menu .cart:hover span {
 	width: 200px;
 }
 
-#editorials article img {
+.init-list article img {
 	max-height: 200px;
 	max-width: 200px;
 }
 
-#editorials article a {
+.init-list article a {
 	color: #919191;
 }
 
-#editorials article span {
+.init-list article span,  .init-list article li {
 	display: block;
 	font-weight: bold;
 	margin-top: 13px;
+	margin-bottom: 8px;
 	text-transform: uppercase;
 }
 
-#editorials article a:hover {
+.init-list article .price {
+	margin-top: 13px;
+	margin-bottom: 0px;
+	font-weight: normal;
+}
+
+.init-list article .details {
+	margin: 0px;
+	font-size: 0.9em;
+	font-weight: normal;
+	text-transform: none;
+}
+
+.init-list article a:hover {
 	color: white;
+}
+
+.init-list .others {
+	display: block;
+	font-size: 13px;
+	letter-spacing: 0.1em;
+	margin-left: 60px;
+	text-align: left;
+	width: 400px;
+}
+
+.init-list .others h4 {
+	font-size: 1em;
+	text-transform: uppercase;
+}
+
+.init-list .others li {
+	font-size: 0.9em;
+	list-style: disc;
+	margin-left: 15px;
+	text-transform: none;
 }
 
 
@@ -307,7 +346,7 @@ footer {
 }
 
 footer a {
-	color: #5A5A5A;+
+	color: #5A5A5A;
 }
 
 footer a:hover {
@@ -380,6 +419,14 @@ footer #credits {
 	text-align: center;
 }
 
+footer #credits a {
+	color: #7a7a7a;
+}
+
+footer #credits a:hover {
+	color: white;
+}
+
 
 @media screen and (max-width: 1000px) {
 	#banner article #addCart {
@@ -390,10 +437,18 @@ footer #credits {
 		float: left;
 		position: static;
 	}
+
+	header .menu {
+		clear: none;
+	}
 }
 
 @media screen and (max-width: 934px) {
 	#banner article #addCart {
 		position: static;
+	}
+
+	header .menu {
+		clear: left;
 	}
 }
