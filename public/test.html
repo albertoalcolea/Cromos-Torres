@@ -18,26 +18,49 @@
 <body>
 	<div id="wrapper">
 		<header>
-			<h1>Cromos Torres</h1>
 			<nav class="menu">
-				<ul>
-					<li>
-						<a href="#" class="select">Inicio</a>
-					</li>
-					<li>
-						<a href="#" class="unselect">Editoriales</a>
-					</li>
-					<li>
-						<a href="#" class="unselect">&Aacute;lbumes</a>
-					</li>
-					<li>
-						<a href="#" class="unselect cart"><span><img src="images/cart.png">Carrito</span></a>
-					</li>
-				</ul>
+				<div class="headContent">
+					<h1>Cromos Torres</h1>
+					<ul>
+						<li>
+							<a href="#" class="select">Inicio</a>
+						</li>
+						<li>
+							<a href="#" class="unselect">Editoriales</a>
+						</li>
+						<li>
+							<a href="#" class="unselect">&Aacute;lbumes</a>
+						</li>
+						<li>
+							<a href="#" class="unselect cart">
+								<span><img src="images/cart.png">Carrito</span>
+								<div id="cartNumber" class="visible">9</div>
+							</a>
+						</li>
+					</ul>
+				</div>
 			</nav>
+			<aside class="info">
+				<div class="headContent">
+					<ul>
+						<li>
+							<a href="#">¿Quiénes somos?</a>
+						</li>
+						<li>
+							<a href="#">Métodos de pago</a>
+						</li>
+						<li>
+							<a href="#">Compra y envío</a>
+						</li>
+					</ul>
+				</div>
+			</aside>
 		</header>
 
 		<div id="content">
+			<aside id="welcomeMessage">
+				<p>Venta de cromos de coleccionismo antiguos y actuales. Mira nuestro catálogo.</p>
+			</aside>
 			<section id="banner">
 				<article>
 					<a href="#">
@@ -55,7 +78,7 @@
 							</ul>
 						</div>
 					</a>
-					<div id="addCart">
+					<div id="addCart" class="cartBig">
 					<a href="#">
 						<img src="images/cart.png">Al carrito
 					</a>
@@ -66,15 +89,18 @@
 			<section class="init-list" id="last-stickers">
 				<h2>Últimos cromos</h2>
 				<article>
-					<a href="#">
+					<a href="#" title="Cromo con error de impresión">
 						<img src="images/stickers/5.jpg">
 						<ul>
 							<li>Josep Guardiola i Sala</li>
 							<li class="details">Mundial 2010</li>
-							<li class="details">(Ed. Ester)</li>
+							<li class="details">(Ed. Este)</li>
 							<li class="price">23.61 €</li>
 						</ul>
 					</a>
+					<div id="addCart" class="cartSmall">
+						<a href="#"><img src="images/cart.png">Al carrito</a>
+					</div>
 				</article>
 				<article>
 					<a href="#">
@@ -86,6 +112,9 @@
 							<li class="price">4.00 €</li>
 						</ul>
 					</a>
+					<div id="addCart" class="cartSmall">
+						<a href="#"><img src="images/cart.png">Al carrito</a>
+					</div>
 				</article>
 				<article>
 					<a href="#">
@@ -97,6 +126,9 @@
 							<li class="price">9.50 €</li>
 						</ul>
 					</a>
+					<div id="addCart" class="cartSmall">
+						<a href="#"><img src="images/cart.png">Al carrito</a>
+					</div>
 				</article>
 			</section>
 
@@ -151,7 +183,7 @@
 						<a href="#"><img src="images/facebook-icon.png">Facebook</a>
 					</li>
 					<li>
-						<a href="#"><img src="images/mail-icon.png">Contacta</a>
+						<a href="#"><img src="images/mail-icon.png">Contacto</a>
 					</li>
 				</ul>
 			</nav>
