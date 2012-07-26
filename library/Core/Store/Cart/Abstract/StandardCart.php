@@ -19,7 +19,7 @@ class Core_Store_Cart_Abstract_StandardCart extends Core_Store_Cart_Abstract
     
     protected function __construct()
     {
-        parent::_construct();
+        $this->reset();
     }
     
     
@@ -33,11 +33,10 @@ class Core_Store_Cart_Abstract_StandardCart extends Core_Store_Cart_Abstract
     }
     
     
-    public function reset($resetDatabase = false)
+    public function reset()
     {
-        $this->contents = new Core_Store_Cart_Item_Collection();
-        $this->total = 0;
-        $this->weight = 0;
+        $this->_contents = new Core_Store_Cart_Item_Collection();
+        $this->_total = 0;
         
         $sessionData = Zend_Registry::getInstance()->get('coreSession');
         
@@ -79,7 +78,8 @@ class Core_Store_Cart_Abstract_StandardCart extends Core_Store_Cart_Abstract
     
     public function countContents()
     {
-        return (int)$this->_contents->count();
+        //return (int)$this->_contents->count();
+        return (int)$this->_contents->countQuantity();
     }
     
     public function getQuantity($productId)

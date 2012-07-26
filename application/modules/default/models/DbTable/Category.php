@@ -1,35 +1,32 @@
 <?php
 
-class Default_Model_DbTable_Category extends Zend_Db_Table_Abstract
+class Default_Model_DbTable_Category extends Default_Model_DbTablePagination
 {
 	protected $_name = 'category';
 	protected $_primary = 'category_id';
 	
 	
 	/*****************************************************************/
-	/* Private                                                       */
+	/* Static                                                        */
 	/*****************************************************************/
-	private function rowToObject($row)
+	public static function rowToObject($row)
 	{
-		$category = new Core_Sticker_Category();
-		$categoty->setId($row['category_id']);
-		$categoty->setName($row['category_name']);
-		$categoty->setOrder($row['category_order']);
-		$categoty->setCollectionId($row['collection_id']);
-		 
-		return $category;
+		if ($row !== null) {
+        	$category = new Core_Sticker_Category();
+		
+       		$category->fromArray($row);
+		
+        	return $category;
+		} else {
+			return false;
+		}
 	}
 	
-	private function objectToRow(Core_Sticker_Category $category)
+	public static function objectToRow(Core_Sticker_Category $category)
 	{
-		$row = array(
-			'category_id' => $category->getId(),
-			'category_name' => $category->getName(),
-			'category_order' => $category->getOrder(),
-			'collection_id' => $category->getCollectionId(),
-		);
-		
-		return $row;
+		 $row = $category->toArray();
+		         
+        return $row;
 	}
 	
 	
@@ -38,42 +35,46 @@ class Default_Model_DbTable_Category extends Zend_Db_Table_Abstract
     /*****************************************************************/
 	public function getById($id)
 	{
-		 $row = $this->find($id)->current();
-		 return rowToObject($row);
+		$select = $this->select()
+					   ->setIntegrityCheck(false)
+					   ->from('category')
+					   ->join('collection', 'category.collection_id = collection.collection_id')
+					   ->join('editorial', 'editorial.editorial_id = collection.editorial_id')
+					   ->where('category_id = ?', $id);
+		
+		$row = $this->fetchRow($select);
+		 
+		return self::rowToObject($row);
+	}
+
+
+    /* get all categories */
+	public function getAll()
+	{
+		$select = $this->select()
+                       ->setIntegrityCheck(false)
+					   ->from('category')
+                       ->join('collection', 'category.collection_id = collection.collection_id')
+					   ->join('editorial', 'editorial.editorial_id = collection.editorial_id')
+					   ->order(array('editorial.editorial_id ASC', 'collection.collection_id ASC',
+					   				 'category.category_order ASC'));
+					   
+		return $this->createPaginator($select);
 	}
 
 
 	/* get all categories into a collection */
 	public function getIntoCollection($collectionId)
 	{
-		$select = $this->select();
-		$select->where('collection_id = ?', $collectionId);
- 
-		$rows = $this->fetchAll($select);
-					
-		return $rows;
-	}
-	
-	
-	/* add new category */
-	public function addCategory(Core_Sticker_Category $category)
-	{
-		$this->insert(objectToRow($category));
-	}
-	
-	
-	/* update a category */
-	public function updateCategory(Core_Sticker_Category $category)
-	{
-		$this->update(objectToRow($category), 'category_id = '. $category->getId());
-	}
-	
-	
-	/* delete a category */
-	public function deleteCategory($id)
-	{
-		$row = $this->find($id)->current();
-		if ( !empty($row) ) $row->delete();
+		$select = $this->select()
+                       ->setIntegrityCheck(false)
+					   ->from('category')
+                       ->join('collection', 'category.collection_id = collection.collection_id')
+					   ->join('editorial', 'editorial.editorial_id = collection.editorial_id')
+					   ->where('category.collection_id = ?', $collectionId)
+					   ->order(array('category.category_order ASC'));
+					   
+		return $this->createPaginator($select);
 	}
 }
 

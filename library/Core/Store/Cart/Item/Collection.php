@@ -63,6 +63,17 @@ class Core_Store_Cart_Item_Collection implements ArrayAccess, IteratorAggregate,
     {
         return count($this->_objectArray);
     }
+	
+	public function countQuantity()
+	{
+		$count = 0;
+		
+		foreach ($this->_objectArray as $obj) {
+			$count += $obj->getQuantity();
+		}
+		
+		return $count;
+	}
     
     public function offsetExists($offset)
     {

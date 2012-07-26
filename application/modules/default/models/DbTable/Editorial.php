@@ -1,32 +1,30 @@
 <?php
+
 class Default_Model_DbTable_Editorial extends Zend_Db_Table_Abstract{
     
     protected $_name = 'editorial';
-    protected $_primary = 'id';
+    protected $_primary = 'editorial_id';
     
     
     /*****************************************************************/
-	/* Private                                                       */
+	/* Static                                                        */
 	/*****************************************************************/
-    private function rowToObject($row)
+    public static function rowToObject($row)
     {
-        $editorial = new Core_Sticker_Editorial();
-        $editorial->setId($row['id']);
-        $editorial->setName($row['name']);
-        $editorial->setPriority($row['priority']);
-        $editorial->setImageURL($row['imageUrl']);
-         
-        return $editorial;
+    	if ($row !== null) {
+        	$editorial = new Core_Sticker_Editorial();
+		
+       		$editorial->fromArray($row);
+		
+        	return $editorial;
+		} else {
+			return false;
+		}
     }
     
-    private function objectToRow(Core_Sticker_Editorial $editorial)
+    public static function objectToRow(Core_Sticker_Editorial $editorial)
     {
-        $row = array(
-            'id' => $editorial->getId(),
-            'name' => $editorial->getName(),
-            'priority' => $editorial->getPriority(),
-            'imageUrl' => $editorial->getImageUrl(),
-        );
+        $row = $editorial->toArray();
         
         return $row;
     }
@@ -37,36 +35,22 @@ class Default_Model_DbTable_Editorial extends Zend_Db_Table_Abstract{
 	/*****************************************************************/
     public function getById($id)
 	{
-		 $row = $this->find($id)->current();
-		 return rowToObject($row);
+		$row = $this->find($id)->current();
+		return self::rowToObject($row);
 	}
     
     
     /* get all editorials */
 	public function getAll()
 	{
-		return $this->fetchAll();
-	}
-	
-	
-	/* add new editorial */
-	public function addEditorial(Core_Sticker_Editorial $editorial)
-	{
-		$this->insert(objectToRow($editorial));
-	}
-	
-	
-	/* update a editorial */
-	public function updateEditorial(Core_Sticker_Editorial $editorial)
-	{
-		$this->update(objectToRow($editorial), 'editorial_id = '. $editorial->getId());
-	}
-	
-	
-	/* delete a editorial */
-	public function deleteEditorial($id)
-	{
-		$row = $this->find($id)->current();
-		if ( !empty($row) ) $row->delete();
+		$rows = $this->fetchAll();
+		
+		$editorialArray = array();
+		
+		foreach ($rows as $row) {
+			array_push($editorialArray, self::rowToObject($row));
+		}
+		
+		return $editorialArray;
 	}
 }

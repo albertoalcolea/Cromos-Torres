@@ -2,15 +2,158 @@
 <html lang="es">
 	<head>
 		<meta charset="utf-8">
+		<meta name="description" content="Venta de cromos de coleccionismo antiguos y actuales. Mira nuestro catálogo">
 		
 		<?php echo $this->headTitle() ?>
+		
 		<?php echo $this->headLink()->appendStylesheet($this->BaseUrl()."/css/style.css","screen"); ?>
+		
+		<?php echo $this->headLink()->appendStylesheet('http://fonts.googleapis.com/css?family=Convergence'); ?>
+		<?php echo $this->headLink()->appendStylesheet('http://fonts.googleapis.com/css?family=Montserrat'); ?>
+				
+		<!--[if lt IE 9]>
+		<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+		<![endif]-->
 	</head>
 	<body>  
-	    <div id="content">
-		    <?php
-		      echo $this->layout()->content;
-		    ?>
-	   </div>
+	    <div id="wrapper">
+		<header>
+			<nav class="menu">
+				<div class="headContent">
+					<h1>Cromos Torres</h1>
+					<ul>
+						<li>
+							<?php if ($this->section == "inicio"): ?>
+								<a href="#" class="select">
+							<?php else: ?>
+								<a href="#" class="unselect">
+							<?php endif; ?>
+								Inicio
+							</a>
+						</li>
+						<li>
+							<?php if ($this->section == "editoriales"): ?>
+								<a href="#" class="select">
+							<?php else: ?>
+								<a href="#" class="unselect">
+							<?php endif; ?>
+								Editoriales
+							</a>
+						</li>
+						<li>
+							<?php if ($this->section == "albumes"): ?>
+								<a href="#" class="select">
+							<?php else: ?>
+								<a href="#" class="unselect">
+							<?php endif; ?>
+								&Aacute;lbumes
+							</a>
+						</li>
+						<li>
+							<?php if ($this->section == "carrito"): ?>
+								<a href="#" class="select cart">
+							<?php else: ?>
+								<a href="#" class="unselect cart">
+							<?php endif; ?>
+								<span><img src="images/cart.png">Carrito</span>
+								<?php if ($this->cartNumber > 0): ?>
+									<div id="cartNumber" class="visible">
+										<?php echo $this->cartNumber ?>
+									</div>
+								<?php endif; ?>
+							</a>
+						</li>
+					</ul>
+				</div>
+			</nav>
+			<aside class="info">
+				<div class="headContent">
+					<ul>
+						<li>
+							<?php if ($this->section == "quienessomos"): ?>
+							<a href="#" class="select">
+							<?php else: ?>
+							<a href="#">
+							<?php endif; ?>
+								¿Quiénes somos?
+							</a>
+						</li>
+						<li>
+							<?php if ($this->section == "metodospago"): ?>
+							<a href="#" class="select">
+							<?php else: ?>
+							<a href="#">
+							<?php endif; ?>
+								Métodos de pago
+							</a>
+						</li>
+						<li>
+							<?php if ($this->section == "comprayenvio"): ?>
+							<a href="#" class="select">
+							<?php else: ?>
+							<a href="#">
+							<?php endif; ?>
+								Compra y envío
+							</a>
+						</li>
+					</ul>
+				</div>
+			</aside>
+		</header>
+
+		<div id="content">
+			<section id="banner">
+				<article>
+					<a href="#">
+						<img src="images/stickers/1.jpg">
+					</a>
+						<div class="banner-description">
+							<a href="#">
+								<h3>Ronaldinho</h3>
+							</a>
+							<ul>
+								<li>Panini</li>
+								<li>WCCF European Clubs 2004-2005</li>
+								<li>N625</li>
+								<li>15.26 €</li>
+							</ul>
+						</div>
+					</a>
+					<div id="addCart" class="cartBig">
+					<a href="#">
+						<img src="images/cart.png">Al carrito
+					</a>
+				</div>
+				</article>
+			</section>
+
+			<aside id="welcomeMessage">
+				<p>Venta de cromos de coleccionismo antiguos y actuales. Mira nuestro catálogo.</p>
+			</aside>
+
+			<section class="init-list">
+				<?php echo $this->layout()->content; ?>
+			</section>
+		</div>
+		
+		<footer>
+			<p><a href="">¿Quiénes somos?</a></p>
+			<nav id="social">
+				<ul>
+					<li>
+						<a href="#"><img src="images/twitter-icon.png">Twitter</a>
+					</li>
+					<li>
+						<a href="#"><img src="images/facebook-icon.png">Facebook</a>
+					</li>
+					<li>
+						<a href="#"><img src="images/mail-icon.png">Contacto</a>
+					</li>
+				</ul>
+			</nav>
+			<div id="credits">
+				Sitio web creado por <a href="http://albertoalcolea.com">Alberto Alcolea</a>
+			</div>
+		</footer>
 	</body>
 </html>

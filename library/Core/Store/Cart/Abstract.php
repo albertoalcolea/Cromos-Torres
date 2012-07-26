@@ -1,27 +1,13 @@
 <?php
 
-// Zend_Loader::loadClass('Core_Store_Cart_Item_Collection');
-
 abstract class Core_Store_Cart_Abstract
 {
     protected $_contents = null;
     
     protected $_total = 0;
-    
-    protected $_weight = 0;
-    
-    protected $_totalTax = 0;
-    
-    protected $_taxValue = 19;
-    
-    
-    protected function __construct()
-    {
-        $this->reset();
-    }
-    
-    
-    abstract public function reset($reset_database = false);
+   
+     
+    abstract public function reset();
     
     abstract public function addCart(Core_Store_Cart_Item $item);
     
@@ -45,6 +31,7 @@ abstract class Core_Store_Cart_Abstract
     
     abstract public function getTotal();
     
+	
     public function save()
     {
         try {

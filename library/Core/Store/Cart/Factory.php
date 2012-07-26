@@ -1,15 +1,12 @@
 <?php
 
-// Zend_Loader::loadClass('Zend_Session_Namespace');
-// Zend_Loader::loadClass('Core_Store_Cart_Abstract');
-
 abstract class Core_Store_Cart_Factory
 {
     const ADAPTER_NAMESPACE = 'Core_Store_Cart_Abstract_';
     
     static public function createInstance($adapterName)
     {
-        if (!is_string($adapterName) || !strlen($adapterName)) {
+        if ( !is_string($adapterName) || !strlen($adapterName) ) {
             throw new Exception('Adapter Cart name must be specified in a string');
         }
         
@@ -25,6 +22,7 @@ abstract class Core_Store_Cart_Factory
         
         if ( isset($sessionData->cart) && ($sessionData->cart !== null) ) {
             $cartObject = $sessionData->cart;
+			
         } else {
             if (class_exists($classEngine, false)) {
                 $cartObject = call_user_func(array($classEngine, 'getInstance'));

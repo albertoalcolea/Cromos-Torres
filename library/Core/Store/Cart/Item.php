@@ -33,6 +33,7 @@ class Core_Store_Cart_Item
     {
         $this->_product = $product;
         $this->_calculateSubTotal();
+		return $this;
     }
     
     public function getId()
@@ -47,6 +48,7 @@ class Core_Store_Cart_Item
         if ($this->_product !== null) {
             $this->_product->setId((int)$id);
         }
+		return $this;
     }
     
     public function getName()
@@ -61,6 +63,7 @@ class Core_Store_Cart_Item
         if ($this->_product !== null) {
             $this->_product->setName($name);
         }
+		return $this;
     }
     
     public function getPrice()
@@ -75,6 +78,7 @@ class Core_Store_Cart_Item
         if ($this->_product !== null) {
             $this->_product->setPrice((double)$price);
         }
+		return $this;
     }
     
     public function getQuantity()
@@ -86,6 +90,7 @@ class Core_Store_Cart_Item
     {
         $this->_quantity = (int)$quantity;
         $this->_calculateSubTotal();
+		return $this;
     }
     
     public function getSubTotal()
@@ -101,5 +106,6 @@ class Core_Store_Cart_Item
     public function setSubTotal($subTotal)
     {
         $this->_subTotal = (double)$subTotal;
+		return $this;
     }
 }

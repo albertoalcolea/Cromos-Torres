@@ -31,7 +31,6 @@
 	height: 25px;
 	letter-spacing: 0.1em;
 	padding: 10px;
-	margin: 20px;
 	/*text-align: center;*/
 	text-shadow: black 0.1em 0.1em 0.4em;
 	text-transform: uppercase;
@@ -60,7 +59,6 @@
 	height: 20px;
 	letter-spacing: 0.1em;
 	padding: 10px;
-	margin: 20px;
 	/*text-align: center;*/
 	text-shadow: black 0.1em 0.1em 0.4em;
 	text-transform: uppercase;
@@ -213,8 +211,8 @@ header .menu .unselect {
 }
 
 header .menu .cart {
-	background-color: #626262;
-	opacity: 0.9;
+	/*background-color: #626262;*/
+	opacity: 1;
 }
 
 header .menu .cart span {
@@ -252,7 +250,6 @@ header .menu .cart #cartNumber {
 
 header .info {
 	background-color: #2e9b36;
-
 }
 
 header .info ul {
@@ -306,6 +303,10 @@ header .info a:hover {
 	);*/
 }
 
+header .info .select {
+	background-color: #1b7b22;
+}
+
 
 #wrapper {
 	background-image: url('../images/bg.gif');
@@ -335,7 +336,6 @@ header .info a:hover {
 	letter-spacing: 0.1em;
 	margin-bottom: 10px;
 	margin-right: 80px;
-	margin-top: -15px;
 	text-align: right;
 }
 
@@ -408,6 +408,7 @@ header .info a:hover {
 
 #banner article #addCart {
 	left: 68%;
+	margin: 20px;
 	position: absolute;
 	top: 73%;
 }
@@ -503,6 +504,10 @@ header .info a:hover {
 	list-style: disc;
 	margin-left: 15px;
 	text-transform: none;
+}
+
+.init-list #addCart {
+	margin: 20px 20px 0 20px;
 }
 
 .init-list #addCart a {
