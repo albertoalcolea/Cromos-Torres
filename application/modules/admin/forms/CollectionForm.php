@@ -48,7 +48,7 @@ class Admin_Form_CollectionForm extends Admin_Form_Decorator
 			 	 ->addFilter('StringTrim');
 		
 		/* Editorial */				
-		$editorials = new Admin_Model_DbTable_Editorial();
+		$editorials = new Core_Model_DbTable_Editorial();
 		
 		$editorialArray = array();
 		

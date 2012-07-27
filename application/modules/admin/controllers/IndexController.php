@@ -5,7 +5,6 @@ class Admin_IndexController extends Zend_Controller_Action
 
     public function init()
     {
-        $this->view->baseUrl = $this->_request->getBaseUrl();
         $this->view->user = Zend_Auth::getInstance()->getIdentity();
     }
 

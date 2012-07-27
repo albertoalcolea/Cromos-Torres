@@ -35,7 +35,7 @@ class Admin_Form_CategoryForm extends Admin_Form_Decorator
 			  ->addFilter('Int');
 		
 		/* Collection */				
-		$collections = new Admin_Model_DbTable_Collection();
+		$collections = new Core_Model_DbTable_Collection();
 		
 		$collectionArray = array();
 		
