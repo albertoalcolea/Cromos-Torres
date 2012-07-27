@@ -74,7 +74,7 @@ class Admin_Model_DbTable_Order extends Admin_Model_DbTablePagination
 	{
 		$select = $this->select()
 					   ->setIntegrityCheck(false)
-					   ->from('orderProducts', array('number_products'))
+					   ->from('orderProducts', array('quantity'))
 					   ->join('product', 'orderProducts.product_id = product.product_id')
 					   ->joinLeft('category', 'product.category_id = category.category_id')
 					   ->joinLeft('collection', '(category.collection_id = collection.collection_id) 
@@ -98,11 +98,11 @@ class Admin_Model_DbTable_Order extends Admin_Model_DbTablePagination
 			switch ($row['product_type']) {
 				case Core_Store_Product::TYPE_STICKER:
 					$item = new Core_Store_Cart_Item(Admin_Model_DbTable_Sticker::rowToObject($row), 
-						$row['number_products']);
+						$row['quantity']);
 					break;
 				case Core_Store_Product::TYPE_ALBUM:
 					$item = new Core_Store_Cart_Item(Admin_Model_DbTable_Album::rowToObject($row), 
-						$row['number_products']);
+						$row['quantity']);
 					break;
 			}
 

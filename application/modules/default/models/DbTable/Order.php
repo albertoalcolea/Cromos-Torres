@@ -36,6 +36,12 @@ class Default_Model_DbTable_Order extends Default_Model_DbTablePagination
 	/* add new order */
 	public function addOrder(Core_Store_Order $order)
 	{
-		//return $this->insert(self::objectToRow($album));
+		$orderId = $this->insert(self::objectToRow($collection));
+		
+		$orderProducts = new Default_Model_DbTable_OrderProducts();
+		
+		foreach ($order->getItems()->getIterator() as $productId => $product) {
+			$orderProducts->addOrderProduct($orderId, $productId, $product->getQuantity());
+		}
 	}
 }
