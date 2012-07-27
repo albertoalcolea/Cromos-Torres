@@ -12,6 +12,7 @@ class Core_Store_Cart_Item_Collection implements ArrayAccess, IteratorAggregate,
         $this->offsetUnset($offset);
         return $this;
     }
+	
     
     public function attach($obj)
     {
@@ -28,6 +29,7 @@ class Core_Store_Cart_Item_Collection implements ArrayAccess, IteratorAggregate,
         throw new Exception('Must be a Object');
     }
     
+	
     public function addItem($offset = null, Core_Store_Cart_Item $obj, $validate = true)
     {
         if ($offset === null) {
@@ -40,6 +42,7 @@ class Core_Store_Cart_Item_Collection implements ArrayAccess, IteratorAggregate,
         return $this;
     }
     
+	
     public function getItem($offset = null)
     {
         if ($offset === null) {
@@ -49,20 +52,24 @@ class Core_Store_Cart_Item_Collection implements ArrayAccess, IteratorAggregate,
         }
     }
     
+	
     public function contains($obj)
     {
         return $this->offsetExists($obj);
     }
+	
     
     public function getIterator()
     {
         return new ArrayIterator($this->_objectArray);
     }
+	
     
     public function count()
     {
         return count($this->_objectArray);
     }
+	
 	
 	public function countQuantity()
 	{
@@ -75,6 +82,7 @@ class Core_Store_Cart_Item_Collection implements ArrayAccess, IteratorAggregate,
 		return $count;
 	}
     
+	
     public function offsetExists($offset)
     {
         if (is_object($offset)) {
@@ -88,6 +96,7 @@ class Core_Store_Cart_Item_Collection implements ArrayAccess, IteratorAggregate,
         
         return array_key_exists($offset, $this->_objectArray);
     }
+	
     
     public function offsetGet($offset) {
         if ($this->offsetExists($offset) === true) {
@@ -96,6 +105,7 @@ class Core_Store_Cart_Item_Collection implements ArrayAccess, IteratorAggregate,
             return false;
         }
     }
+	
     
     public function offsetSet($offset, $value, $validate = false)
     {
@@ -114,6 +124,7 @@ class Core_Store_Cart_Item_Collection implements ArrayAccess, IteratorAggregate,
         }
     }
     
+	
     public function offsetUnset($offset)
     {
         if (is_object($offset)) {

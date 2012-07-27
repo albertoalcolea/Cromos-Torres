@@ -45,6 +45,7 @@ class Core_Store_Cart_Abstract_StandardCart extends Core_Store_Cart_Abstract
         }
     }
     
+	
     public function addCart(Core_Store_Cart_Item $item)
     {
         if ($this->inCart($item->getId())) {
@@ -55,6 +56,7 @@ class Core_Store_Cart_Abstract_StandardCart extends Core_Store_Cart_Abstract
         }
     }
     
+	
     public function updateQuantity($productId, $quantity, $quantityFromPost = false)
     {
         $item = $this->findProduct($productId);
@@ -66,6 +68,7 @@ class Core_Store_Cart_Abstract_StandardCart extends Core_Store_Cart_Abstract
             $this->cleanup();
         }
     }
+	
     
     public function cleanup()
     {
@@ -75,12 +78,14 @@ class Core_Store_Cart_Abstract_StandardCart extends Core_Store_Cart_Abstract
             }
         }
     }
+	
     
     public function countContents()
     {
         //return (int)$this->_contents->count();
         return (int)$this->_contents->countQuantity();
     }
+	
     
     public function getQuantity($productId)
     {
@@ -94,15 +99,18 @@ class Core_Store_Cart_Abstract_StandardCart extends Core_Store_Cart_Abstract
         }
     }
     
+	
     public function inCart($productId)
     {
         return $this->_contents->offsetExists($productId);
     }
     
+	
     public function has($productId)
     {
         return $this->inCart($productId);
     }
+	
     
     public function remove($productId)
     {
@@ -111,6 +119,7 @@ class Core_Store_Cart_Abstract_StandardCart extends Core_Store_Cart_Abstract
             $this->_contents->detach($product);
         }
     }
+	
     
     public function removeProducts(ArrayAccess $productsIds)
     {
@@ -121,17 +130,20 @@ class Core_Store_Cart_Abstract_StandardCart extends Core_Store_Cart_Abstract
         }
     }
     
+	
     public function removeAll()
     {
         $this->reset();
     }
     
+	
     public function getProducts()
     {
         $this->calculateTotals();
         return $this->_contents;
     }
     
+	
     public function calculateTotals()
     {
         $this->_total = 0;
@@ -140,11 +152,13 @@ class Core_Store_Cart_Abstract_StandardCart extends Core_Store_Cart_Abstract
             $this->_total += $item->getSubTotal;
         }
     }
-    
+
+
     public function getContents()
     {
         return $this->_contents;
     }
+	
     
     public function getTotal()
     {

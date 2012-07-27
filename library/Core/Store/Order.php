@@ -24,7 +24,7 @@ class Core_Store_Order
     
     private $_paymentMethod = 0;
     
-    private $_products = null;
+    private $_items = null;
     
     
     public function __construct($id = null,
@@ -36,7 +36,7 @@ class Core_Store_Order
                                 $postcode = null,
                                 $email = null,
                                 $paymentMethod = null,
-                                $products = null)
+                                Core_Store_Cart_Item_Collection $items = null)
     {
     	if ($id !== null) {
         	$this->_id = (int)$id;
@@ -49,7 +49,7 @@ class Core_Store_Order
         $this->_postcode = (int)$postcode;
         $this->_email = $email;
         $this->_paymentMethod = (int)$paymentMethod;
-        $this->_products = $products;
+        $this->_items = $items;
     }
     
     
@@ -188,15 +188,15 @@ class Core_Store_Order
     }
     
 	
-    public function getProducts()
+    public function getItems()
     {
-        return $this->_products;
+        return $this->_items;
     }
     
 	
-    public function setProducts($products)
+    public function setItems(Core_Store_Cart_Item_Collection $items)
     {
-        $this->_products = $products;
+        $this->_items = $items;
 		return $this;
     }
 	

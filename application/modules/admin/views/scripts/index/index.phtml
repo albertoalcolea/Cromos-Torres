@@ -47,15 +47,15 @@
 			        <tbody>
 			        	<?php
 			        		$total = (double)0.0;
-			        		foreach ($order->getProducts() as $product):
+							foreach ($order->getItems()->getIterator() as $product):
 								$total = $total + $product->getPrice();	
 			        	?>
 				        	<tr>
 				        		<td><?php echo $product->getTypeName() ?></td>
 				        		<td><?php echo $product->getName() ?></td>
 				        		<td><?php echo $product->getPrice() ?> €</td>
-				        		<td><?php echo $product->getStock() ?></td>
-				        		<td><strong><?php echo $product->getStock() * $product->getPrice() ?> €</strong></td>
+				        		<td><?php echo $product->getQuantity() ?></td>
+				        		<td><strong><?php echo $product->getQuantity() * $product->getPrice() ?> €</strong></td>
 				        	</tr>
 			        	<?php endforeach; ?>
 			        </tbody>

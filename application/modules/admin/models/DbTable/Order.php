@@ -74,23 +74,8 @@ class Admin_Model_DbTable_Order extends Admin_Model_DbTablePagination
 	{
 		$select = $this->select()
 					   ->setIntegrityCheck(false)
-					   ->from('orderProducts', array('product_stock' => 'number_products'))
-					   ->join('product', 'orderProducts.product_id = product.product_id', 
-					   		array(
-					   		/* 
-							 * All except product_stock 
-							 *  (In this case, this field indicates the number of products sold) 
-							 * */
-					   			'product_id', 
-					   			'product_type', 
-					   			'sticker_number', 
-					   			'sticker_imageUrl', 
-					   			'category_id', 
-					   			'collection_id', 
-					   			'product_name', 
-					   			'product_details', 
-					   			'product_price', 
-					   			'product_dateAdded'))
+					   ->from('orderProducts', array('number_products'))
+					   ->join('product', 'orderProducts.product_id = product.product_id')
 					   ->joinLeft('category', 'product.category_id = category.category_id')
 					   ->joinLeft('collection', '(category.collection_id = collection.collection_id) 
 					   		OR (product.collection_id = collection.collection_id)')
@@ -107,20 +92,24 @@ class Admin_Model_DbTable_Order extends Admin_Model_DbTablePagination
 		
 		$rows = $this->fetchAll($select);
 		
-		$products = array();
+		$itemCollection = new Core_Store_Cart_Item_Collection();
 		
 		foreach ($rows as $row) {
 			switch ($row['product_type']) {
 				case Core_Store_Product::TYPE_STICKER:
-					array_push($products, Admin_Model_DbTable_Sticker::rowToObject($row));
+					$item = new Core_Store_Cart_Item(Admin_Model_DbTable_Sticker::rowToObject($row), 
+						$row['number_products']);
 					break;
 				case Core_Store_Product::TYPE_ALBUM:
-					array_push($products, Admin_Model_DbTable_Album::rowToObject($row));
+					$item = new Core_Store_Cart_Item(Admin_Model_DbTable_Album::rowToObject($row), 
+						$row['number_products']);
 					break;
 			}
+
+			$itemCollection->addItem($item->getId(), $item);
 		}
 		
-		return $products;
+		return $itemCollection;
 	}
 
 	

@@ -20,22 +20,20 @@
 	visibility: visible;
 }
 
-.cartBig {
+.cartBig,
+.cartSmall {
 	background-color: #b73d3d;
 	/*border: 1px solid #cd5151;*/
-	box-shadow: 1px 1px 5px 1px #808080;
 	color: white;
-	border-radius: 10px;
+	letter-spacing: 0.1em;
 	font-size: 13px;
 	font-weight: bold;
-	height: 25px;
 	letter-spacing: 0.1em;
 	padding: 10px;
 	/*text-align: center;*/
 	text-shadow: black 0.1em 0.1em 0.4em;
 	text-transform: uppercase;
 	vertical-align: middle;
-	width: 160px;
 
 	transition: background-color .3s;
 
@@ -48,32 +46,16 @@
 	-ms-transition: background-color .3s;
 }
 
+.cartBig {
+	box-shadow: 1px 1px 5px 1px #808080;
+	height: 25px;
+	width: 160px;
+}
+
 .cartSmall {
-	background-color: #b73d3d;
-	/*border: 1px solid #cd5151;*/
 	box-shadow: 1px 1px 5px 1px #101010;
-	color: white;
-	border-radius: 10px;
-	font-size: 13px;
-	font-weight: bold;
 	height: 20px;
-	letter-spacing: 0.1em;
-	padding: 10px;
-	/*text-align: center;*/
-	text-shadow: black 0.1em 0.1em 0.4em;
-	text-transform: uppercase;
-	vertical-align: middle;
 	width: 140px;
-
-	transition: background-color .3s;
-
-	/* others */
-	-webkit-border-radius: 10px;
-	-moz-border-radius: 10px;
-	-webkit-transition: background-color .3s;
-	-moz-transition: background-color .3s;
-	-o-transition: background-color .3s;
-	-ms-transition: background-color .3s;
 }
 
 .cartBig:hover,
@@ -270,7 +252,7 @@ header .info li {
 }
 
 header .info a {
-	color: white;
+	color: #eee;
 	display: block;
 	height: 27px;
 	line-height: 27px;

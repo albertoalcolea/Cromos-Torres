@@ -22,7 +22,7 @@ class Admin_Model_Paginator_OrderPaginator extends Zend_Paginator_Adapter_DbSele
 		foreach ($rows as $row) {
 			$order = new Core_Store_Order();
 			$order = Admin_Model_DbTable_Order::rowToObject($row);
-			$order->setProducts($orders->getAllProductsIntoOrder($order->getId()));
+			$order->setItems($orders->getAllProductsIntoOrder($order->getId()));
 			
 			array_push($orderArray, $order);
 		}
