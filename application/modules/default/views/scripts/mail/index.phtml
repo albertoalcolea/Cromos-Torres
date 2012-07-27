@@ -1,0 +1,30 @@
+<section class="init-list">
+	<h2>Test Mail</h2>
+	
+	<article>
+		<form method="post">
+			<?php echo $this->message ?>
+			<ul>
+				<li>
+					<label>From:</label>
+					<input type="text" name="from" id="from">
+				</li>
+				<li>
+					<label>To:</label>
+					<input type="text" name="to" id="to">
+				</li>
+				<li>
+					<label>Subject:</label>
+					<input type"text" name="subject" id="subject">
+				</li>
+				<li>
+					<label>Message:</label>
+					<textarea name="msg" id="msg"></textarea>
+				</li>
+				<li>
+					<input type="submit" value="Send Mail">
+				</li>
+			</ul>
+		</form>
+	</article>
+</section>

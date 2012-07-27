@@ -4,6 +4,10 @@
 	padding: 0;
 }
 
+header, section, article, footer, nav, aside { 
+	display: block; 
+}
+
 .hide {
 	display: none;
 }
@@ -24,6 +28,7 @@
 .cartSmall {
 	background-color: #b73d3d;
 	/*border: 1px solid #cd5151;*/
+	border-radius: 10px;
 	color: white;
 	letter-spacing: 0.1em;
 	font-size: 13px;
@@ -186,6 +191,9 @@ header .menu .unselect {
 
 	transition: opacity .4s;
 
+	/* IE 8 */
+	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
+
 	/* others */
 	-webkit-transition: opacity .4s;
 	-moz-transition: opacity .4s;
@@ -196,10 +204,16 @@ header .menu .unselect {
 header .menu .cart {
 	/*background-color: #626262;*/
 	opacity: 1;
+
+	/* IE 8 */
+	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
 }
 
 header .menu .cart span {
 	opacity: 0.6;
+
+	/* IE 8 */
+	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=60)";
 }
 
 header .menu .cart img {
@@ -213,6 +227,9 @@ header .menu .cart img {
 header .menu .unselect:hover,
 header .menu .cart:hover span {
 	opacity: 1;
+
+	/* IE 8 */
+	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
 }
 
 header .menu .cart #cartNumber {
@@ -553,6 +570,9 @@ footer #social a {
 
 	transition: background-color .5s;
 
+	/* IE 8 */
+	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=30)";
+
 	/* others */
 	-webkit-transition: background-color .5s;
 	-moz-transition: background-color .5s;
@@ -562,6 +582,9 @@ footer #social a {
 
 footer #social a:hover {
 	opacity: 1;
+
+	/* IE 8 */
+	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
 }
 
 footer #social li:hover{
