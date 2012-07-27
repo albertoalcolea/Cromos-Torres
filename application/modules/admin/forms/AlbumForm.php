@@ -11,7 +11,7 @@ class Admin_Form_AlbumForm extends Admin_Form_Decorator
 		$id->addFilter('Int');
 		
 		/* Collection */				
-		$collections = new Admin_Model_DbTable_Collection();
+		$collections = new Core_Model_DbTable_Collection();
 		
 		$collectionArray = array();
 		

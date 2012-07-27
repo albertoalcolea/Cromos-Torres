@@ -78,7 +78,7 @@ class Admin_Form_StickerForm extends Admin_Form_Decorator
 			 	 ->addFilter('StringTrim');
 		
 		/* Category */				
-		$categories = new Admin_Model_DbTable_Category();
+		$categories = new Core_Model_DbTable_Category();
 		
 		$categoryArray = array();
 		

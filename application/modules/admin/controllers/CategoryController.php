@@ -1,8 +1,77 @@
 <?php
 
 class Admin_CategoryController extends Zend_Controller_Action 
-{ 
-     
+{
+	/* Private methods with returnUrl in param */
+	private function updateCategory($returnUrl)
+	{		
+		$this->view->title = "Editar Categor&iacute;a";
+		
+		$form = new Admin_Form_CategoryForm();
+		$form->submit->setLabel('Editar');
+		$this->view->form = $form;
+			
+		if ($this->getRequest()->isPost()) {			
+			$formData = $this->getRequest()->getPost();
+			
+			if ($form->isValid($formData)) {
+				$categories = new Core_Model_DbTable_Category();
+				$category = new Core_Sticker_Category();
+				
+				$category->setId($form->getValue('category_id'))
+						 ->setName($form->getValue('category_name'))
+						 ->setOrder($form->getValue('category_order'));
+				
+				$collection = new Core_Sticker_Collection();
+				$collection->setId($form->getValue('collection_id'));
+				
+				$category->setCollection($collection);
+				
+				$categories->updateCategory($category);
+          		$this->_redirect($returnUrl);
+			} else {
+				$form->populate($formData);
+			}
+      	} else {
+      		if ($this->_hasParam('id')) {
+      			$categories = new Core_Model_DbTable_Category();
+				$category = new Core_Sticker_Category();
+				
+				if ( !($id = $this->_helper->filter($this->_getParam('id')))) {
+					$this->_redirect($returnUrl);	
+				}
+				
+				$category = $categories->getById($id);
+				
+				if ($category) {
+					$form->populate($category->toArray());
+				} else {
+					$this->_redirect($returnUrl);	
+				}
+      		} else {
+      			$this->_redirect($returnUrl);
+      		}
+      	}
+		
+		$this->render('form');
+	}
+ 
+    private function deleteCategory($returnUrl)
+	{
+		if ($this->_hasParam('id')) {
+			$categories = new Core_Model_DbTable_Category();
+			
+			if ( !($id = $this->_helper->filter($this->_getParam('id')))) {
+				$this->_redirect($returnUrl);	
+			}
+			      
+			$categories->deleteCategory($id);
+			$this->_redirect($returnUrl);  
+		}
+	}
+	
+	
+	/* PUBLIC */
 	public function preDispatch()
 	{
 		$this->_helper->logged($this->_helper->redirector);
@@ -193,76 +262,6 @@ class Admin_CategoryController extends Zend_Controller_Action
 			$this->deleteCategory('/admin/sticker/list/collection_id/' . $collectionId);
 		} else {
 			$this->deleteCategory('/admin/category');
-		}
-	}
-	
-	
-	/* Private methods with returnUrl in param */
-	public function updateCategory($returnUrl)
-	{		
-		$this->view->title = "Editar Categor&iacute;a";
-		
-		$form = new Admin_Form_CategoryForm();
-		$form->submit->setLabel('Editar');
-		$this->view->form = $form;
-			
-		if ($this->getRequest()->isPost()) {			
-			$formData = $this->getRequest()->getPost();
-			
-			if ($form->isValid($formData)) {
-				$categories = new Core_Model_DbTable_Category();
-				$category = new Core_Sticker_Category();
-				
-				$category->setId($form->getValue('category_id'))
-						 ->setName($form->getValue('category_name'))
-						 ->setOrder($form->getValue('category_order'));
-				
-				$collection = new Core_Sticker_Collection();
-				$collection->setId($form->getValue('collection_id'));
-				
-				$category->setCollection($collection);
-				
-				$categories->updateCategory($category);
-          		$this->_redirect($returnUrl);
-			} else {
-				$form->populate($formData);
-			}
-      	} else {
-      		if ($this->_hasParam('id')) {
-      			$categories = new Core_Model_DbTable_Category();
-				$category = new Core_Sticker_Category();
-				
-				if ( !($id = $this->_helper->filter($this->_getParam('id')))) {
-					$this->_redirect($returnUrl);	
-				}
-				
-				$category = $categories->getById($id);
-				
-				if ($category) {
-					$form->populate($category->toArray());
-				} else {
-					$this->_redirect($returnUrl);	
-				}
-      		} else {
-      			$this->_redirect($returnUrl);
-      		}
-      	}
-		
-		$this->render('form');
-	}
-
-
-	private function deleteCategory($returnUrl)
-	{
-		if ($this->_hasParam('id')) {
-			$categories = new Core_Model_DbTable_Category();
-			
-			if ( !($id = $this->_helper->filter($this->_getParam('id')))) {
-				$this->_redirect($returnUrl);	
-			}
-			      
-			$categories->deleteCategory($id);
-			$this->_redirect($returnUrl);  
 		}
 	}
  }
