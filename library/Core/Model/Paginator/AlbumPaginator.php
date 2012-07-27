@@ -1,6 +1,6 @@
 <?php
 
-class Admin_Model_Paginator_AlbumimagePaginator extends Zend_Paginator_Adapter_DbSelect
+class Core_Model_Paginator_AlbumPaginator extends Zend_Paginator_Adapter_DbSelect
 {
 	
     /**
@@ -16,12 +16,12 @@ class Admin_Model_Paginator_AlbumimagePaginator extends Zend_Paginator_Adapter_D
         $rows = parent::getItems($offset, $itemCountPerPage);
 
 
-		$albumImageArray = array();
+		$albumArray = array();
 		
 		foreach ($rows as $row) {
-			array_push($albumImageArray, Admin_Model_DbTable_Albumimage::rowToObject($row));
+			array_push($albumArray, Core_Model_DbTable_Album::rowToObject($row));
 		}
 		
-		return $albumImageArray;
+		return $albumArray;
     }
 }

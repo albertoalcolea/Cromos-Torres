@@ -1,6 +1,6 @@
 <?php
 
-class Admin_Model_Paginator_CategoryPaginator extends Zend_Paginator_Adapter_DbSelect
+class Core_Model_Paginator_StickerPaginator extends Zend_Paginator_Adapter_DbSelect
 {
 	
     /**
@@ -16,12 +16,12 @@ class Admin_Model_Paginator_CategoryPaginator extends Zend_Paginator_Adapter_DbS
         $rows = parent::getItems($offset, $itemCountPerPage);
 
 
-		$categoryArray = array();
+		$stickerArray = array();
 		
 		foreach ($rows as $row) {
-			array_push($categoryArray, Admin_Model_DbTable_Category::rowToObject($row));
+			array_push($stickerArray, Core_Model_DbTable_Sticker::rowToObject($row));
 		}
 		
-		return $categoryArray;
+		return $stickerArray;
     }
 }

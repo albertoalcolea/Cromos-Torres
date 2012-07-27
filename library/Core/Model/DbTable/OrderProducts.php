@@ -1,6 +1,6 @@
 <?php
 
-class Default_Model_DbTable_OrderProducts extends Default_Model_DbTablePagination
+class Core_Model_DbTable_OrderProducts extends Zend_Db_Table_Abstract
 {
     protected $_name = 'orderProducts';
     protected $_primary = array('order_id', 'product_id');

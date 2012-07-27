@@ -32,7 +32,7 @@ class Admin_StickerController extends Zend_Controller_Action
 			$this->view->action = "list";
 		} 
 	
-		$collections = new Admin_Model_DbTable_Collection();
+		$collections = new Core_Model_DbTable_Collection();
 		
 		$data = $collections->getAll();
 		
@@ -58,14 +58,14 @@ class Admin_StickerController extends Zend_Controller_Action
 		}
 		
 		/* Set the title with the collection name */
-		$collections = new Admin_Model_DbTable_Collection();
+		$collections = new Core_Model_DbTable_Collection();
 		$collection = $collections->getById($collectionId);
 		$this->view->title = "Lista de Cromos de la colecci&oacute;n " . $collection->getName(); 
 
 		/* Set in the view the collection ID */
 		$this->view->collectionId = $collectionId;
 
-		$stickers = new Admin_Model_DbTable_Sticker();	
+		$stickers = new Core_Model_DbTable_Sticker();	
 		
 		/* Get the actuall page, the number of registers to show and  
 		 * the max number of pages in the paginator */
@@ -99,7 +99,7 @@ class Admin_StickerController extends Zend_Controller_Action
 		}
 		
 		/* Get the categories for filtering */		
-		$categories = new Admin_Model_DbTable_Category();
+		$categories = new Core_Model_DbTable_Category();
 		$this->view->categories = $categories->getIntoCollection($collectionId);
 		
 		$this->view->titleCategories = "Categor&iacute;as";
@@ -130,7 +130,7 @@ class Admin_StickerController extends Zend_Controller_Action
 			$formData = $this->getRequest()->getPost();
 			
 			if ($form->isValid($formData)) {
-				$stickers = new Admin_Model_DbTable_Sticker();
+				$stickers = new Core_Model_DbTable_Sticker();
 				$sticker = new Core_Sticker_Sticker();
 				
 				$sticker->setId(null)
@@ -180,7 +180,7 @@ class Admin_StickerController extends Zend_Controller_Action
 			$formData = $this->getRequest()->getPost();
 			
 			if ($form->isValid($formData)) {
-				$stickers = new Admin_Model_DbTable_Sticker();
+				$stickers = new Core_Model_DbTable_Sticker();
 				$sticker = new Core_Sticker_Sticker();
 			
 				$sticker->setId($form->getValue('product_id'))
@@ -203,7 +203,7 @@ class Admin_StickerController extends Zend_Controller_Action
 			}
       	} else {
       		if ($this->_hasParam('id')) {
-      			$stickers = new Admin_Model_DbTable_Sticker();
+      			$stickers = new Core_Model_DbTable_Sticker();
 				$sticker = new Core_Sticker_Sticker();
 				
 				if ( !($id = $this->_helper->filter($this->_getParam('id')))) {
@@ -230,7 +230,7 @@ class Admin_StickerController extends Zend_Controller_Action
 	public function deleteAction()
 	{
 		if ($this->_hasParam('id')) {
-			$collections = new Admin_Model_DbTable_Sticker();
+			$collections = new Core_Model_DbTable_Sticker();
 			
 			Zend_Loader::loadClass('Zend_Filter_StripTags');
 			$f = new Zend_Filter_StripTags();

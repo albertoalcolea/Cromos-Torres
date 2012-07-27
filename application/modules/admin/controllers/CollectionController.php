@@ -28,7 +28,7 @@ class Admin_CollectionController extends Zend_Controller_Action
 	{
 		$this->view->title = "Lista de Colecciones";
 
-		$collections = new Admin_Model_DbTable_Collection();
+		$collections = new Core_Model_DbTable_Collection();
 		
 		/* Get the actuall page, the number of registers to show and  
 		 * the max number of pages in the paginator */
@@ -62,7 +62,7 @@ class Admin_CollectionController extends Zend_Controller_Action
 		}
 		
 		/* Get the editorial for filtering */
-		$editorials = new Admin_Model_DbTable_Editorial();
+		$editorials = new Core_Model_DbTable_Editorial();
 		$this->view->editorials = $editorials->getAll();
 	}
 	
@@ -80,7 +80,7 @@ class Admin_CollectionController extends Zend_Controller_Action
 			$formData = $this->getRequest()->getPost();
 			
 			if ($form->isValid($formData)) {
-				$collections = new Admin_Model_DbTable_Collection();
+				$collections = new Core_Model_DbTable_Collection();
 				$collection = new Core_Sticker_Collection();
 				
 				$collection->setId(null)
@@ -96,7 +96,7 @@ class Admin_CollectionController extends Zend_Controller_Action
 				$collectionId = $collections->addCollection($collection);
 				
 				/* Add a default category for this collection */
-				$categories = new Admin_Model_DbTable_Category();
+				$categories = new Core_Model_DbTable_Category();
 				$category = new Core_Sticker_Category();
 				
 				$collection->setId($collectionId);
@@ -131,7 +131,7 @@ class Admin_CollectionController extends Zend_Controller_Action
 			$formData = $this->getRequest()->getPost();
 			
 			if ($form->isValid($formData)) {
-				$collections = new Admin_Model_DbTable_Collection();
+				$collections = new Core_Model_DbTable_Collection();
 				$collection = new Core_Sticker_Collection();
 				
 				$collection->setId($form->getValue('collection_id'))
@@ -151,7 +151,7 @@ class Admin_CollectionController extends Zend_Controller_Action
 			}
       	} else {
       		if ($this->_hasParam('id')) {
-      			$collections = new Admin_Model_DbTable_Collection();
+      			$collections = new Core_Model_DbTable_Collection();
 				$collection = new Core_Sticker_Collection();
 				
 				if ( !($id = $this->_helper->filter($this->_getParam('id')))) {
@@ -178,7 +178,7 @@ class Admin_CollectionController extends Zend_Controller_Action
 	public function deleteAction()
 	{
 		if ($this->_hasParam('id')) {
-			$collections = new Admin_Model_DbTable_Collection();
+			$collections = new Core_Model_DbTable_Collection();
 			
 			if ( !($id = $this->_helper->filter($this->_getParam('id')))) {
 				$this->_redirect('/admin/editorial');	

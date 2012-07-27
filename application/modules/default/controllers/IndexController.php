@@ -14,7 +14,7 @@ class IndexController extends Zend_Controller_Action
 
     public function indexAction()
     {
-        $table = new Default_Model_DbTable_Editorial();
+        $table = new Core_Model_DbTable_Editorial();
 		
 		$this->view->editorials = $table->getAll();
 		

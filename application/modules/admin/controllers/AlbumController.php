@@ -22,7 +22,7 @@ class Admin_AlbumController extends Zend_Controller_Action
 	{
 		$this->view->title = "Lista de &Aacute;lbumes";
 		
-		$albums = new Admin_Model_DbTable_Album();
+		$albums = new Core_Model_DbTable_Album();
 		
 		/* Get the actuall page, the number of registers to show and  
 		 * the max number of pages in the paginator */
@@ -55,7 +55,7 @@ class Admin_AlbumController extends Zend_Controller_Action
 			$formData = $this->getRequest()->getPost();
 			
 			if ($form->isValid($formData)) {
-				$albums = new Admin_Model_DbTable_Album();
+				$albums = new Core_Model_DbTable_Album();
 				$album = new Core_Sticker_Album();
 				
 				$album->setId(null)
@@ -94,7 +94,7 @@ class Admin_AlbumController extends Zend_Controller_Action
 			$formData = $this->getRequest()->getPost();
 			
 			if ($form->isValid($formData)) {
-				$albums = new Admin_Model_DbTable_Album();
+				$albums = new Core_Model_DbTable_Album();
 				$album = new Core_Sticker_Album();
 				
 				$album->setId($form->getValue('product_id'))
@@ -116,7 +116,7 @@ class Admin_AlbumController extends Zend_Controller_Action
 			}
       	} else {
       		if ($this->_hasParam('id')) {
-      			$albums = new Admin_Model_DbTable_Album();
+      			$albums = new Core_Model_DbTable_Album();
 				$album = new Core_Sticker_Album();
 				
 				if ( !($id = $this->_helper->filter($this->_getParam('id')))) {
@@ -144,7 +144,7 @@ class Admin_AlbumController extends Zend_Controller_Action
 	public function deleteAction()
 	{
 		if ($this->_hasParam('id')) {
-			$albums = new Admin_Model_DbTable_Album();
+			$albums = new Core_Model_DbTable_Album();
 			
 			if ( !($id = $this->_helper->filter($this->_getParam('id')))) {
 				$this->_redirect('/admin/album');	
@@ -164,7 +164,7 @@ class Admin_AlbumController extends Zend_Controller_Action
 				$this->_redirect('/admin/album');
 			}
 			
-			$albumImages = new Admin_Model_DbTable_Albumimage();
+			$albumImages = new Core_Model_DbTable_Albumimage();
 			
 			$form = new Admin_Form_AlbumimageForm();
 			$form->setAction($this->view->baseUrl() . "/admin/album/images/album_id/" . $albumId);
@@ -186,7 +186,7 @@ class Admin_AlbumController extends Zend_Controller_Action
 	      	}
 			
 			
-			$albums = new Admin_Model_DbTable_Album();
+			$albums = new Core_Model_DbTable_Album();
 			$album = new Core_Sticker_Album();
 			
 			$album = $albums->getById($albumId);
@@ -200,7 +200,7 @@ class Admin_AlbumController extends Zend_Controller_Action
 			$this->view->form = $form;
 			
 			
-			$albumImages = new Admin_Model_DbTable_Albumimage();
+			$albumImages = new Core_Model_DbTable_Albumimage();
 		
 			/* Get the actuall page, the number of registers to show and  
 		 	* the max number of pages in the paginator */
@@ -227,7 +227,7 @@ class Admin_AlbumController extends Zend_Controller_Action
 	public function deleteimageAction ()
 	{
 		if ($this->_hasParam('id')) {
-			$albumImages = new Admin_Model_DbTable_Albumimage();
+			$albumImages = new Core_Model_DbTable_Albumimage();
 			
 			Zend_Loader::loadClass('Zend_Filter_StripTags');
 			$f = new Zend_Filter_StripTags();

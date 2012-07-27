@@ -1,6 +1,6 @@
 <?php
 
-class Default_Model_DbTable_Album extends Default_Model_DbTablePagination
+class Core_Model_DbTable_Album extends Core_Model_DbTablePagination
 {
 	const ORDER_BY_PRICE_ASC	= 0;
 	const ORDER_BY_PRICE_DESC	= 1;
@@ -37,7 +37,7 @@ class Default_Model_DbTable_Album extends Default_Model_DbTablePagination
         return $row;
     }
     
-	
+    
 	/*****************************************************************/
 	/* Private                                                       */
 	/*****************************************************************/
@@ -127,5 +127,27 @@ class Default_Model_DbTable_Album extends Default_Model_DbTablePagination
 		$this->orderBy($select, $orderBy);
 		
 		return $this->createPaginator($select);
+	}
+	
+	
+	/* add new album */
+	public function addAlbum(Core_Sticker_Album $album)
+	{
+		return $this->insert(self::objectToRow($album));
+	}
+	
+	
+	/* update an album */
+	public function updateAlbum(Core_Sticker_Album $album)
+	{
+		$this->update(self::objectToRow($album), $this->_primary . ' = ' . $album->getId());
+	}
+	
+	
+	/* delete an album */
+	public function deleteAlbum($id)
+	{
+		$row = $this->find($id)->current();
+		if ( !empty($row) ) $row->delete();
 	}
 }

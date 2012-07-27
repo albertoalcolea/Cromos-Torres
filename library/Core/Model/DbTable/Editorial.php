@@ -1,7 +1,7 @@
 <?php
 
-class Default_Model_DbTable_Editorial extends Zend_Db_Table_Abstract{
-    
+class Core_Model_DbTable_Editorial extends Zend_Db_Table_Abstract
+{
     protected $_name = 'editorial';
     protected $_primary = 'editorial_id';
     
@@ -52,5 +52,27 @@ class Default_Model_DbTable_Editorial extends Zend_Db_Table_Abstract{
 		}
 		
 		return $editorialArray;
+	}
+	
+	
+	/* add new editorial */
+	public function addEditorial(Core_Sticker_Editorial $editorial)
+	{
+		return $this->insert(self::objectToRow($editorial));
+	}
+	
+	
+	/* update a editorial */
+	public function updateEditorial(Core_Sticker_Editorial $editorial)
+	{
+		$this->update(self::objectToRow($editorial), $this->_primary . ' = ' . $editorial->getId());
+	}
+	
+	
+	/* delete a editorial */
+	public function deleteEditorial($id)
+	{
+		$row = $this->find($id)->current();
+		if ( !empty($row) ) $row->delete();
 	}
 }

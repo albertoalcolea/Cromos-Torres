@@ -28,7 +28,7 @@ class Admin_CategoryController extends Zend_Controller_Action
 	{
 		$this->view->title = "Lista de Categor&iacute;as"; 
 
-		$categories = new Admin_Model_DbTable_Category();	
+		$categories = new Core_Model_DbTable_Category();	
 		
 		/* Get the actuall page, the number of registers to show and  
 		 * the max number of pages in the paginator */
@@ -64,7 +64,7 @@ class Admin_CategoryController extends Zend_Controller_Action
 		}
 		
 		/* Get the collections for filtering */
-		$collections = new Admin_Model_DbTable_Collection();
+		$collections = new Core_Model_DbTable_Collection();
 		$this->view->collections = $collections->getAll();
 	}
 	
@@ -82,7 +82,7 @@ class Admin_CategoryController extends Zend_Controller_Action
 			$formData = $this->getRequest()->getPost();
 			
 			if ($form->isValid($formData)) {
-				$categories = new Admin_Model_DbTable_Category();
+				$categories = new Core_Model_DbTable_Category();
 				$category = new Core_Sticker_Category();
 				
 				$category->setId(null)
@@ -128,7 +128,7 @@ class Admin_CategoryController extends Zend_Controller_Action
 				$formData = $this->getRequest()->getPost();
 				
 				if ($form->isValid($formData)) {
-					$categories = new Admin_Model_DbTable_Category();
+					$categories = new Core_Model_DbTable_Category();
 					$category = new Core_Sticker_Category();
 					
 					$category->setId(null)
@@ -210,7 +210,7 @@ class Admin_CategoryController extends Zend_Controller_Action
 			$formData = $this->getRequest()->getPost();
 			
 			if ($form->isValid($formData)) {
-				$categories = new Admin_Model_DbTable_Category();
+				$categories = new Core_Model_DbTable_Category();
 				$category = new Core_Sticker_Category();
 				
 				$category->setId($form->getValue('category_id'))
@@ -229,7 +229,7 @@ class Admin_CategoryController extends Zend_Controller_Action
 			}
       	} else {
       		if ($this->_hasParam('id')) {
-      			$categories = new Admin_Model_DbTable_Category();
+      			$categories = new Core_Model_DbTable_Category();
 				$category = new Core_Sticker_Category();
 				
 				if ( !($id = $this->_helper->filter($this->_getParam('id')))) {
@@ -255,7 +255,7 @@ class Admin_CategoryController extends Zend_Controller_Action
 	private function deleteCategory($returnUrl)
 	{
 		if ($this->_hasParam('id')) {
-			$categories = new Admin_Model_DbTable_Category();
+			$categories = new Core_Model_DbTable_Category();
 			
 			if ( !($id = $this->_helper->filter($this->_getParam('id')))) {
 				$this->_redirect($returnUrl);	

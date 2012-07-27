@@ -1,6 +1,6 @@
 <?php
 
-class Admin_Model_DbTable_Order extends Admin_Model_DbTablePagination
+class Core_Model_DbTable_Order extends Core_Model_DbTablePagination
 {
     protected $_name = 'order';
     protected $_primary = 'order_id';
@@ -97,11 +97,11 @@ class Admin_Model_DbTable_Order extends Admin_Model_DbTablePagination
 		foreach ($rows as $row) {
 			switch ($row['product_type']) {
 				case Core_Store_Product::TYPE_STICKER:
-					$item = new Core_Store_Cart_Item(Admin_Model_DbTable_Sticker::rowToObject($row), 
+					$item = new Core_Store_Cart_Item(Core_Model_DbTable_Sticker::rowToObject($row), 
 						$row['quantity']);
 					break;
 				case Core_Store_Product::TYPE_ALBUM:
-					$item = new Core_Store_Cart_Item(Admin_Model_DbTable_Album::rowToObject($row), 
+					$item = new Core_Store_Cart_Item(Core_Model_DbTable_Album::rowToObject($row), 
 						$row['quantity']);
 					break;
 			}
@@ -116,21 +116,27 @@ class Admin_Model_DbTable_Order extends Admin_Model_DbTablePagination
 	/* add new order */
 	public function addOrder(Core_Store_Order $order)
 	{
-		//return $this->insert(self::objectToRow($album));
+		$orderId = $this->insert(self::objectToRow($collection));
+		
+		$orderProducts = new Default_Model_DbTable_OrderProducts();
+		
+		foreach ($order->getItems()->getIterator() as $productId => $product) {
+			$orderProducts->addOrderProduct($orderId, $productId, $product->getQuantity());
+		}
 	}
 	
 	
 	/* update an order */
-	public function updateOrder(Core_Store_Order $order)
+	/*public function updateOrder(Core_Store_Order $order)
 	{
-		//$this->update(self::objectToRow($album), $this->_primary . ' = ' . $album->getId());
-	}
+		$this->update(self::objectToRow($order), $this->_primary . ' = ' . $order->getId());
+	}*/
 	
 	
 	/* delete an order */
-	public function deleteOrder($id)
+	/*public function deleteOrder($id)
 	{
-		//$row = $this->find($id)->current();
-		//if ( !empty($row) ) $row->delete();
-	}
+		$row = $this->find($id)->current();
+		if ( !empty($row) ) $row->delete();
+	}*/
 }

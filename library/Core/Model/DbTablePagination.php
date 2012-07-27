@@ -1,6 +1,6 @@
 <?php
 
-class Admin_Model_DbTablePagination extends Zend_Db_Table_Abstract
+class Core_Model_DbTablePagination extends Zend_Db_Table_Abstract
 {
     protected $_page = 0;
 	protected $_itemsPerPage = 0;
@@ -12,9 +12,9 @@ class Admin_Model_DbTablePagination extends Zend_Db_Table_Abstract
 	/*****************************************************************/
 	private function getClassName()
 	{
-		//$out = explode('Admin_Model_DbTable_', get_class($this));
+		//$out = explode('Core_Model_DbTable_', get_class($this));
 		//return $out[1];
-		return substr(get_class($this), 20);
+		return substr(get_class($this), 19);
 	}
 	
 	
@@ -23,7 +23,7 @@ class Admin_Model_DbTablePagination extends Zend_Db_Table_Abstract
 	/*****************************************************************/
 	protected function createPaginator(Zend_Db_Select $select)
 	{
-		$paginatorClassName = "Admin_Model_Paginator_" . $this->getClassName() . "Paginator";;
+		$paginatorClassName = "Core_Model_Paginator_" . $this->getClassName() . "Paginator";;
 		
 		$adapter   = new $paginatorClassName($select);
        	$paginator = new Zend_Paginator($adapter);

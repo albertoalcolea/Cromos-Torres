@@ -1,6 +1,6 @@
 <?php
 
-class Default_Model_DbTable_Albumimage extends Default_Model_DbTablePagination
+class Core_Model_DbTable_Albumimage extends Core_Model_DbTablePagination
 {
     protected $_name = 'albumImage';
     protected $_primary = 'albumImage_id';
@@ -49,5 +49,27 @@ class Default_Model_DbTable_Albumimage extends Default_Model_DbTablePagination
 					   ->order(array('albumImage_id ASC'));
 					   
 		return $this->createPaginator($select);
+	}
+	
+	
+	/* add new album image */
+	public function addAlbumImage(Core_Sticker_Albumimage $albumImage)
+	{
+		return $this->insert(self::objectToRow($albumImage));
+	}
+	
+	
+	/* update an album */
+	public function updateAlbumImage(Core_Sticker_Albumimage $albumImage)
+	{
+		$this->update(self::objectToRow($albumImage), $this->_primary . ' = ' . $id);
+	}
+	
+	
+	/* delete an album */
+	public function deleteAlbumImage($id)
+	{
+		$row = $this->find($id)->current();
+		if ( !empty($row) ) $row->delete();
 	}
 }

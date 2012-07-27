@@ -29,7 +29,7 @@ class Admin_IndexController extends Zend_Controller_Action
 	{
 		$this->view->title = "Historial de Ventas";
 		
-		$orders = new Admin_Model_DbTable_Order();
+		$orders = new Core_Model_DbTable_Order();
 		
 		/* Get the actuall page, the number of registers to show and  
 		 * the max number of pages in the paginator */

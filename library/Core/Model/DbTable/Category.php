@@ -1,6 +1,6 @@
 <?php
 
-class Admin_Model_DbTable_Category extends Admin_Model_DbTablePagination
+class Core_Model_DbTable_Category extends Core_Model_DbTablePagination
 {
 	protected $_name = 'category';
 	protected $_primary = 'category_id';

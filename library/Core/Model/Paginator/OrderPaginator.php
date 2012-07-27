@@ -1,6 +1,6 @@
 <?php
 
-class Default_Model_Paginator_CollectionPaginator extends Zend_Paginator_Adapter_DbSelect
+class Core_Model_Paginator_OrderPaginator extends Zend_Paginator_Adapter_DbSelect
 {
 	
     /**
@@ -15,12 +15,18 @@ class Default_Model_Paginator_CollectionPaginator extends Zend_Paginator_Adapter
     {
         $rows = parent::getItems($offset, $itemCountPerPage);
 
-		$collectionArray = array();
+		$orders = new Core_Model_DbTable_Order();
+
+		$orderArray = array();
 		
 		foreach ($rows as $row) {
-			array_push($collectionArray, Default_Model_DbTable_Collection::rowToObject($row));
+			$order = new Core_Store_Order();
+			$order = Core_Model_DbTable_Order::rowToObject($row);
+			$order->setItems($orders->getAllProductsIntoOrder($order->getId()));
+			
+			array_push($orderArray, $order);
 		}
 		
-        return $collectionArray;
+		return $orderArray;
     }
 }

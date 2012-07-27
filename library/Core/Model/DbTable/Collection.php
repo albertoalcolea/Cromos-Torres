@@ -1,6 +1,6 @@
 <?php
 
-class Default_Model_DbTable_Collection extends Default_Model_DbTablePagination
+class Core_Model_DbTable_Collection extends Core_Model_DbTablePagination
 {
     protected $_name = 'collection';
     protected $_primary = 'collection_id';
@@ -71,5 +71,27 @@ class Default_Model_DbTable_Collection extends Default_Model_DbTablePagination
 					   ->order(array('collection.collection_year DESC'));
 					   
 		return $this->createPaginator($select);
+	}
+	
+	
+	/* add new collection */
+	public function addCollection(Core_Sticker_Collection $collection)
+	{
+		return $this->insert(self::objectToRow($collection));
+	}
+	
+	
+	/* update a collection */
+	public function updateCollection(Core_Sticker_Collection $collection)
+	{
+		$this->update(self::objectToRow($collection), $this->_primary . ' = ' . $collection->getId());
+	}
+	
+	
+	/* delete a collection */
+	public function deleteCollection($id)
+	{
+		$row = $this->find($id)->current();
+		if ( !empty($row) ) $row->delete();
 	}
 }

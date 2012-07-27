@@ -24,7 +24,7 @@ class Admin_EditorialController extends Zend_Controller_Action
 		$this->view->minPriority = Core_Sticker_Editorial::MINPRIORITY;
 		$this->view->maxPriority = Core_Sticker_Editorial::MAXPRIORITY;
 		
-		$editorials = new Admin_Model_DbTable_Editorial();
+		$editorials = new Core_Model_DbTable_Editorial();
 		$data = $editorials->getAll();
 		$this->view->data = $data ;
 				
@@ -47,7 +47,7 @@ class Admin_EditorialController extends Zend_Controller_Action
 			$formData = $this->getRequest()->getPost();
 			
 			if ($form->isValid($formData)) {
-				$editorials = new Admin_Model_DbTable_Editorial();
+				$editorials = new Core_Model_DbTable_Editorial();
 				$editorial = new Core_Sticker_Editorial();
 				
 				$editorial->setId(null)
@@ -79,7 +79,7 @@ class Admin_EditorialController extends Zend_Controller_Action
 			$formData = $this->getRequest()->getPost();
 			
 			if ($form->isValid($formData)) {
-				$editorials = new Admin_Model_DbTable_Editorial();
+				$editorials = new Core_Model_DbTable_Editorial();
 				$editorial = new Core_Sticker_Editorial();
 				
 				$editorial->setId($form->getValue('editorial_id'))
@@ -94,7 +94,7 @@ class Admin_EditorialController extends Zend_Controller_Action
 			}
       	} else {
       		if ($this->_hasParam('id')) {
-      			$editorials = new Admin_Model_DbTable_Editorial();
+      			$editorials = new Core_Model_DbTable_Editorial();
 				$editorial = new Core_Sticker_Editorial();
 				
 				if ( !($id = $this->_helper->filter($this->_getParam('id')))) {
@@ -121,7 +121,7 @@ class Admin_EditorialController extends Zend_Controller_Action
 	public function deleteAction()
 	{
 		if ($this->_hasParam('id')) {
-			$editorials = new Admin_Model_DbTable_Editorial();
+			$editorials = new Core_Model_DbTable_Editorial();
 			
 			if ( !($id = $this->_helper->filter($this->_getParam('id')))) {
 				$this->_redirect('/admin/editorial');	

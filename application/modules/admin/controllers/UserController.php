@@ -32,7 +32,7 @@ class Admin_UserController extends Zend_Controller_Action
 			
 			if (!empty($actualpass) && !empty($newpass) && !empty($confirmpass)) {
 				/* check actual password */
-				$table = new Admin_Model_DbTable_User();
+				$table = new Core_Model_DbTable_User();
 				
 				$user = $this->view->user;
 				

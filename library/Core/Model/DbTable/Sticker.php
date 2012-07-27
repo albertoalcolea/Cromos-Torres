@@ -1,11 +1,11 @@
 <?php
 
-class Default_Model_DbTable_Sticker extends Default_Model_DbTablePagination
+class Core_Model_DbTable_Sticker extends Core_Model_DbTablePagination
 {
-	const ORDER_BY_PRICE_ASC	= 0;
-	const ORDER_BY_PRICE_DESC	= 1;
-	const ORDER_BY_NUMBER_ASC	= 2;
-	const ORDER_BY_NUMBER_DESC	= 3;
+	const ORDER_BY_PRICE_ASC	= 1;
+	const ORDER_BY_PRICE_DESC	= 2;
+	const ORDER_BY_NUMBER_ASC	= 3;
+	const ORDER_BY_NUMBER_DESC	= 4;
 	
 	
     protected $_name = 'product';
@@ -140,5 +140,27 @@ class Default_Model_DbTable_Sticker extends Default_Model_DbTablePagination
 		$this->orderBy($select, $orderBy);
 					   
 		return $this->createPaginator($select);
+	}
+	
+	
+	/* add new sticker */
+	public function addSticker(Core_Sticker_Sticker $sticker)
+	{
+		return $this->insert(self::objectToRow($sticker));
+	}
+	
+	
+	/* update a sticker */
+	public function updateSticker(Core_Sticker_Sticker $sticker)
+	{
+		$this->update(self::objectToRow($sticker), $this->_primary . ' = ' . $sticker->getId());
+	}
+	
+	
+	/* delete a sticker */
+	public function deleteSticker($id)
+	{
+		$row = $this->find($id)->current();
+		if ( !empty($row) ) $row->delete();
 	}
 }
