@@ -2,7 +2,7 @@
 <div class="span9">
     <h1 class="page-header"><?php echo $this->title ?></h1>
     <div>
-		<form id="filterEditorialForm" name="filterEditorialForm" method="get" action="<?php echo $this->baseUrl() ?>/admin/collection/list" class="form-inline pull-right">
+		<form id="filterEditorialForm" name="filterEditorialForm" method="get" action="<?php echo $this->baseUrl("/admin/collection/list") ?>" class="form-inline pull-right">
 			<label for="editorial_id">Filtrar por: </label>
 			<select name="editorial_id" id="editorial_id">
 				<option value="0" label="Todas las editoriales" style="font-weight: bold;"
@@ -55,22 +55,22 @@
 	                    	</a>
 	                    </td>
 	                    <td>
-	                    	<a href="<?php echo $this->baseUrl() ?>/admin/editorial/update/id/<?php echo $this->escape($collection->getEditorial()->getId()) ?>">
+	                    	<a href="<?php echo $this->baseUrl("/admin/editorial/update/id/" . $this->escape($collection->getEditorial()->getId())) ?>">
 	                    		<?php echo $this->escape($collection->getEditorial()->getName()) ?>
 	                    	</a>
 	                    </td>
 	                    <td>
-	                    	<a href="<?php echo $this->baseUrl() ?>/admin/sticker/list/collection_id/<?php echo $collection->getId() ?>">
+	                    	<a href="<?php echo $this->baseUrl("/admin/sticker/list/collection_id/" . $collection->getId()) ?>">
 								<i class="icon-list"></i>
 							</a>
 	                    </td>
 	                    <td>
-	                    	<a href="<?php echo $this->baseUrl() ?>/admin/collection/update/id/<?php echo $collection->getId() ?>" >
+	                    	<a href="<?php echo $this->baseUrl("/admin/collection/update/id/" . $collection->getId()) ?>" >
 	                    		<i class="icon-edit"></i>
 	                    	</a>
 	                    </td>  
 	                    <td>
-	                    	<a href="<?php echo $this->baseUrl() ?>/admin/collection/delete/id/<?php echo $collection->getId() ?>" 
+	                    	<a href="<?php echo $this->baseUrl("/admin/collection/delete/id/" . $collection->getId()) ?>" 
 	                    		onclick="return confirm('&iquest;Est&aacute; seguro que desea eliminar esta colecci&oacute;n?');">
 	                    		<i class="icon-remove"></i>
 	                    	</a>

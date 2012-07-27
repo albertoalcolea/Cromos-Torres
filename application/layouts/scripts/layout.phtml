@@ -6,10 +6,14 @@
 		
 		<?php echo $this->headTitle() ?>
 		
-		<?php echo $this->headLink()->appendStylesheet($this->BaseUrl()."/css/style.css","screen"); ?>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		
-		<?php echo $this->headLink()->appendStylesheet('http://fonts.googleapis.com/css?family=Convergence'); ?>
-		<?php echo $this->headLink()->appendStylesheet('http://fonts.googleapis.com/css?family=Montserrat'); ?>
+		<?php 
+			$this->headLink()->appendStylesheet($this->baseUrl("/css/style.css"), "screen")
+			                 ->appendStylesheet("http://fonts.googleapis.com/css?family=Convergence|Montserrat", "screen");
+							 
+			echo $this->headLink();
+		?>
 				
 		<!--[if lt IE 9]>
 		<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
@@ -23,37 +27,41 @@
 					<h1>Cromos Torres</h1>
 					<ul>
 						<li>
+							<a href="<?php echo $this->baseUrl("") ?>" 
 							<?php if ($this->section == "inicio"): ?>
-								<a href="#" class="select">
+								class="select">
 							<?php else: ?>
-								<a href="#" class="unselect">
+								class="unselect">
 							<?php endif; ?>
 								Inicio
 							</a>
 						</li>
 						<li>
+							<a href="#" 
 							<?php if ($this->section == "editoriales"): ?>
-								<a href="#" class="select">
+								class="select">
 							<?php else: ?>
-								<a href="#" class="unselect">
+								class="unselect">
 							<?php endif; ?>
 								Editoriales
 							</a>
 						</li>
 						<li>
+							<a href="#" 
 							<?php if ($this->section == "albumes"): ?>
-								<a href="#" class="select">
+								class="select">
 							<?php else: ?>
-								<a href="#" class="unselect">
+								class="unselect">
 							<?php endif; ?>
 								&Aacute;lbumes
 							</a>
 						</li>
 						<li>
+							<a href="#" 
 							<?php if ($this->section == "carrito"): ?>
-								<a href="#" class="select cart">
+								class="select cart">
 							<?php else: ?>
-								<a href="#" class="unselect cart">
+								class="unselect cart">
 							<?php endif; ?>
 								<span><img src="images/cart.png">Carrito</span>
 								<?php if ($this->cartNumber > 0): ?>
@@ -70,28 +78,31 @@
 				<div class="headContent">
 					<ul>
 						<li>
+							<a href="#" 
 							<?php if ($this->section == "quienessomos"): ?>
-							<a href="#" class="select">
+								class="select">
 							<?php else: ?>
-							<a href="#">
+								>
 							<?php endif; ?>
 								¿Quiénes somos?
 							</a>
 						</li>
 						<li>
+							<a href="#" 
 							<?php if ($this->section == "metodospago"): ?>
-							<a href="#" class="select">
+								class="select">
 							<?php else: ?>
-							<a href="#">
+								>
 							<?php endif; ?>
 								Métodos de pago
 							</a>
 						</li>
 						<li>
+							<a href="#" 
 							<?php if ($this->section == "comprayenvio"): ?>
-							<a href="#" class="select">
+								class="select">
 							<?php else: ?>
-							<a href="#">
+								>
 							<?php endif; ?>
 								Compra y envío
 							</a>
@@ -102,38 +113,7 @@
 		</header>
 
 		<div id="content">
-			<section id="banner">
-				<article>
-					<a href="#">
-						<img src="images/stickers/1.jpg">
-					</a>
-						<div class="banner-description">
-							<a href="#">
-								<h3>Ronaldinho</h3>
-							</a>
-							<ul>
-								<li>Panini</li>
-								<li>WCCF European Clubs 2004-2005</li>
-								<li>N625</li>
-								<li>15.26 €</li>
-							</ul>
-						</div>
-					</a>
-					<div id="addCart" class="cartBig">
-					<a href="#">
-						<img src="images/cart.png">Al carrito
-					</a>
-				</div>
-				</article>
-			</section>
-
-			<aside id="welcomeMessage">
-				<p>Venta de cromos de coleccionismo antiguos y actuales. Mira nuestro catálogo.</p>
-			</aside>
-
-			<section class="init-list">
-				<?php echo $this->layout()->content; ?>
-			</section>
+			<?php echo $this->layout()->content; ?>
 		</div>
 		
 		<footer>

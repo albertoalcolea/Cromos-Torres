@@ -18,15 +18,15 @@
     	</style>
 
 		<?php 
-			$this->headLink()->appendStylesheet($this->baseUrl()."/css/bootstrap.css","screen")
-			                 ->appendStylesheet($this->baseUrl()."/css/bootstrap-responsive.css","screen")
-							 ->appendStylesheet($this->baseUrl()."/css/lightbox.css", "screen")
-			                 ->appendStylesheet($this->baseUrl()."/css/admin.css","screen");
+			$this->headLink()->appendStylesheet($this->baseUrl("/css/bootstrap.css"), "screen")
+			                 ->appendStylesheet($this->baseUrl("/css/bootstrap-responsive.css"), "screen")
+							 ->appendStylesheet($this->baseUrl("/css/lightbox.css"), "screen")
+			                 ->appendStylesheet($this->baseUrl("/css/admin.css"), "screen");
 			
-			$this->headScript()->appendFile($this->baseUrl()."/js/jquery-1.7.2.min.js")
-							   ->appendFile($this->baseUrl()."/js/bootstrap-dropdown.js")
-							   ->appendFile($this->baseUrl()."/js/lightbox.js")
-							   ->appendFile($this->baseUrl()."/js/admin.js");
+			$this->headScript()->appendFile($this->baseUrl("/js/jquery-1.7.2.min.js"))
+							   ->appendFile($this->baseUrl("/js/bootstrap-dropdown.js"))
+							   ->appendFile($this->baseUrl("/js/lightbox.js"))
+							   ->appendFile($this->baseUrl("/js/admin.js"));
 			
 			echo $this->headLink();
 		?>
@@ -38,7 +38,7 @@
  		<div class="navbar navbar-fixed-top">
  			<div class="navbar-inner">
  				<div class="container-fluid">
-					<a class="brand" href="<?php echo $this->baseUrl()?>/admin">Cromos Torres</a>
+					<a class="brand" href="<?php echo $this->baseUrl("/admin") ?>">Cromos Torres</a>
 					<div class="btn-group pull-right">
 						<a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
 							<i class="icon-user"></i> 
@@ -47,13 +47,13 @@
 						</a>
 						<ul class="dropdown-menu">
 							<li>
-								<a href="<?php echo $this->baseUrl()?>/admin/user/changepassword">
+								<a href="<?php echo $this->baseUrl("/admin/user/changepassword") ?>">
 									Cambiar contraseña
 								</a>
 							</li>
 							<li class="divider"></li>
 							<li>
-								<a href="<?php echo $this->baseUrl()?>/admin/login/logout">
+								<a href="<?php echo $this->baseUrl("/admin/login/logout") ?>">
 									Salir
 								</a>
 							</li>
@@ -67,13 +67,13 @@
 							
 							<ul class="dropdown-menu">
 								<li>
-									<a href="<?php echo $this->baseUrl() ?>/admin">
+									<a href="<?php echo $this->baseUrl("/admin") ?>">
 										Historial de Ventas
 									</a>
 								</li>
                 				<li class="divider"></li>
                 				<li>
-									<a href="<?php echo $this->baseUrl()?>">Ir a la Tienda</a>
+									<a href="<?php echo $this->baseUrl("") ?>">Ir a la Tienda</a>
 								</li>
 							</ul>
 						</li>
@@ -84,10 +84,14 @@
 							<ul class="dropdown-menu">
 								
 								<li>
-									<a href="<?php echo $this->baseUrl()?>/admin/editorial">Listar editoriales</a>
+									<a href="<?php echo $this->baseUrl("/admin/editorial") ?>">
+										Listar editoriales
+									</a>
 								</li>
 								<li>
-									<a href="<?php echo $this->baseUrl()?>/admin/editorial/insert">Agregar editorial</a>
+									<a href="<?php echo $this->baseUrl("/admin/editorial/insert") ?>">
+										Agregar editorial
+									</a>
 								</li>
             				</ul>
 						</li>
@@ -98,10 +102,14 @@
 							<ul class="dropdown-menu">
 								
 								<li>
-									<a href="<?php echo $this->baseUrl()?>/admin/collection">Listar colecciones</a>
+									<a href="<?php echo $this->baseUrl("/admin/collection") ?>">
+										Listar colecciones
+									</a>
 								</li>
 								<li>
-									<a href="<?php echo $this->baseUrl()?>/admin/collection/insert">Agregar colecci&oacute;n</a>
+									<a href="<?php echo $this->baseUrl("/admin/collection/insert") ?>">
+										Agregar colecci&oacute;n
+									</a>
 								</li>
             				</ul>
 						</li>
@@ -112,17 +120,25 @@
 							<ul class="dropdown-menu">
 								
 								<li>
-									<a href="<?php echo $this->baseUrl()?>/admin/sticker">Listar cromos</a>
+									<a href="<?php echo $this->baseUrl("/admin/sticker") ?>">
+										Listar cromos
+									</a>
 								</li>
 								<li>
-									<a href="<?php echo $this->baseUrl()?>/admin/sticker/index/action_method/insert">Agregar cromo</a>
+									<a href="<?php echo $this->baseUrl("/admin/sticker/index/action_method/insert") ?>">
+										Agregar cromo
+									</a>
 								</li>
 								<li class="divider"></li>
 								<li>
-									<a href="<?php echo $this->baseUrl()?>/admin/category/list">Listar categor&iacute;as</a>
+									<a href="<?php echo $this->baseUrl("/admin/category/list") ?>">
+										Listar categor&iacute;as
+									</a>
 								</li>
 								<li>
-									<a href="<?php echo $this->baseUrl()?>/admin/category/insert">Agregar categor&iacute;a</a>
+									<a href="<?php echo $this->baseUrl("/admin/category/insert") ?>">
+										Agregar categor&iacute;a
+									</a>
 								</li>
             				</ul>
 						</li>
@@ -133,10 +149,14 @@
 							<ul class="dropdown-menu">
 								
 								<li>
-									<a href="<?php echo $this->baseUrl()?>/admin/album">Listar &aacute;lbumes</a>
+									<a href="<?php echo $this->baseUrl("/admin/album") ?>">
+										Listar &aacute;lbumes
+									</a>
 								</li>
 								<li>
-									<a href="<?php echo $this->baseUrl()?>/admin/album/insert">Agregar &aacute;lbum</a>
+									<a href="<?php echo $this->baseUrl("/admin/album/insert") ?>">
+										Agregar &aacute;lbum
+									</a>
 								</li>	
             				</ul>
 						</li>

@@ -5,7 +5,7 @@
             <div id="main-login">
                 <div class="linea"></div>
 
-                <form action="<?php echo $this->baseUrl ?>/admin/login" method="post">
+                <form action="<?php echo $this->baseUrl("/admin/login") ?>" method="post">
                     <div class=" alert-error">
                     	<?php 
                     		if (!empty($this->message))

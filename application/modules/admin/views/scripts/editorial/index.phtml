@@ -29,17 +29,17 @@
 	                    	</a>
 	                    </td>
 	                    <td>
-	                    	<a href="<?php echo $this->baseUrl() ?>/admin/collection/list/editorial_id/<?php echo $editorial->getId(); ?>" >
+	                    	<a href="<?php echo $this->baseUrl("/admin/collection/list/editorial_id/" . $editorial->getId()) ?>">
 	                    		<i class="icon-list"></i>
 	                    	</a>
 	                    </td>
 	                    <td>
-	                    	<a href="<?php echo $this->baseUrl() ?>/admin/editorial/update/id/<?php echo $editorial->getId(); ?>" >
+	                    	<a href="<?php echo $this->baseUrl("/admin/editorial/update/id/" . $editorial->getId()) ?>">
 	                    		<i class="icon-edit"></i>
 	                    	</a>
 	                    </td>  
 	                    <td>
-	                    	<a href="<?php echo $this->baseUrl() ?>/admin/editorial/delete/id/<?php echo $editorial->getId(); ?>" 
+	                    	<a href="<?php echo $this->baseUrl("/admin/editorial/delete/id/ ". $editorial->getId()) ?>" 
 	                    		onclick="return confirm('&iquest;Est&aacute; seguro que desea eliminar esta editorial?');">
 	                    		<i class="icon-remove"></i>
 	                    	</a>

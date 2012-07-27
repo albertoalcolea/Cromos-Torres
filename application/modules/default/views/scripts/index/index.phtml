@@ -1,12 +1,44 @@
-<h2>Yo me llamo Ralph</h2>
-
-<?php foreach ($this->editorials as $editorial) : ?>
+<section id="banner">
 	<article>
-		<ul>
-		<li><?php echo $editorial->getId() ?></li>
-		<li><?php echo $editorial->getName() ?></li>
-		<li><?php echo $editorial->getPriority() ?></li>
-		<li><?php echo $editorial->getImageUrl() ?></li>
-		</ul>
+		<a href="#">
+			<img src="images/stickers/1.jpg">
+		</a>
+			<div class="banner-description">
+				<a href="#">
+					<h3>Ronaldinho</h3>
+				</a>
+				<ul>
+					<li>Panini</li>
+					<li>WCCF European Clubs 2004-2005</li>
+					<li>N625</li>
+					<li>15.26 €</li>
+				</ul>
+			</div>
+		</a>
+		<div id="addCart" class="cartBig">
+		<a href="#">
+			<img src="images/cart.png">Al carrito
+		</a>
+	</div>
 	</article>
-<?php endforeach; ?>
+</section>
+
+
+<aside id="welcomeMessage">
+	<p>Venta de cromos de coleccionismo antiguos y actuales. Mira nuestro catálogo.</p>
+</aside>
+
+<section class="init-list">			
+	<h2>Yo me llamo Ralph</h2>
+	
+	<?php foreach ($this->editorials as $editorial) : ?>
+		<article>
+			<ul>
+			<li><?php echo $editorial->getId() ?></li>
+			<li><?php echo $editorial->getName() ?></li>
+			<li><?php echo $editorial->getPriority() ?></li>
+			<li><?php echo $editorial->getImageUrl() ?></li>
+			</ul>
+		</article>
+	<?php endforeach; ?>
+</section>

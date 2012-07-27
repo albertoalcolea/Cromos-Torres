@@ -5,7 +5,6 @@ class IndexController extends Zend_Controller_Action
 
     public function init()
     {
-        $this->view->baseUrl = $this->_request->getBaseUrl();
 		$cart = Core_Store_Cart_Factory::createInstance('StandardCart');
 		$this->view->cartNumber = $cart->countContents();
 		$this->view->section = 'inicio';

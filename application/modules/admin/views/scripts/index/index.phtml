@@ -1,7 +1,7 @@
 <div class="span9">
 	<h1 class="page-header"><?php echo $this->title ?></h1>   
 	<div>
-		<form id="filterDateHistoriyForm" name="filterDateHistoriyForm" method="get" action="<?php echo $this->baseUrl() ?>/admin/index" class="form-inline pull-right">
+		<form id="filterDateHistoriyForm" name="filterDateHistoriyForm" method="get" action="<?php echo $this->baseUrl("/admin/index") ?>" class="form-inline pull-right">
 			<label for="from">Desde: </label>
 			<input type="text" class="input-small" required="required" name="from" id="from" value="<?php echo $this->fromDate ?>" />
 			<label for="from">Hasta: </label>

@@ -7,7 +7,7 @@
     	</div>
     <?php else: ?>
 	    <div>
-			<form id="filterCollectionForm" name="filterCollectionForm" method="get" action="<?php echo $this->baseUrl() ?>/admin/sticker/<?php echo $this->action ?>" class="form-inline">
+			<form id="filterCollectionForm" name="filterCollectionForm" method="get" action="<?php echo $this->baseUrl("/admin/sticker/" . $this->action) ?>" class="form-inline">
 				<label for="collection_id">Elijar una colecci&oacute;n: </label>
 				<select name="collection_id" id="collection_id">
 					<?php foreach ($this->data as $collection): ?>

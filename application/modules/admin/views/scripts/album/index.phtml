@@ -27,7 +27,7 @@
 	                <tr>
 	                <?php endif; ?>	
 	                	<td>
-	                    	<a href="<?php echo $this->baseUrl() ?>/admin/collection/update/id/<?php echo $album->getCollection()->getId(); ?>" >
+	                    	<a href="<?php echo $this->baseUrl("/admin/collection/update/id/" . $album->getCollection()->getId()) ?>">
 								<?php echo $album->getCollection()->getName(); ?>
 	                    	</a>
 	                    </td>
@@ -35,17 +35,17 @@
 						<td><span class="pull-right"><?php echo $this->escape($album->getPrice()); ?> &euro;</span></td>
 						<td><span class="pull-right"><?php echo $this->escape($album->getStock()); ?></span></td>
 	                    <td>
-	                    	<a href="<?php echo $this->baseUrl() ?>/admin/album/images/album_id/<?php echo $album->getId() ?>">
+	                    	<a href="<?php echo $this->baseUrl("/admin/album/images/album_id/" . $album->getId()) ?>">
 	                    		<i class="icon-picture"></i>
 	                    	</a>
 	                    </td>
 	                    <td>
-	                    	<a href="<?php echo $this->baseUrl() ?>/admin/album/update/id/<?php echo $album->getId(); ?>" >
+	                    	<a href="<?php echo $this->baseUrl("/admin/album/update/id/" . $album->getId()) ?>" >
 	                    		<i class="icon-edit"></i>
 	                    	</a>
 	                    </td>  
 	                    <td>
-	                    	<a href="<?php echo $this->baseUrl() ?>/admin/album/delete/id/<?php echo $album->getId(); ?>" 
+	                    	<a href="<?php echo $this->baseUrl("/admin/album/delete/id/" . $album->getId()) ?>" 
 	                    		onclick="return confirm('&iquest;Est&aacute; seguro que desea eliminar este &aacute;lbum?');">
 	                    		<i class="icon-remove"></i>
 	                    	</a>
