@@ -2,6 +2,14 @@
 
 class Default_Model_DbTable_Album extends Default_Model_DbTablePagination
 {
+	const ORDER_BY_PRICE_ASC	= 0;
+	const ORDER_BY_PRICE_DESC	= 1;
+	const ORDER_BY_NAME_ASC		= 2;
+	const ORDER_BY_NAME_DESC	= 3;
+	const ORDER_BY_ID_ASC		= 4;
+	const ORDER_BY_ID_DESC		= 5;
+	
+	
     protected $_name = 'product';
     protected $_primary = 'product_id';
 	
@@ -29,6 +37,46 @@ class Default_Model_DbTable_Album extends Default_Model_DbTablePagination
         return $row;
     }
     
+	
+	/*****************************************************************/
+	/* Private                                                       */
+	/*****************************************************************/
+	/* Note: $select is a object (pass by reference, no return var) */
+	private function orderBy($select, $orderBy)
+	{
+		switch ($orderBy) {
+			case self::ORDER_BY_PRICE_ASC:
+				$select->order(array('product.product_price ASC'));
+				break;
+				
+			case self::ORDER_BY_PRICE_DESC:
+				$select->order(array('product.product_price DESC'));
+				break;
+				
+			case self::ORDER_BY_NAME_ASC:
+				$select->order(array('product.product_name ASC'));
+				break;
+				
+			case self::ORDER_BY_NAME_DESC:
+				$select->order(array('product.product_name DESC'));
+				break;
+				
+			case self::ORDER_BY_ID_ASC:
+				$select->order(array('editorial.editorial_id ASC', 
+									 'collection.collection_id ASC',
+					   				 'product.product_id ASC')
+				);
+				break;
+			
+			case self::ORDER_BY_ID_DESC:
+				$select->order(array('editorial.editorial_id DESC', 
+									 'collection.collection_id DESC',
+					   				 'product.product_id DESC')
+				);
+				break;
+		}
+	}
+	
     
 	/*****************************************************************/
 	/* Public                                                        */
@@ -50,23 +98,23 @@ class Default_Model_DbTable_Album extends Default_Model_DbTablePagination
 
 
     /* get all albums */
-	public function getAll()
+	public function getAll($orderBy = self::ORDER_BY_ID_ASC)
 	{
 		$select = $this->select()
                        ->setIntegrityCheck(false)
 					   ->from('product')
                        ->join('collection', 'product.collection_id = collection.collection_id')
 					   ->join('editorial', 'editorial.editorial_id = collection.editorial_id')
-					   ->where('product_type = ?', Core_Store_Product::TYPE_ALBUM)
-					   ->order(array('editorial.editorial_id ASC', 'collection.collection_id ASC',
-					   				 'product.product_id ASC'));
+					   ->where('product_type = ?', Core_Store_Product::TYPE_ALBUM);
+					   
+		$this->orderBy($select, $orderBy);
 					   
 		return $this->createPaginator($select);
 	}
 
 
 	/* get all albums into a collection */
-	public function getIntoCollection($collectionId)
+	public function getIntoCollection($collectionId, $orderBy = self::ORDER_BY_ID_ASC)
 	{
 		$select = $this->select()
                        ->setIntegrityCheck(false)
@@ -74,9 +122,10 @@ class Default_Model_DbTable_Album extends Default_Model_DbTablePagination
                        ->join('collection', 'product.collection_id = collection.collection_id')
 					   ->join('editorial', 'editorial.editorial_id = collection.editorial_id')
 					   ->where('collection.collection_id = ?', $collectionId)
-					   ->where('product_type = ?', Core_Store_Product::TYPE_ALBUM)
-					   ->order(array('product.product_id ASC'));
+					   ->where('product_type = ?', Core_Store_Product::TYPE_ALBUM);
 					   
+		$this->orderBy($select, $orderBy);
+		
 		return $this->createPaginator($select);
 	}
 }
