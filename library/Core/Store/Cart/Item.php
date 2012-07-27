@@ -8,6 +8,12 @@ class Core_Store_Cart_Item
     
     private $_subTotal = null;
     
+	
+	private function _calculateSubTotal()
+    {
+        $this->getSubTotal();
+    }
+	
     
     public function __construct(Core_Store_Product $product = null,
                                 $quantity = null)
@@ -15,12 +21,6 @@ class Core_Store_Cart_Item
         $this->_product = $product;
         $this->_quantity = $quantity;
         $this->_calculateSubTotal();
-    }
-    
-    
-    private function _calculateSubTotal()
-    {
-        $this->getSubTotal();
     }
     
     

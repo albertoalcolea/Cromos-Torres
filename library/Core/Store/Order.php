@@ -26,6 +26,16 @@ class Core_Store_Order
     
     private $_items = null;
     
+	
+	private function findProduct($productId)
+    {
+        if ($this->inCart($productId)) {
+            return $this->_contents->getItem($productId);
+        }
+        
+        return null;
+    }
+	
     
     public function __construct($id = null,
                                 $date = null,
@@ -198,6 +208,33 @@ class Core_Store_Order
     {
         $this->_items = $items;
 		return $this;
+    }
+	
+	
+	public function addItem(Core_Store_Cart_Item $item)
+    {
+        if ($this->inOrder($item->getId())) {
+            $this->updateQuantity($item->getId(), $item->getQuantity());
+        } else {
+            $this->_contents->addItem($item->getId(), $item);
+        }
+    }
+    
+	
+    public function updateQuantity($productId, $quantity, $quantityFromPost = false)
+    {
+        $item = $this->findProduct($productId);
+        
+        if ($item !== null) {
+            $quantity = ($quantityFromPost === true) ?  $quantity : $item->getQuantity() + $quantity;
+            $item->setQuantity($quantity);
+        }
+    }
+	
+	
+	public function inOrder($productId)
+    {
+        return $this->_items->offsetExists($productId);
     }
 	
 		
