@@ -635,8 +635,13 @@ footer #credits a:hover {
 }
 
 
-@media screen and (max-width: 960px) {
+@media screen and (max-width: 990px) {
+	#banner article {
+		text-align: left;
+	}
+
 	#banner article img {
+		margin-left: 10%;
 		max-height: 250px;
 	}
 
@@ -644,14 +649,43 @@ footer #credits a:hover {
 		margin-left: 20px;
 	}
 
+	#banner article .banner-description h3 {
+		font-size: 28px;
+	}
+
+	#banner article .banner-description ul {
+		margin-left: 20px;
+	}
+
+	#banner article .banner-description li {
+		font-size: 16px;
+	}
+
 	#banner article #addCart {
+		display: block;
 		position: absolute;
 	}
 }
 
-
 @media screen and (max-width: 800px) {
+	#banner article {
+		text-align: center;
+	}
+
+	#banner article img {
+		margin-left: 0;
+	}
+
+	#banner article .banner-description {
+		margin-left: 0;
+	}
+
+	#banner article .banner-description ul {
+		margin-left: 0;
+	}
+
 	#banner article #addCart {
+		display: inline-block;
 		position: static;
 	}
 }
