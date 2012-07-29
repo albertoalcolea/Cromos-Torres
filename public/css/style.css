@@ -150,6 +150,20 @@ header h1 {
 	border-top-right-radius: 0;
 	border-bottom-right-radius: 12px;
 	border-bottom-left-radius: 0;
+
+background-image: linear-gradient(bottom, #237A28 13%, #2E9B35 75%);
+background-image: -o-linear-gradient(bottom, #237A28 13%, #2E9B35 75%);
+background-image: -moz-linear-gradient(bottom, #237A28 13%, #2E9B35 75%);
+background-image: -webkit-linear-gradient(bottom, #237A28 13%, #2E9B35 75%);
+background-image: -ms-linear-gradient(bottom, #237A28 13%, #2E9B35 75%);
+
+background-image: -webkit-gradient(
+	linear,
+	left bottom,
+	left top,
+	color-stop(0.13, #237A28),
+	color-stop(0.75, #2E9B35)
+);
 }
 
 header .menu {
