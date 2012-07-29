@@ -335,8 +335,7 @@ header .info .select {
 	font-size: 12px;
 	margin: auto;
 	max-width: 1000px;
-	padding: 15px;
-	padding-bottom: 15px;
+	padding: 15px 0;
 
 	box-shadow: 0 0 10px #1e1e1e;
 
@@ -641,7 +640,6 @@ footer #credits a:hover {
 	}
 
 	#banner article img {
-		margin-left: 10%;
 		max-height: 250px;
 	}
 
@@ -670,14 +668,6 @@ footer #credits a:hover {
 @media screen and (max-width: 800px) {
 	#banner article {
 		text-align: center;
-	}
-
-	#banner article img {
-		margin-left: 0;
-	}
-
-	#banner article .banner-description {
-		margin-left: 0;
 	}
 
 	#banner article .banner-description ul {
