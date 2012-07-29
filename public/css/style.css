@@ -635,27 +635,23 @@ footer #credits a:hover {
 }
 
 
-@media screen and (max-width: 1000px) {
+@media screen and (max-width: 960px) {
+	#banner article img {
+		max-height: 250px;
+	}
+
+	#banner article .banner-description {
+		margin-left: 20px;
+	}
+
 	#banner article #addCart {
 		position: absolute;
 	}
-
-	header h1 {
-		float: left;
-		position: static;
-	}
-
-	header .menu {
-		clear: none;
-	}
 }
 
-@media screen and (max-width: 934px) {
+
+@media screen and (max-width: 800px) {
 	#banner article #addCart {
 		position: static;
-	}
-
-	header .menu {
-		clear: left;
 	}
 }
