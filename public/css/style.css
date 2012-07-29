@@ -59,8 +59,9 @@ header, section, article, footer, nav, aside {
 
 .cartSmall {
 	box-shadow: 1px 1px 5px 1px #101010;
+	font-size: 12px;
 	height: 20px;
-	width: 140px;
+	width: 133px;
 }
 
 .cartBig:hover,
@@ -97,7 +98,7 @@ body {
 	color: white;
 	/*font-family: 'Lucida Sans Unicode', 'Lucida Grande', Arial, sans-serif;*/
 	font-family: 'Montserrat', serif;
-	font-size: 16px;
+	font-size: 13px;
 }
 
 header {
@@ -125,28 +126,29 @@ header h1 {
 	display: block;
 	font-family: 'Montserrat', sans-serif;
 	float: left;
-	font-size: 25px;
+	font-size: 24px;
 	font-weight: bold;
 	/*left: 17%;*/
-	letter-spacing: 0.1em;
+	/*letter-spacing: 0.1em;*/
 	padding: 30px 15px 25px;
 	text-align: center;
-	width: 275px;
+	text-shadow: 0px 0px 5px #6e6e6e;
+	width: 200px;
 	word-spacing: 0.4em;
 
 	-webkit-border-top-left-radius: 0;
 	-webkit-border-top-right-radius: 0;
-	-webkit-border-bottom-right-radius: 10px;
+	-webkit-border-bottom-right-radius: 12px;
 	-webkit-border-bottom-left-radius: 0;
 
 	-moz-border-radius-topleft: 0;
 	-moz-border-radius-topright: 0;
-	-moz-border-radius-bottomright: 10px;
+	-moz-border-radius-bottomright: 12px;
 	-moz-border-radius-bottomleft: 0;
 
 	border-top-left-radius: 0;
 	border-top-right-radius: 0;
-	border-bottom-right-radius: 10px;
+	border-bottom-right-radius: 12px;
 	border-bottom-left-radius: 0;
 }
 
@@ -319,7 +321,8 @@ header .info .select {
 	font-size: 12px;
 	margin: auto;
 	max-width: 1000px;
-	padding-top: 35px;
+	padding: 15px;
+	padding-bottom: 15px;
 
 	box-shadow: 0 0 10px #1e1e1e;
 
@@ -334,7 +337,6 @@ header .info .select {
 	font-family: 'Convergence', sans-serif;
 	font-style: italic;
 	letter-spacing: 0.1em;
-	margin-bottom: 10px;
 	margin-right: 80px;
 	text-align: right;
 }
@@ -428,7 +430,7 @@ header .info .select {
 .init-list h2 {
 	background-color: #101010;
 	display: block;
-	font-size: 20px;
+	font-size: 19px;
 	letter-spacing: 0.05em;
 	margin-bottom: 20px;
 	padding: 10px;
@@ -439,9 +441,9 @@ header .info .select {
 
 .init-list article {
 	display: inline-block;
-	font-size: 14px;
+	font-size: 13px;
 	letter-spacing: 0.1em;
-	margin: 0 20px 50px 20px;
+	margin: 0 15px 50px 15px;
 	text-align: center;
 	width: 200px;
 }
@@ -458,13 +460,13 @@ header .info .select {
 .init-list article span,  .init-list article li {
 	display: block;
 	font-weight: bold;
-	margin-top: 13px;
-	margin-bottom: 8px;
+	margin-top: 10px;
+	margin-bottom: 7px;
 	text-transform: uppercase;
 }
 
 .init-list article .price {
-	margin-top: 13px;
+	margin-top: 11px;
 	margin-bottom: 0px;
 	font-weight: normal;
 }
@@ -507,7 +509,7 @@ header .info .select {
 }
 
 .init-list #addCart {
-	margin: 20px 20px 0 20px;
+	margin: 17px 20px 0 20px;
 }
 
 .init-list #addCart a {
@@ -515,8 +517,13 @@ header .info .select {
 }
 
 
+#foot-separator {
+	border-top: 10px solid #0A0A0A;
+}
+
 footer {
 	background-color: #0E0E0E;
+	/*border-top: 2px solid #181818;*/
 	border-top: 1px solid #181818;
 	color: #5A5A5A;
 	font-family: 'Convergence', sans-serif;
