@@ -250,6 +250,7 @@ header .menu .cart:hover span {
 
 header .menu .cart #cartNumber {
 	background-color: #b73d3d;
+	border-radius: 3px;
 	color: white;
 	height: 15px;
 	font-size: 10px;
@@ -262,6 +263,10 @@ header .menu .cart #cartNumber {
 	/*opacity:0.9;
 
 	filter:alpha(opacity=90);*/
+
+	/* others */
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
 }
 
 header .info {
