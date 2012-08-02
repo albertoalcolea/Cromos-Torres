@@ -24,12 +24,13 @@ header, section, article, footer, nav, aside {
 	visibility: visible;
 }
 
-.cartBig,
-.cartSmall {
+.cartBig a,
+.cartSmall a {
 	background-color: #b73d3d;
 	/*border: 1px solid #cd5151;*/
 	border-radius: 10px;
 	color: white;
+	display: block;
 	letter-spacing: 0.1em;
 	font-size: 13px;
 	font-weight: bold;
@@ -51,28 +52,22 @@ header, section, article, footer, nav, aside {
 	-ms-transition: background-color .3s;
 }
 
-.cartBig {
+.cartBig a {
 	box-shadow: 1px 1px 5px 1px #808080;
 	height: 25px;
 	width: 160px;
 }
 
-.cartSmall {
+.cartSmall a{
 	box-shadow: 1px 1px 5px 1px #101010;
 	font-size: 12px;
 	height: 20px;
 	width: 133px;
 }
 
-.cartBig:hover,
-.cartSmall:hover {
+.cartBig a:hover,
+.cartSmall a:hover {
 	background-color: #8c0f0f;
-}
-
-
-.cartBig a,
-.cartSmall a {
-	color: white;
 }
 
 .cartBig img,
